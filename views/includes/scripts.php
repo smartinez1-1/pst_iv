@@ -1,0 +1,1 @@
+<script defer src="<?php echo constant("URL");?>views/js/bundle.js"></script>
