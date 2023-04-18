@@ -16,12 +16,12 @@
       if($nameRoute === $this->ruta_actual) echo "active";
     }
 
-    private function GetHeader(){
+    private function GetHeader($titulo = "SGSC | UNEFA"){
       $this->Auth();
       include_once("./views/includes/head.php");
     }
 
-    private function GetComplement($name){
+    private function GetComplement($name, $options = []){
       $ruta = "./views/includes/$name.php";
       if(file_exists($ruta)) require_once("./views/includes/$name.php");
     }

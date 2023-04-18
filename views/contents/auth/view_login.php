@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $this->GetComplement('head');?>
+<?php $this->GetHeader("SGSC | UNEFA");?>
 
 <body
 	x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
