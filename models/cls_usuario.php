@@ -17,7 +17,7 @@
 			$this->cedula_usuario = isset($d['cedula_usuario']) ? $this->Clean(intval($d['cedula_usuario'])) : null;
 			$this->clave_usuario = isset($d['clave_usuario']) ? $this->Clean($d['clave_usuario']) : null;
       $this->nombre_usuario = isset($d['nombre_usuario']) ? $this->Clean($d['nombre_usuario']) : null;
-      $this->genero_usuario = isset($d['genero_usuario']) ? $this->Clean($d['genero_usuario']) : "M";
+      $this->genero_usuario = isset($d['genero_usuario']) ? $this->Clean($d['genero_usuario']) : null;
       $this->edad_usuario = isset($d['edad_usuario']) ? $this->Clean(intval($d['edad_usuario'])) : null;
       $this->permisos_usuario = isset($d['permisos_usuario']) ? $this->Clean($d['permisos_usuario']) : null;
       $this->tipo_usuario = isset($d['tipo_usuario']) ? $this->Clean($d['tipo_usuario']) : null;
@@ -35,9 +35,9 @@
 		public function create(){
 			$sqlConsulta = "SELECT * FROM usuario WHERE cedula_usuario = '$this->cedula_usuario'";
 			$result = $this->Query($sqlConsulta);
-			$arr = $this->Get_todos_array($result);
 			
-			// if(isset($arr)) return "err/02ERR";
+			if($result->num_rows > 0) return false;
+			$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT);
 			$sql = "INSERT INTO usuario
         (cedula_usuario,clase_usuario,nombre_usuario,estatus_usuario,edad_usuario,genero_usuario,permiso_usuario,
         tipo_usuario,telefono_usuario,correo_usuario,pregunta_1,pregunta_2,pregunta_3,respuesta_1,respuesta_2,respuesta_3) 

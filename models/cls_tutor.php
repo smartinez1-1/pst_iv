@@ -19,7 +19,7 @@
 			$sqlConsulta = "SELECT * FROM tutor WHERE cedula_usuario = $this->cedula_usuario";
 			$result = $this->Query($sqlConsulta);
 
-			// if($result->num_rows > 0) return "err/02ERR";
+			if($result->num_rows > 0) return "err/02ERR";
 			$sql = "INSERT INTO tutor(cedula_usuario,tipo_tutor,categoria_tutor) VALUES('$this->cedula_usuario','$this->categoria_tutor');";
 			$this->Query($sql);
 

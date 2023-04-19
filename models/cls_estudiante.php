@@ -16,12 +16,9 @@
 
 		public function create(){
 			$sqlConsulta = "SELECT * FROM estudiante WHERE cedula_usuario = '$this->cedula_usuario'";
-
-			
 			$result = $this->Query($sqlConsulta);
-			$arr = $this->Get_todos_array($result);
 			
-			// if(isset($arr)) return "err/02ERR";
+			if($result->num_rows > 0) return "err/02ERR";
 			$sql = "INSERT INTO estudiante(cedula_usuario,turno_estudiante) VALUES('$this->cedula_usuario','$this->turno_estudiante');";
 			$this->Query($sql);
 

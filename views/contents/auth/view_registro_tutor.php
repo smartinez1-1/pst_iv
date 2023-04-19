@@ -18,60 +18,17 @@
 				<div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
           <!-- ====== Forms Section Start -->
           <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-            <form class="flex flex-wrap items-center">
+            <form action="<?php $this->SetURL("controllers/tutor_controller.php");?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
               <div class="w-1/2 border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
                 <div class="w-full p-4 sm:p-12.5 xl:p-17.5">
                   <span class="mb-1.5 block font-medium">Por favor verifica todos tus datos antes de guardar</span>
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                     Bienvenido al registro de Tutor
                   </h2>
-                  <div class="mb-4">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Nombre del Usuario</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese su Nombre"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Cedula del Usuario</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese su cedula"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Correo</label>
-                    <div class="relative">
-                      <input type="email" placeholder="Ingrese su Correo"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Edad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="edad"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-                  
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
-                    <div class="relative">
-                      <input type="password" placeholder="Ingrese su Contraseña"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Numero de Teléfono</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese su Numero de Teléfono"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
+                  <input type="hidden" name="permisos_usuario" value="2" readonly>
+                  <input type="hidden" name="tipo_usuario" value="Tutor" readonly>
+                  <input type="hidden" name="ope" value="Registrar" readonly>
+                  <?php $this->GetComplement('campos_datos_usuario');?>
                 </div>
               </div>
               <div class="w-1/2 border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
@@ -80,54 +37,7 @@
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Preguntas De Seguridad
                   </h2>
-
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Primera pregunta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese pregunta de Seguridad"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-                  
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Primera respuesta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese respuesta"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Segunda pregunta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese pregunta de Seguridad"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">Segunda respuesta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese respuesta"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">tercera pregunta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese pregunta de Seguridad"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
-
-                   <div class="mb-6">
-                    <label class="mb-2.5 block font-medium text-black dark:text-white">tercera respuesta de seguridad</label>
-                    <div class="relative">
-                      <input type="text" placeholder="Ingrese respuesta"
-                        class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                    </div>
-                  </div>
+                  <?php $this->GetComplement('campos_seguridad_usuario');?>
                   <!-- fin de las preguntas de seguridad -->
                   <div class="mb-5">
                     <input type="submit" value="Registrar datos"

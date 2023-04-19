@@ -92,8 +92,8 @@
 										<div class="mt-6 text-center">
 											<p class="font-medium">
 												No posees una cuenta de usuario?
-												<a href="signup.html" class="text-primary">Registro de Estudiante</a> o 
-												<a href="signup.html" class="text-primary">Registro de Docente</a>
+												<a href="<?php $this->SetURL($this->controlador."/registro_estudiante");?>" class="text-primary">Registro de Estudiante</a> o 
+												<a href="<?php $this->SetURL($this->controlador."/registro_tutor");?>" class="text-primary">Registro de Docente</a>
 											</p>
 										</div>
 									</form>
