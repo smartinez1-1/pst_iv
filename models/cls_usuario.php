@@ -37,7 +37,7 @@
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return false;
-			$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT);
+			$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT,['cost' => 12]);
 			$sql = "INSERT INTO usuario
         (cedula_usuario,clase_usuario,nombre_usuario,estatus_usuario,edad_usuario,genero_usuario,permiso_usuario,
         tipo_usuario,telefono_usuario,correo_usuario,pregunta_1,pregunta_2,pregunta_3,respuesta_1,respuesta_2,respuesta_3) 
