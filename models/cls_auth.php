@@ -1,19 +1,14 @@
 <?php
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\SMTP;
-  use PHPMailer\PHPMailer\Exception;
-  
-  if(is_file("vendor/autoload.php")) require "vendor/autoload.php";
-  if(!class_exists("m_db")) require("m_db.php");
+  if(!class_exists("cls_db")) require("cls_db.php");
 
-  class m_auth extends m_db{
-    private $user_id, $cedula, $password, $pregunta1, $pregunta2, $respuesta1, $respuesta2;
+  class cls_auth extends cls_db{
+    private $cedula_usuario, $cedula, $clase_usuario, $pregunta1, $pregunta2, $pregunta3, $respuesta1, $respuesta2, $respuesta3;
 
     public function __construct(){
       parent::__construct();
-      $this->user_id = null;
+      $this->cedula_usuario = null;
       $this->cedula = null;
-      $this->password = null;
+      $this->clase_usuario = null;
       $this->pregunta1 = null;
       $this->pregunta2 = null;
       $this->respuesta1 = null;
@@ -21,36 +16,33 @@
     }
     
     public function SetDatos($d){
-      $this->user_id = isset($d['user_id']) ? $d['user_id'] : null;
-      $this->cedula = isset($d['cedula']) ? $d['cedula'] : null;
-      $this->password = isset($d['password']) ? $d['password'] : null;
+      $this->cedula_usuario = isset($d['cedula_usuario']) ? $d['cedula_usuario'] : null;
+      $this->clase_usuario = isset($d['clase_usuario']) ? $d['clase_usuario'] : null;
       $this->pregunta1 = isset($d['pregunta1']) ? $d['pregunta1'] : null;
       $this->pregunta2 = isset($d['pregunta2']) ? $d['pregunta2'] : null;
+      $this->pregunta3 = isset($d['pregunta3']) ? $d['pregunta3'] : null;
       $this->respuesta1 = isset($d['respuesta1']) ? strtoupper($d['respuesta1']) : null;
       $this->respuesta2 = isset($d['respuesta2']) ? strtoupper($d['respuesta2']) : null;
+      $this->respuesta3 = isset($d['respuesta3']) ? strtoupper($d['respuesta3']) : null;
     }
     
     public function Login(){
-      $res = $this->Query("SELECT * FROM personas 
-      INNER JOIN usuarios ON usuarios.person_id_user = personas.id_person 
-      INNER JOIN roles_usuario ON roles_usuario.id = usuarios.id_rol
-      WHERE personas.cedula_person = '$this->cedula' ;");
+      $res = $this->Query("SELECT * FROM usuarios WHERE cedula_usuario = '$this->cedula_usuario' ;");
       
       if($res->num_rows > 0){
         $datos = $this->Get_array($res);
-        if($datos['status_user'] === "0") return [false,"err/06AUTH"];
+        if($datos['estatus_usuario'] === "0") return [false,"err/06AUTH"];
 
-        if(password_verify($this->password, $datos['password_user'])){
+        if(password_verify($this->password, $datos['clave_usuario'])){
           session_start();
-          $_SESSION['user_id'] = $datos['id_user'];
-          $_SESSION['cedula'] = $datos['cedula_person'];
-          $_SESSION['username'] = $datos['nom_person'];
-          $_SESSION['permisos'] = $datos['nivel_permisos_rol'];
-          $_SESSION['nom_rol'] = $datos['nom_rol'];
+          $_SESSION['cedula'] = $datos['cedula_usuario'];
+          $_SESSION['username'] = $datos['nombre_usuario'];
+          $_SESSION['permisos'] = $datos['permisos_usuaio'];
+          $_SESSION['nom_rol'] = $datos['tipo_usuario'];
           
           return [true,'msg/01AUTH'];
         }
-        if($datos['id_rol'] != 1) $this->intentos($datos['id_user']);
+        // if($datos['id_rol'] != 1) $this->intentos($datos['id_user']);
         return [false,'err/07AUTH'];
       }
       else return [false,"err/05AUTH"];
@@ -296,41 +288,6 @@
 
       die("FALLO algo");
       $this->Make_code_recovery($id_user);
-    }
-
-    public function SendEmail($code, $email){
-      if(constant('username_email')  == '') die("Debes de tener configurada una cuenta de Correo electronico");
-      
-      $mail = new PHPMailer(true);
-      $email_user = strtolower($email);
-      
-      try{
-        ini_set( 'display_errors', 1 );
-        error_reporting( E_ALL );
-
-        $mail->SMTPDebug = 0;                              //Enable verbose debug output
-        $mail->isSMTP();                                   //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';              //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                          //Enable SMTP authentication
-        $mail->Username   = constant('username_email');    //SMTP username
-        $mail->Password   = constant('password_email');    //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
-        $mail->Port       = constant('port_email');  
-
-        //Recipients
-        $mail->setFrom(constant('username_email'), 'Mailer');
-        $mail->addAddress($email_user);     //Add a recipient
-
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Codigo de recuperacion';
-        $mail->Body    = "Este es tu código de recuperación: <b>$code</b>";
-
-        if(!$mail->send()) return false; else return true;
-        
-      }catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-      }
     }
 
     function generateRandomString($length = 8) { 

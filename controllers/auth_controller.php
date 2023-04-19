@@ -1,6 +1,6 @@
 <?php
   require_once("../models/config.php");
-  require_once("../models/m_auth.php");
+  require_once("../models/cls_auth.php");
     
   if(isset($_POST['ope'])){
     switch($_POST['ope']){
@@ -18,20 +18,20 @@
     }
   }
 
-  if(isset($_GET['ope'])){
-    switch($_GET['ope']){
-      case "Get_respuesta":
-        fn_Get_respuesta();
-      break;
+  // if(isset($_GET['ope'])){
+  //   switch($_GET['ope']){
+  //     case "Get_respuesta":
+  //       fn_Get_respuesta();
+  //     break;
 
-      case "Consultar_grupo":
-        fn_Consultar_grupo();
-      break;
-    }
-  }
+  //     case "Consultar_grupo":
+  //       fn_Consultar_grupo();
+  //     break;
+  //   }
+  // }
 
   function fn_Login(){
-    $model = new m_auth();    
+    $model = new cls_auth();    
     
     $model->setDatos($_POST);
     $mensaje = $model->Login();

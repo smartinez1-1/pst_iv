@@ -1,11 +1,11 @@
 <?php
-    class m_db{
+    class cls_db{
 			private $host, $dbname, $user, $pass, $conexion;
 			public function __construct(){
 				if(!isset($_SESSION)) session_start();
 
 				$this->host = "localhost";
-				$this->dbname = "";
+				$this->dbname = "bd_pst";
 				$this->user = "root";
 				$this->pass = "";
 				$this->Connect();

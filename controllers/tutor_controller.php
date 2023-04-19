@@ -1,7 +1,7 @@
 <?php
 	require_once("../models/config.php");
 	require_once("../models/cls_usuario.php");
-	require_once("../models/cls_estudiante.php");
+	require_once("../models/cls_tutor.php");
     
 	if(isset($_POST['ope'])){
 		switch($_POST['ope']){
@@ -37,17 +37,17 @@
 
 	function fn_Registrar(){
 		$model_u = new cls_usuario();
-		$model_e = new cls_estudiante();
+		$model_t = new cls_tutor();
 		
 		$model_u->setDatos($_POST);
 		$result = $model_u->create();
 
 		if($result){
-			$model_e->setDatos($_POST);
-			$mensaje = $model_e->create();
+			$model_t->setDatos($_POST);
+			$mensaje = $model_t->create();
 		}else $mensaje = "err/01ERR";
 
-		header("Location: ".constant("URL")."auth/registro_estudiante/$mensaje");	
+		header("Location: ".constant("URL")."auth/registro_tutor/$mensaje");	
 	}
 
 	// function fn_Actualizar(){
