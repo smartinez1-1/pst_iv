@@ -7,6 +7,10 @@
 			case "Registrar":
 				fn_Registrar();
 			break;
+
+			case "Actualizar":
+				fn_Actualizar();
+			break;
 		}
 	}
 
@@ -15,6 +19,15 @@
 				
 		$model_c->setDatos($_POST);
 		$mensaje = $model_c->create();
+
+		header("Location: ".constant("URL")."carrera/formulario/$mensaje");	
+	}
+
+	function fn_Actualizar(){
+		$model_c = new cls_carrera();
+				
+		$model_c->setDatos($_POST);
+		$mensaje = $model_c->update();
 
 		header("Location: ".constant("URL")."carrera/formulario/$mensaje");	
 	}

@@ -35,7 +35,6 @@
     
     $model->setDatos($_POST);
     $mensaje = $model->Login();
-
     
     if($mensaje[0]) header("Location: ".constant("URL")."inicio/index/".$mensaje[1]);
     else header("Location: ".constant("URL")."auth/login/".$mensaje[1]);
