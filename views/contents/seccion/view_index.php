@@ -17,7 +17,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Lapso Academico"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Seccion"]);
         ?>
           <!-- ====== Table Three Start -->
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -26,19 +26,13 @@
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Id
+                      Id seccion
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Descripcion
-                    </th>
-                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Fase
+                      numero de seccion
                     </th>
                     <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                      Estado lapso academico
-                    </th>
-                    <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                      Estado inscripciones
+                      Estado
                     </th>
                     <th class="py-4 px-4 font-medium text-black dark:text-white">
                       Opciones
@@ -47,37 +41,28 @@
                 </thead>
                 <tbody>
                   <?php 
-                    require_once("./models/cls_lapso_academico.php");
-                    $model = new cls_lapso_academico();
+                    require_once("./models/cls_seccion.php");
+                    $model = new cls_seccion();
                     $datos = $model->Get_secciones();
                     
-                    foreach($datos as $lap){
+                    foreach($datos as $sec){
                       ?>
                       <tr>
                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                          <h5 class="font-medium text-black dark:text-white"><?php echo $lap['id_seccion'];?></h5>
+                          <h5 class="font-medium text-black dark:text-white"><?php echo $sec['id_seccion'];?></h5>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $lap['numero_seccion'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $sec['numero_seccion'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $lap['numero_seccion'];?></p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <?php $text = ($lap['estado_seccion'] == '1') ? "text-success" : "text-danger";?>
+                          <?php $text = ($sec['estado_seccion'] == '1') ? "text-success" : "text-danger";?>
                           <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium <?php echo $text;?>">
-                          <?php echo ($lap['estado_seccion'] == '1') ? "Activo" : "Inactivo";?>
-                          </p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <?php $text = ($lap['estado_seccion'] == '1') ? "text-success" : "text-danger";?>
-                          <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium <?php echo $text;?>">
-                          <?php echo ($lap['estado_seccion'] == '1') ? "Activo" : "Inactivo";?>
+                          <?php echo ($sec['estado_seccion'] == '1') ? "Activo" : "Inactivo";?>
                           </p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('carrera/formulario/b/'.$lap['id_seccion']);?>">Editar</a>
+                            <a href="<?php $this->SetURL('carrera/formulario/b/'.$sec['id_seccion']);?>">Editar</a>
                           </div>
                         </td>
                       </tr>

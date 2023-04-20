@@ -23,8 +23,8 @@
 							<div class="hidden w-full xl:block xl:w-1/2">
 								<div class="py-17.5 px-26 text-center">
 									<a class="mb-5.5 flex justify-between" href="index.html">
-										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.jpg');?>" alt="Logo 1" style="height:10rem;" />
-										<img class="" src="<?php $this->SetURL('views/img/logo_armas.jpg');?>" alt="Logo 2" style="height:10rem;" />
+										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo 1" style="height:10rem;" />
+										<img class="" src="<?php $this->SetURL('views/img/logo_armas.png');?>" alt="Logo 2" style="height:10rem;" />
 									</a>
 
 									<p class="font-bold 2xl:px-20">

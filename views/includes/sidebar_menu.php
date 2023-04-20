@@ -5,7 +5,7 @@
 			<!-- SIDEBAR HEADER -->
 			<div class="flex items-center justify-between gap-2 px-6 py-1">
 				<a href="<?php $this->SetURL('inicio/');?>">
-					<img src="<?php $this->SetURL('views/img/logo_unefa.jpg');?>" alt="Logo" style="height:9rem;" />
+					<img src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo" style="height:9rem;" />
 				</a>
 
 				<button class="block lg:hidden" @click.stop="sidebarToggle = !sidebarToggle">
