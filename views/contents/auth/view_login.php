@@ -22,14 +22,13 @@
 						<div class="flex flex-wrap items-center">
 							<div class="hidden w-full xl:block xl:w-1/2">
 								<div class="py-17.5 px-26 text-center">
-									<a class="mb-5.5 inline-block" href="index.html">
-										<img class="hidden dark:block" src="src/images/logo/logo.svg" alt="Logo" />
-										<img class="dark:hidden" src="src/images/logo/logo-dark.svg" alt="Logo" />
+									<a class="mb-5.5 flex justify-between" href="index.html">
+										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo 1" style="height:10rem;" />
+										<img class="" src="<?php $this->SetURL('views/img/logo_armas.png');?>" alt="Logo 2" style="height:10rem;" />
 									</a>
 
-									<p class="font-medium 2xl:px-20">
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit
-										suspendisse.
+									<p class="font-bold 2xl:px-20">
+										Universidad Nacional Experimental de la Fuerza Armada Nacional Bolivariana (UNEFA)
 									</p>
 
 								</div>
@@ -46,7 +45,7 @@
 											<label class="mb-2.5 block font-medium text-black dark:text-white">Cedula del usuario</label>
 											<div class="relative">
 												<input type="hidden" name="ope" value="Login">
-												<input type="text" placeholder="Ingresa tu cedula" name="cedula_usuario"
+												<input type="text" required maxlength="8" minlength="7" pattern="[0-4]{7,8)" placeholder="Ingresa tu cedula" name="cedula_usuario"
 													class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
 												<span class="absolute right-4 top-4">
@@ -65,7 +64,7 @@
 										<div class="mb-6">
 											<label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
 											<div class="relative">
-												<input type="password" placeholder="6+ Characters, 1 Capital letter" name="clave_usuario"
+												<input type="password" required maxlength="12" minlength="8" placeholder="6+ Characters, 1 Capital letter" name="clave_usuario"
 													class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
 												<span class="absolute right-4 top-4">

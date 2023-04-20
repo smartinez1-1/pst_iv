@@ -3,10 +3,11 @@
   require_once("./controllers/alerts.php");
 
   class App{
-    private $ruta_actual, $code_error, $code_done, $titleContent, $controlador, $file_view_name, $ObjMessage;
+    private $ruta_actual, $code_error, $code_done, $titleContent, $controlador, $file_view_name, $ObjMessage, $id_consulta;
 
     public function __construct(){
       session_start();
+      $this->id_consulta = null;
       $this->ObjMessage = new alerts();
       $this->GetView($this->GetRoute());
     }
@@ -32,11 +33,11 @@
 
     private function Auth(){
       if(in_array($this->ruta_actual, constant("PRIVATE_URLS"))){
-        if(!isset($_SESSION['user_id'])){
+        if(!isset($_SESSION['cedula'])){
           $this->Redirect("auth/login","err/01AUTH");
         }
 
-        if(isset($_SESSION['user_id'])){
+        if(isset($_SESSION['cedula'])){
           if($_SESSION['permisos'] == 1 && $this->file_view_name == "form") $this->Redirect($this->controlador.'/index',"err/08AUTH");
           if($_SESSION['permisos'] < 3 && $this->controlador == "usuarios" && $this->file_view_name == "index") $this->Redirect("inicio/index","err/08AUTH");
         }
@@ -69,6 +70,7 @@
 
       if(sizeof($url) > 2 && $url[2] === "err") $this->code_error = $url[3];
       if(sizeof($url) > 2 && $url[2] === "msg") $this->code_done = $url[3];
+      if(sizeof($url) > 2 && $url[2] === "b") $this->id_consulta = $url[3];
       return $url;
     }
 

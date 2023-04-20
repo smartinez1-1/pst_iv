@@ -26,16 +26,32 @@
 			if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
 		}
 
-		// public function update(){
-		// 	$sql = "UPDATE carrera SET codigo_carrera = '$this->codigo_carrera' WHERE id_carrera = $this->id_carrera ;";
-    //   $this->Query($sql);
-		// 	return "msg/01DONE";
-		// }
+		public function update(){
+			$sqlConsulta = "SELECT * FROM carrera WHERE codigo_carrera = '$this->codigo_carrera' AND nombre_carrera = '$this->nombre_carrera';";
+			$result = $this->Query($sqlConsulta);
+			
+			if($result->num_rows > 0) return "err/02ERR";
+
+			$sql = "UPDATE carrera SET 
+				codigo_carrera = '$this->codigo_carrera', 
+				nombre_carrera = '$this->nombre_carrera',
+				estado_carrera = '$this->estado_carrera'
+				WHERE id_carrera = $this->id_carrera ;";
+
+      $this->Query($sql);
+			return "msg/01DONE";
+		}
 
 		public function Get_carreras(){
 			$sql = "SELECT * FROM carrera;";
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
+		}
+
+		public function consulta($id){
+			$sql = "SELECT * FROM carrera WHERE id_carrera = '$id';";
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
 		}
 	}
 ?>

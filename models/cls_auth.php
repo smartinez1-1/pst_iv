@@ -37,7 +37,7 @@
           session_start();
           $_SESSION['cedula'] = $datos['cedula_usuario'];
           $_SESSION['username'] = $datos['nombre_usuario'];
-          $_SESSION['permisos'] = $datos['permisos_usuaio'];
+          $_SESSION['permisos'] = $datos['permiso_usuaio'];
           $_SESSION['nom_rol'] = $datos['tipo_usuario'];
           
           return [true,'msg/01AUTH'];

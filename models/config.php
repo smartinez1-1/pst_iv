@@ -10,7 +10,7 @@
   }
   // "grupos/index","grupos/form",
   $rutas_privadas = [
-    "carrera/index","carrera/formulario"
+    "carrera/index","carrera/formulario","inicio/index"
   ];
 
   define("URL", "http://$host_string:$port_string$string_url");
