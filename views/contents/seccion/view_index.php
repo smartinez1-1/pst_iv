@@ -62,7 +62,7 @@
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('carrera/formulario/b/'.$sec['id_seccion']);?>">Editar</a>
+                            <a href="<?php $this->SetURL('grupo/formulario/b/'.$sec['id_seccion']);?>">Editar</a>
                           </div>
                         </td>
                       </tr>

@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+  $this->GetHeader("SGSC | UNEFA");
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template
-  </title>
-  <link rel="icon" href="favicon.ico">
-  <link href="style.css" rel="stylesheet">
-</head>
+  $op = "Registrar";
+  $id_semestre = null;
+  $des_semestre = null;
+  $estado_semestre = null;
+  $fecha_inicio_semestre = null;
+  $fecha_cierre_semestre = null;
 
+  if(isset($this->id_consulta)){
+    require_once("./models/cls_semestre.php");
+    $model = new cls_semestre();
+    $datos = $model->consulta($this->id_consulta);
+
+    if(isset($datos['id_semestre'])){      
+      $op = "Actualizar";
+      $id_semestre = $datos['id_semestre'];
+      $des_semestre = $datos['des_semestre'];
+      $fecha_inicio_semestre = $datos['fecha_inicio_semestre'];
+      $fecha_cierre_semestre = $datos['fecha_cierre_semestre'];
+      $estado_semestre = $datos['estado_semestre'];
+    }
+  }
+
+?>
 <body
-  x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
-  x-init="
+	x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+	x-init="
           darkMode = JSON.parse(localStorage.getItem('darkMode'));
           $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-  :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+	:class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
-  <!-- ===== Page Wrapper Start ===== -->
-  <div class="flex h-screen overflow-hidden">
-
-
-    <!-- ===== Content Area Start ===== -->
-    <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-
-
-
-
-
-
+	<!-- ===== Page Wrapper Start ===== -->
+	<div class="flex h-screen overflow-hidden">
+		<?php $this->GetComplement('sidebar_menu');?>
+		<!-- ===== Content Area Start ===== -->
+		<div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+		<?php $this->GetComplement('header');?>
       <main>
-        <!-- FORMULARIO DE EJEMPLO -->
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
-          <!-- ====== Form Layout Section Start -->
+        <?php 
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Semestre"]);
+        ?>
+          <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
             <div class="flex flex-col gap-9">
               <!-- Contact Form -->
               <div
-                class=" rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                  <h3 class="font-semibold text-black dark:text-white text-center">
-                    Formulario del Semestre
+                  <h3 class="font-semibold text-black dark:text-white">
+                    Getion de Semestre
                   </h3>
                 </div>
-                <form action="#" class=" ">
+                <form action="<?php $this->SetURL('controllers/semestre_controller.php');?>" autocomplete="off" method="POST">
+                  <input type="hidden" name="ope" value="<?php echo $op;?>">
+                  <input type="hidden" name="id_semestre" value="<?php echo $id_semestre;?>">
                   <div class="p-6.5">
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-2/6">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Descripcion<span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" placeholder=""
+                        <input type="text" placeholder="" name="des_semestre" value="<?php echo $des_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 
                       <div class="relative">
                         <label class="mb-2.5 block text-black dark:text-white">Fecha de Inicio</label>
-                        <input type="date"
+                        <input type="date" name="fecha_inicio_semestre" value="<?php echo $fecha_inicio_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                         <span
                           class="absolute right-0.5 top-0.5 block rounded-tr rounded-br bg-white p-3.5 dark:bg-form-input">
@@ -73,7 +85,7 @@
 
                       <div class="relative">
                         <label class="mb-2.5 block text-black dark:text-white">Fecha de Cierre</label>
-                        <input type="date"
+                        <input type="date" name="fecha_cierre_semestre" value="<?php echo $fecha_cierre_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
                         <span
@@ -87,61 +99,49 @@
                         </span>
                       </div>
                     </div>
-                    <div>
+                    <div class="mb-6">
                       <div x-data="{ checkboxToggle: false }">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Estado del Semestre<span class="text-meta-1 ">*</span>
                         </label>
 
-                        <label for="checkboxLabelOne" class="flex cursor-pointer select-none items-center">
-                          <div class="relative p-6">
-                            <input type="radio" id="checkboxLabelOne" class="sr-only"
-                              @change="checkboxToggle = !checkboxToggle" />
-                            <div :class="checkboxToggle && 'border-primary bg-gray dark:bg-transparent'"
-                              class="mr-4 flex h-5 w-5 items-center justify-center rounded border">
-                              <span :class="checkboxToggle && 'bg-primary'" class="h-2.5 w-2.5 rounded-sm"></span>
-                            </div>
+                        <div class="flex items-center space-x-2">
+                          <div class="mr-3">
+                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" id="checkboxLabelFour" class="" name="estado_semestre" value="1" <?php if(isset($estado_semestre) && $estado_semestre == "1") echo "checked";?>/>
+                              </div>
+                              Activo
+                            </label>
                           </div>
-                          Activo
-                        </label>
-                      </div>
 
-                      <label for="checkboxLabelOne" class="flex cursor-pointer select-none items-center">
-                        <div class="relative p-6">
-                          <input type="radio" id="checkboxLabelOne" class="sr-only"
-                            @change="checkboxToggle = !checkboxToggle" />
-                          <div :class="checkboxToggle && 'border-primary bg-gray dark:bg-transparent'"
-                            class="mr-4 flex h-5 w-5 items-center justify-center rounded border">
-                            <span :class="checkboxToggle && 'bg-primary'" class="h-2.5 w-2.5 rounded-sm"></span>
+                          <div >
+                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" id="checkboxLabelFour" class="" name="estado_semestre" value="0" <?php if(isset($estado_semestre) && $estado_semestre == "0") echo "checked";?>/>
+                              </div>
+                              Inactivo
+                            </label>
                           </div>
                         </div>
-                        Inactivo
-                      </label>
+                      </div>
                     </div>
 
-
-                    <div class="flex flex-row justify-center items-center">
-                      <button
-                        class="flex w-72 flex-col justify-center items-center rounded bg-primary p-3 font-medium text-gray">
-                        Continuar
-                      </button>
-                    </div>
-
+                    <button class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+                      Guardar
+                    </button>
                   </div>
-
                 </form>
               </div>
             </div>
           </div>
         </div>
       </main>
-
-
-    </div>
-    <!-- ===== Content Area End ===== -->
-  </div>
-  <!-- ===== Page Wrapper End ===== -->
-  <script defer src="bundle.js"></script>
+		</div>
+		<!-- ===== Content Area End ===== -->
+	</div>
+	<!-- ===== Page Wrapper End ===== -->
+	<?php $this->GetComplement('scripts');?>
 </body>
 
 </html>

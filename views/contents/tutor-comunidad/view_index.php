@@ -26,7 +26,7 @@
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Cedula del tutor-comunidad
+                      Cedula 
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       nombre
@@ -65,7 +65,7 @@
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('carrera/formulario/b/'.$tur_c['id_tutor']);?>">Editar</a>
+                            <a href="<?php $this->SetURL('tutor-comunidad/formulario/b/'.$tur_c['id_tutor']);?>">Editar</a>
                           </div>
                         </td>
                       </tr>

@@ -1,7 +1,7 @@
 <?php
 	if(!class_exists("cls_db")) require_once("cls_db.php");
 
-	class cls_tutor extends cls_db{
+	class cls_tutor_comunidad extends cls_db{
 		private $id_tutor, $cedula_tutor, $nombre_tutor_comunidad, $telefono_tutor, $id_comunidad;
 			public function __construct(){
 			parent::__construct();
@@ -17,7 +17,7 @@
 		}
 
 		public function create(){
-			$sqlConsulta = "SELECT * FROM tutor WHERE id_comunidad = '$this->id_comunidad'";
+			$sqlConsulta = "SELECT * FROM tutor_comunidad WHERE id_comunidad = '$this->id_comunidad'";
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";
@@ -43,8 +43,8 @@
 			return "msg/01DONE";
 		}
 
-		public function Get_tutores(){
-			$sql = "SELECT * FROM tutor_comunidad;";
+		public function Get_tutores_comu(){
+			$sql = "SELECT * FROM tutor_comunidad INNER JOIN comunidad ON comunidad.id_comunidad = tutor_comunidad.id_comunidad;";
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}

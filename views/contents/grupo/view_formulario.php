@@ -4,20 +4,20 @@
   $this->GetHeader("SGSC | UNEFA");
 
   $op = "Registrar";
-  $id_tutor = null;
-  $cedula_tutor = null;
-  $nombre_tutor_comunidad = null;
+  $id_grupo = null;
+  $nombre_grupo = null;
+  $estado_grupo = null;
 
   if(isset($this->id_consulta)){
-    require_once("./models/cls_tutor_comunidad.php");
-    $model = new cls_tutor_comunidad();
+    require_once("./models/cls_grupo.php");
+    $model = new cls_grupo();
     $datos = $model->consulta($this->id_consulta);
 
-    if(isset($datos['id_tutor'])){      
+    if(isset($datos['id_grupo'])){      
       $op = "Actualizar";
-      $id_tutor = $datos['id_tutor'];
-      $cedula_tutor = $datos['cedula_tutor'];
-      $nombre_tutor_comunidad = $datos['nombre_tutor_comunidad'];
+      $id_grupo = $datos['id_grupo'];
+      $nombre_grupo = $datos['nombre_grupo'];
+      $estado_grupo = $datos['estado_grupo'];
     }
   }
 
@@ -38,7 +38,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Tutor-Comunidad"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Grupo"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -48,38 +48,44 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Tutor-comunidad
+                    Getion de Grupo
                   </h3>
                 </div>
-                <form action="<?php $this->SetURL('controllers/tutor_controller.php');?>" autocomplete="off" method="POST">
+                <form action="<?php $this->SetURL('controllers/grupo_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
-                  <input type="hidden" name="id_tutor" value="<?php echo $id_tutor;?>">
+                  <input type="hidden" name="id_grupo" value="<?php echo $id_grupo;?>">
                   <div class="p-6.5">
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Cedula del tutor <span class="text-meta-1">*</span>
+                          Numero de seccion <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-4]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="cedula_tutor" value="<?php echo $id_tutor;?>"
+                        <input type="text" maxlength="4" minlength="4" pattern="[0-4]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
-                    </div>
-                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-4/6">
+                      <div class="w-full xl:w-2/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Nombre del tutor <span class="text-meta-1">*</span>
+                          Estado del grupo <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-4]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="nombre_tutor_comunidad" value="<?php echo $nombre_tutor;?>"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                      </div>
-                    </div>
-                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-4/6">
-                        <label class="mb-2.5 block text-black dark:text-white">
-                          Telefono <span class="text-meta-1">*</span>
-                        </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-4]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="telefono_tutor" value="<?php echo $telefono;?>"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        <div class="flex items-center space-x-2">
+                          <div class="mr-3">
+                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_grupo" value="1" <?php echo ($estado_grupo == '1') ? "checked" : "";?>/>
+                              </div>
+                              Activo
+                            </label>
+                          </div>
+
+                          <div >
+                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_grupo" value="0" <?php echo ($estado_grupo == '0') ? "checked" : "";?>/>
+                              </div>
+                              Inactivo
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
