@@ -20,7 +20,7 @@
 			$result = $this->Query($sqlConsulta);
 
 			if($result->num_rows > 0) return "err/02ERR";
-			$sql = "INSERT INTO tutor(cedula_usuario,tipo_tutor,categoria_tutor) VALUES('$this->cedula_usuario','tipo','$this->categoria_tutor');";
+			$sql = "INSERT INTO tutor(cedula_usuario,tipo_tutor,categoria_tutor) VALUES('$this->cedula_usuario','$this->tipo_tutor','$this->categoria_tutor');";
 			$this->Query($sql);
 
 			if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";

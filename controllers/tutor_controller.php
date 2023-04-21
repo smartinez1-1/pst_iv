@@ -38,7 +38,7 @@
 	function fn_Registrar(){
 		$model_u = new cls_usuario();
 		$model_t = new cls_tutor();
-		
+				
 		$model_u->setDatos($_POST);
 		$result = $model_u->create();
 
@@ -47,13 +47,13 @@
 			$mensaje = $model_t->create();
 		}else $mensaje = "err/01ERR";
 
-		header("Location: ".constant("URL")."auth/registro_tutor/$mensaje");	
+		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
 	}
 
 	function fn_Actualizar(){
 		$model = new cls_usuario();
 		$model->setDatos($_POST);
-		$result = $model->Update();
+		$mensaje = $model->Update();
 
 		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
 	}

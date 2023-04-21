@@ -27,7 +27,7 @@
 		}
 
 		public function update(){
-			$sqlConsulta = "SELECT * FROM comunidad WHERE nombre_comunidad = '$this->nombre_comunidad';";
+			$sqlConsulta = "SELECT * FROM comunidad WHERE nombre_comunidad = '$this->nombre_comunidad' AND id_comunidad != $this->id_comunidad;";
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";

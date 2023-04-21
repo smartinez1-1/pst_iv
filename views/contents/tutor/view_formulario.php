@@ -12,6 +12,7 @@
   $sexo = null;
   $telefono = null;
   $categoria = null;
+  $tipo_tutor = null;
   $if_tutor = true;
 
   if(isset($this->id_consulta)){
@@ -29,6 +30,7 @@
 			$sexo = $datos['genero_usuario'];
 			$telefono = $datos['telefono_usuario'];
       $categoria = $datos['categoria_tutor'];
+      $tipo_tutor = $datos['tipo_tutor'];
 			// $pregunta1 = $datos['pregunta1'];
 			// $respuesta1 = "";
 			// $pregunta2 = $datos['pregunta2'];
@@ -65,7 +67,7 @@
 						</div>
             <form action="<?php $this->SetURL("controllers/tutor_controller.php");?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
               <div class="<?php echo ($op != "Actualizar") ? "w-1/2 xl:w-1/2" : "w-full";?> border-stroke dark:border-strokedark xl:border-l-2">
-                <div class="w-full grid grid-cols-3 gap-4 p-4 sm:p-12.5 xl:p-17.5">
+                <div class="w-full grid grid-cols-<?php echo (isset($this->id_consulta)) ? "3" : "2";?> gap-4 p-4 sm:p-12.5 xl:p-17.5">
                   <!-- <span class="mb-1.5 block font-medium">Por favor verifica todos tus datos antes de guardar</span>
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                     Bienvenido al registro de Estudiante
@@ -92,7 +94,7 @@
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Preguntas De Seguridad
                   </h2>
-                  <?php $this->GetComplement('campos_seguridad_usuario');?>
+                  <?php require_once("./views/includes/campos_seguridad_usuario.php");?>
                   <!-- fin de las preguntas de seguridad -->
                   <div class="mb-5">
                     <input type="submit" value="Guardar"

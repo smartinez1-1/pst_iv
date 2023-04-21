@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2023 a las 03:39:43
+-- Tiempo de generación: 21-04-2023 a las 07:24:25
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -32,7 +32,8 @@ USE `bd_pst`;
 CREATE TABLE `ano_escolar` (
   `id_ano_escolar` int(11) NOT NULL,
   `ano_escolar_nombre` varchar(45) NOT NULL,
-  `fase_ano_escolar` varchar(45) NOT NULL
+  `estado_ano_escolar` tinyint(1) NOT NULL,
+  `estado_incripciones` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -53,7 +54,8 @@ CREATE TABLE `carrera` (
 --
 
 INSERT INTO `carrera` (`id_carrera`, `nombre_carrera`, `codigo_carrera`, `estado_carrera`) VALUES
-(1, 'INGENIERIA', '4145', '0');
+(1, 'INGENIERIA', '4145', '0'),
+(2, 'FASDFASDF', '4564', '1');
 
 -- --------------------------------------------------------
 
@@ -67,6 +69,13 @@ CREATE TABLE `comunidad` (
   `tipo_comunidad` varchar(45) NOT NULL,
   `direccion_comunidad` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `comunidad`
+--
+
+INSERT INTO `comunidad` (`id_comunidad`, `nombre_comunidad`, `tipo_comunidad`, `direccion_comunidad`) VALUES
+(1, 'FASDFASDF', 'FASDFAAAA', 'SSSSSSSSSSSSSSS');
 
 -- --------------------------------------------------------
 
@@ -95,8 +104,8 @@ INSERT INTO `estudiante` (`id_estudiante`, `cedula_usuario`, `turno_estudiante`)
 
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
-  `nombre_grupo` varchar(45) NOT NULL,
-  `numero_integrantes_grupo` varchar(45) NOT NULL
+  `nombre_grupo` varchar(30) NOT NULL,
+  `estado_grupo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -154,11 +163,16 @@ CREATE TABLE `proyecto` (
 
 CREATE TABLE `seccion` (
   `id_seccion` int(11) NOT NULL,
-  `numero_seccion` varchar(45) NOT NULL,
-  `fecha_inicio_semestre` varchar(45) NOT NULL,
-  `fecha_cierre_semestre` varchar(45) NOT NULL,
-  `estado_semestre` varchar(45) NOT NULL
+  `numero_seccion` varchar(5) NOT NULL,
+  `estado_seccion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`id_seccion`, `numero_seccion`, `estado_seccion`) VALUES
+(1, '2020', 1);
 
 -- --------------------------------------------------------
 
@@ -168,10 +182,10 @@ CREATE TABLE `seccion` (
 
 CREATE TABLE `semestre` (
   `id_semestre` int(11) NOT NULL,
-  `numero_semestre` varchar(45) NOT NULL,
-  `fecha_inicio_semestre` varchar(45) NOT NULL,
-  `fecha_cierre_semestre` varchar(45) NOT NULL,
-  `estado_semestre` varchar(45) NOT NULL
+  `des_semestre` varchar(15) NOT NULL,
+  `fecha_inicio_semestre` date NOT NULL,
+  `fecha_cierre_semestre` date NOT NULL,
+  `estado_semestre` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -187,6 +201,13 @@ CREATE TABLE `tutor` (
   `categoria_tutor` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `tutor`
+--
+
+INSERT INTO `tutor` (`id_tutor`, `cedula_usuario`, `tipo_tutor`, `categoria_tutor`) VALUES
+(2, 24654564, 'tipo', 'FASDFASDF');
+
 -- --------------------------------------------------------
 
 --
@@ -194,10 +215,11 @@ CREATE TABLE `tutor` (
 --
 
 CREATE TABLE `tutor_comunidad` (
-  `id_comunidad` int(11) NOT NULL,
+  `id_tutor` int(11) NOT NULL,
   `nombre_tutor_comunidad` varchar(45) NOT NULL,
   `cedula_tutor` varchar(45) NOT NULL,
-  `telefono_tutor` varchar(45) DEFAULT NULL
+  `telefono_tutor` varchar(45) DEFAULT NULL,
+  `id_comunidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -230,6 +252,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula_usuario`, `clave_usuario`, `nombre_usuario`, `estatus_usuario`, `edad_usuario`, `genero_usuario`, `permiso_usuario`, `tipo_usuario`, `telefono_usuario`, `correo_usuario`, `pregunta_1`, `pregunta_2`, `pregunta_3`, `respuesta_1`, `respuesta_2`, `respuesta_3`) VALUES
+(24654564, '$2y$12$7fJjTzr3GlA7O/4MZHNbLOa1BHtIGKlhBzQlBMduSCglh/HWlGW1K', 'FREDY', 1, '20', 'M', '2', 'TUTOR', '04650456406', 'GSDGSDFGDF@GMAIL.COM', 'KHKJHJ', 'KJHJK', 'JKHJKH', 'JKHJKH', 'HKJHJK', 'JKHJK'),
 (27111222, '$2y$12$GkY9DcPH6AmaDl5zN/ySweXlDxpj21mQQXQ3vwZo7alW4UC9awL.m', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (27132642, 'FASDFASDFASDF', 'JESUS MORALES', 1, '20', 'M', '3', 'ESTUDIANTE', '04245198398', 'FASDFASDFASDF@GMAIL.COM', 'FASDFASDF', 'FSADFSADF', 'DFSAFSDF', 'FGASDFSADF', 'FSFSDF', 'FSFASDFASD');
 
@@ -321,7 +344,8 @@ ALTER TABLE `tutor`
 -- Indices de la tabla `tutor_comunidad`
 --
 ALTER TABLE `tutor_comunidad`
-  ADD PRIMARY KEY (`id_comunidad`);
+  ADD PRIMARY KEY (`id_tutor`),
+  ADD KEY `id_comunidad` (`id_comunidad`);
 
 --
 -- Indices de la tabla `usuario`
@@ -343,13 +367,13 @@ ALTER TABLE `ano_escolar`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id_comunidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comunidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -379,7 +403,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `semestre`
@@ -391,7 +415,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT de la tabla `tutor`
 --
 ALTER TABLE `tutor`
-  MODIFY `id_tutor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -428,7 +452,7 @@ ALTER TABLE `proyecto`
   ADD CONSTRAINT `fk_proyecto_ano_escolar1` FOREIGN KEY (`id_ano_escolar`) REFERENCES `ano_escolar` (`id_ano_escolar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_proyecto_grupo1` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_proyecto_tutor1` FOREIGN KEY (`id_tutor`) REFERENCES `tutor` (`id_tutor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_proyecto_tutor_comunidad1` FOREIGN KEY (`id_comunidad`) REFERENCES `tutor_comunidad` (`id_comunidad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_proyecto_tutor_comunidad1` FOREIGN KEY (`id_comunidad`) REFERENCES `tutor_comunidad` (`id_tutor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tutor`
@@ -440,7 +464,7 @@ ALTER TABLE `tutor`
 -- Filtros para la tabla `tutor_comunidad`
 --
 ALTER TABLE `tutor_comunidad`
-  ADD CONSTRAINT `fk_tutor_comunidad_comunidad1` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id_comunidad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tutor_comunidad_ibfk_1` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id_comunidad`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
