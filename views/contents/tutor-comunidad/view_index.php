@@ -17,7 +17,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Comunidad"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Turor-Comunidad"]);
         ?>
           <!-- ====== Table Three Start -->
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -26,13 +26,16 @@
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Id comunidad
+                      Cedula del tutor-comunidad
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Nombre
+                      nombre
                     </th>
                     <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                      Tipo de comunidad
+                      Telefono
+                    </th>
+                    <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                      Comunidad
                     </th>
                     <th class="py-4 px-4 font-medium text-black dark:text-white">
                       Opciones
@@ -41,25 +44,28 @@
                 </thead>
                 <tbody>
                   <?php 
-                    require_once("./models/cls_comunidad.php");
-                    $model = new cls_comunidad();
-                    $datos = $model->Get_comunidades();
+                    require_once("./models/cls_tutor_comunidad.php");
+                    $model = new cls_tutor_comunidad();
+                    $datos = $model->Get_tutores_comu();
                     
-                    foreach($datos as $com){
+                    foreach($datos as $tur_c){
                       ?>
                       <tr>
                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                          <h5 class="font-medium text-black dark:text-white"><?php echo $com['id_comunidad'];?></h5>
+                          <h5 class="font-medium text-black dark:text-white"><?php echo $tur_c['cedula_tutor'];?></h5>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $com['nombre_comunidad'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $tur_c['nombre_tutor_comunidad'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $com['tipo_comunidad'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $tur_c['telefono_tutor'];?></p>
+                        </td>
+                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <p class="text-black dark:text-white"><?php echo $tur_c['nombre_comunidad'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('comunidad/formulario/b/'.$com['id_comunidad']);?>">Editar</a>
+                            <a href="<?php $this->SetURL('carrera/formulario/b/'.$tur_c['id_tutor']);?>">Editar</a>
                           </div>
                         </td>
                       </tr>

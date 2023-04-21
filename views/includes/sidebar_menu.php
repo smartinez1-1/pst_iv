@@ -110,39 +110,17 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									Lapso academico
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'comunidad' ? '':'comunidad')"
+									href="<?php $this->SetURL('comunidad/');?>" @click="selected = (selected === 'comunidad' ? '':'comunidad')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'comunidad') && (page === 'comunidad') }">
 									Comunidad
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
-
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'equipos' ? '':'equipos')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'equipos') && (page === 'equipos') }">
-									Equipos
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-
-							
-							
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									href="<?php $this->SetURL('tutor-comunidad/');?>" @click="selected = (selected === 'tutor-comunidad' ? '':'tutor-comunidad')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'tutor-comunidad') && (page === 'tutor-comunidad') }">
 									Tutor-comunidad
 								</a>
 							</li>
@@ -152,7 +130,7 @@
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
 									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									proyecto
+									Lapso academico
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
@@ -174,13 +152,21 @@
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
-							
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
 									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
 									Grupo
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									proyecto
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
