@@ -9,9 +9,9 @@
 				fn_Registrar();
 			break;
 
-			// case "Actualizar":
-			// 	fn_Actualizar();
-			// break;
+			case "Actualizar":
+				fn_Actualizar();
+			break;
 
 			// case "Desactivar":
 			// 	fn_Desactivar();
@@ -50,16 +50,13 @@
 		header("Location: ".constant("URL")."auth/registro_tutor/$mensaje");	
 	}
 
-	// function fn_Actualizar(){
-	// 	$model = new m_persona();
-	// 	$model->setDatos($_POST);
-	// 	$marcas = isset($_POST['id_marca']) ? $_POST['id_marca'] : [];
+	function fn_Actualizar(){
+		$model = new cls_usuario();
+		$model->setDatos($_POST);
+		$result = $model->Update();
 
-	// 	$result = $model->Update();
-	// 	$model->RegistroMarcasProveedor($marcas);
-
-	// 	print json_encode(["data" => $result]);
-	// }
+		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
+	}
 
   //   function fn_Desactivar(){
   //       $model = new m_persona();

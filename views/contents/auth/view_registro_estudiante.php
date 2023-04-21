@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $this->GetHeader("SGSC | UNEFA");?>
-
+<?php 
+  $if_tutor = false;
+  $this->GetHeader("SGSC | UNEFA");
+?>
 <body
 	x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
 	x-init="
@@ -28,8 +30,9 @@
                   </h2>
                   <input type="hidden" name="permisos_usuario" value="3">
                   <input type="hidden" name="tipo_usuario" value="Estudiante">
+                  <input type="hidden" name="return" value="auth/registro_estudiante">
                   <input type="hidden" name="ope" value="Registrar">
-                  <?php $this->GetComplement('campos_datos_usuario');?>
+                  <?php require_once("./views/includes/campos_datos_usuario.php");?>
                 </div>
               </div>
               <div class="w-1/2 border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
@@ -38,7 +41,7 @@
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Preguntas De Seguridad
                   </h2>
-                  <?php $this->GetComplement('campos_seguridad_usuario');?>
+                  <?php require_once("./views/includes/campos_seguridad_usuario.php");?>
                   <!-- fin de las preguntas de seguridad -->
                   <div class="mb-5">
                     <input type="submit" value="Registrar datos"

@@ -36,5 +36,11 @@
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
+
+		public function consulta($id){
+			$sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE estudiante.id_estudiante = $id;";
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
+		}
 	}
 ?>

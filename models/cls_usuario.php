@@ -52,15 +52,14 @@
 		}
 
 		public function update(){
-			$sql = "UPDATE tutor SET tipo_tutor = '$this->tipo_tutor' WHERE id_tutor = $this->id_tutor ;";
+			$sql = "UPDATE usuario SET
+				nombre_usuario = '$this->nombre_usuario',
+				edad_usuario = '$this->edad_usuario',
+				genero_usuario = '$this->genero_usuario',
+				correo_usuario = '$this->correo_usuario',
+				estatus_usuario = '1' WHERE cedula_usuario = '$this->cedula_usuario';";
       $this->Query($sql);
 			return "msg/01DONE";
-		}
-
-		public function Get_tutores(){
-			$sql = "SELECT * FROM tutor INNER JOIN usuario ON usuario.cedula_usuario = tutor.cedula_usuario";
-			$results = $this->Query($sql);
-			return $this->Get_todos_array($results);
 		}
 	}
 ?>

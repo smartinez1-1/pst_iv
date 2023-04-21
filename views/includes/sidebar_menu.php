@@ -80,7 +80,42 @@
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
-
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('seccion/');?>" @click="selected = (selected === 'seccion' ? '':'seccion')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'seccion') && (page === 'seccion') }">
+									Seccion
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('estudiante/');?>" @click="selected = (selected === 'estudiante ? '':'estudiante)"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'estudiante) && (page === 'estudiante) }">
+									Estudiante
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('tutor/');?>" @click="selected = (selected === 'tutor' ? '':'tutor')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'tutor') && (page === 'tutor') }">
+									Tutor Academico
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									Lapso academico
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
@@ -101,33 +136,8 @@
 							</li>
 							<!-- Menu Item Calendar -->
 
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									Lapso academico
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									Estudiante
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									Tutor Academico
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
+							
+							
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
@@ -164,15 +174,7 @@
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									Seccion
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
+							
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
