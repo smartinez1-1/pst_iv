@@ -185,7 +185,7 @@
 
                     <!-- Modal -->
 
-                    <div  class="  w-full h-full fixed inset-0 bg-gray-400 bg-opacity-50 flex justify-center items-center z-50">
+                    <div id="contendorModal"  class="  w-full h-full fixed inset-0 bg-gray-400 bg-opacity-50 flex justify-center items-center z-50">
                       <div class="w-full max-w-md bg-gray-100 p-5 rounded">
                   
                         <form action="">
@@ -198,13 +198,14 @@
                           
                           <!-- <input  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 my-8 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" type="text"> -->
                   
-                          <button id="cerrar" class="w-full my-4 flex justify-center items-center">
+                          <button id="cerrar" class="w-full my-4 flex justify-center items-center" onclick="cerrarModal()">
                             <label  class="py-4 bg-primary w-72  text-gray rounded cursor-pointer " for="btn">Cerrar</label>
                           </button>
                         </form>
                   
                       </div>
                     </div>
+                    <button onclick="mostrarModal()">mostar</button>
 
                     
 
@@ -218,6 +219,15 @@
           </div>
 				</div>
 			</main>	
+      <!-- script para poder abrir y cerrar la modal -->
+      <script>
+        function mostrarModal(){
+          document.getElementById("contendorModal").style.display="flex"
+        }
+        function cerrarModal(){
+          document.getElementById("contendorModal").style.display="none"
+        }
+      </script>
       
      
          
