@@ -18,6 +18,6 @@
     "inscripcion/index","inscripcion/formulario",
   ];
 
-  define("URL", "https://$host_string:$port_string$string_url");
+  define("URL", "$protocolo://$host_string:$port_string$string_url");
   define("PRIVATE_URLS", $rutas_privadas);
 ?>
