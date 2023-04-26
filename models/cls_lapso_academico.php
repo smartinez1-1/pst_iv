@@ -28,7 +28,7 @@
 		}
 
 		public function update(){
-			$sqlConsulta = "SELECT * FROM ano_escolar WHERE ano_escolar_nombre = '$this->ano_escolar_nombre';";
+			$sqlConsulta = "SELECT * FROM ano_escolar WHERE ano_escolar_nombre = '$this->ano_escolar_nombre' AND id_ano_escolar != $this->id_ano_escolar;";
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";
@@ -51,6 +51,12 @@
 
 		public function consulta($id){
 			$sql = "SELECT * FROM ano_escolar WHERE id_ano_escolar = '$id';";
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
+		}
+
+		public function Get_lapso_activo(){
+			$sql = "SELECT * FROM ano_escolar WHERE estado_ano_escolar = '1';";
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}

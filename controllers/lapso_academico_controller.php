@@ -20,7 +20,7 @@
 		$model_l->setDatos($_POST);
 		$mensaje = $model_l->create();
 
-		header("Location: ".constant("URL")."lapso-academico/formulario/$mensaje");	
+		header("Location: ".constant("URL")."lapso-academico/index/$mensaje");	
 	}
 
 	function fn_Actualizar(){
@@ -29,6 +29,6 @@
 		$model_l->setDatos($_POST);
 		$mensaje = $model_l->update();
 
-		header("Location: ".constant("URL")."lapso-academico/formulario/$mensaje");	
+		header("Location: ".constant("URL")."lapso-academico/index/$mensaje");	
 	}
 ?>

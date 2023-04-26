@@ -62,7 +62,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Codigo de carrera <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-4]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="codigo_carrera" value="<?php echo $codigo_carrera;?>"
+                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="codigo_carrera" value="<?php echo $codigo_carrera;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 
@@ -70,7 +70,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Nombre de la carrera <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="45" required placeholder="Enter your last name" name="nombre_carrera" value="<?php echo $nombre_carrera;?>"
+                        <input type="text" maxlength="45" minlength="5" required placeholder="Enter your last name" name="nombre_carrera" value="<?php echo $nombre_carrera;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 

@@ -51,9 +51,13 @@
 	}
 
 	function fn_Actualizar(){
-		$model = new cls_usuario();
-		$model->setDatos($_POST);
-		$mensaje = $model->Update();
+		$model_u = new cls_usuario();
+		$model_u->setDatos($_POST);
+		$model_u->Update();
+
+		$model_t = new cls_tutor();
+		$model_t->setDatos($_POST);
+		$mensaje = $model_t->Update();
 
 		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
 	}

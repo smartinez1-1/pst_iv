@@ -73,7 +73,7 @@
 									<input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="permisos_usuario" value="3">
                   <input type="hidden" name="tipo_usuario" value="Estudiante">
-                  <input type="hidden" name="return" value="estudiante/formulario">
+                  <input type="hidden" name="return" value="estudiante/index">
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>
                   <?php if($op == "Actualizar"){?>
                     <div class="mb-5 block mx-auto w-full col-3">

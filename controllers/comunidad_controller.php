@@ -20,7 +20,7 @@
 		$model_c->setDatos($_POST);
 		$mensaje = $model_c->create();
 
-		header("Location: ".constant("URL")."comunidad/formulario/$mensaje");	
+		header("Location: ".constant("URL")."comunidad/index/$mensaje");	
 	}
 
 	function fn_Actualizar(){
@@ -29,6 +29,6 @@
 		$model_c->setDatos($_POST);
 		$mensaje = $model_c->update();
 
-		header("Location: ".constant("URL")."comunidad/formulario/$mensaje");	
+		header("Location: ".constant("URL")."comunidad/index/$mensaje");	
 	}
 ?>

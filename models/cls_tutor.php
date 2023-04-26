@@ -27,7 +27,7 @@
 		}
 
 		public function update(){
-			$sql = "UPDATE tutor SET tipo_tutor = '$this->tipo_tutor' WHERE id_tutor = $this->id_tutor ;";
+			$sql = "UPDATE tutor SET tipo_tutor = '$this->tipo_tutor', categoria_tutor = '$this->categoria_tutor' WHERE id_tutor = $this->id_tutor ;";
       $this->Query($sql);
 			return "msg/01DONE";
 		}

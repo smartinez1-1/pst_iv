@@ -14,6 +14,7 @@
   $categoria = null;
   $tipo_tutor = null;
   $if_tutor = true;
+  $id_tutor = null;
 
   if(isset($this->id_consulta)){
     require_once("./models/cls_tutor.php");
@@ -31,6 +32,7 @@
 			$telefono = $datos['telefono_usuario'];
       $categoria = $datos['categoria_tutor'];
       $tipo_tutor = $datos['tipo_tutor'];
+      $id_tutor = $this->id_consulta;
 			// $pregunta1 = $datos['pregunta1'];
 			// $respuesta1 = "";
 			// $pregunta2 = $datos['pregunta2'];
@@ -76,7 +78,7 @@
 									<input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="permisos_usuario" value="2" readonly>
                   <input type="hidden" name="tipo_usuario" value="Tutor" readonly>
-                  <input type="hidden" name="return" value="tutor/formulario" readonly>
+                  <input type="hidden" name="return" value="tutor/index" readonly>
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>
                   <?php if($op == "Actualizar"){?>
                     <div class="mb-5 block mx-auto w-full col-3">

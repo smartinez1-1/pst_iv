@@ -9,18 +9,33 @@
     $telefono = null;
     $categoria = null;
     $tipo_tutor = null;
+
+    $id_tutor = null;
+    $id_estudiante = null;
   }
 ?>
 <div class="mb-4">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Cedula del Usuario</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Cedula</label>
   <div class="relative">
+    <?php 
+      if($this->controlador == "tutor"){
+        ?>
+        <input type="hidden" name="id_tutor" value="<?php echo $id_tutor;?>"/>
+        <?php
+      }
+    ?>
     <input type="text" maxlength="8" placeholder="Ingrese su cedula" name="cedula_usuario" value="<?php echo $cedula;?>" <?php echo ($op == "Actualizar") ? "readonly" : "";?>
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
 
 <div class="mb-4">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Nombre del Usuario</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">
+    <?php 
+      if($this->controlador == "auth") echo "Nombre del Usuario";
+      else echo "Nombre y Apellido";
+    ?>
+  </label>
   <div class="relative">
     
     <input type="text" maxlength="45" placeholder="Ingrese su Nombre" name="nombre_usuario" value="<?php echo $nombre;?>"
@@ -47,7 +62,7 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
   <div class="relative">
-    <input type="password" maxlength="12" placeholder="Ingrese su Contraseña" name="clave_usuario" value="<?php echo $clave;?>"
+    <input type="password" minlength="8" maxlength="12" placeholder="Ingrese su Contraseña" name="clave_usuario" value="<?php echo $clave;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -55,14 +70,14 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Numero de Teléfono</label>
   <div class="relative">
-    <input type="text" maxlength="11" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
+    <input type="text" minmength="11" maxlength="11" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
 
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Sexo:</label>
-  <div class="flex items-center space-x-2">
+  <div class="flex items-center space-x-4">
     <div class="mr-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
@@ -72,7 +87,7 @@
       </label>
     </div>
 
-    <div >
+    <div class="ml-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
           <input type="radio" id="checkboxLabelFour" class="" name="genero_usuario" value="M" <?php if(isset($sexo) && $sexo == "M") echo "checked";?>/>
@@ -84,14 +99,14 @@
 </div>
 <?php if($if_tutor){?>
 <div class="mb-6">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Categoria Tutor</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Categoria Docente</label>
   <div class="relative">
     <input type="text" maxlength="20" placeholder="Ingrese la categoria del tutor" name="categoria_tutor" value="<?php echo $categoria;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
 <div class="mb-6">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Tipo Tutor</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Tipo personal</label>
   <div class="relative">
     <input type="text" maxlength="20" placeholder="Ingrese el tipo de tutor" name="tipo_tutor" value="<?php echo $tipo_tutor;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />

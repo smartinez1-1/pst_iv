@@ -52,6 +52,12 @@
 			return $this->Get_todos_array($results);
 		}
 
+		// public function Get_semestres_activos(){
+		// 	$sql = "SELECT * FROM semestre INNER JOIN ;";
+		// 	$results = $this->Query($sql);
+		// 	return $this->Get_todos_array($results);
+		// }
+
 		public function consulta($id){
 			$sql = "SELECT * FROM semestre WHERE id_semestre = '$id';";
 			$results = $this->Query($sql);

@@ -92,8 +92,8 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('estudiante/');?>" @click="selected = (selected === 'estudiante ? '':'estudiante)"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'estudiante) && (page === 'estudiante) }">
+									href="<?php $this->SetURL('estudiante/');?>" @click="selected = (selected === 'estudiante' ? '':'estudiante')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'estudiante') && (page === 'estudiante') }">
 									Estudiante
 								</a>
 							</li>
@@ -146,8 +146,8 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									href="<?php $this->SetURL('inscripcion/');?>" @click="selected = (selected === 'inscripcion' ? '':'inscripcion')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'inscripcion') && (page === 'inscripcion') }">
 									inscripcion
 								</a>
 							</li>

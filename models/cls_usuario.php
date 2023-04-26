@@ -57,6 +57,7 @@
 				edad_usuario = '$this->edad_usuario',
 				genero_usuario = '$this->genero_usuario',
 				correo_usuario = '$this->correo_usuario',
+				telefono_usuario = '$this->telefono_usuario',
 				estatus_usuario = '1' WHERE cedula_usuario = '$this->cedula_usuario';";
       $this->Query($sql);
 			return "msg/01DONE";

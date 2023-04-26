@@ -62,7 +62,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Descripcion<span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" placeholder="" name="ano_escolar_nombre" value="<?php echo $ano_escolar_nombre;?>"
+                        <input type="text" maxlength="10" minlength="5" placeholder="" name="ano_escolar_nombre" value="<?php echo $ano_escolar_nombre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                     </div>
@@ -74,7 +74,7 @@
                         <div class="mr-3">
                           <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                             <div class="relative">
-                              <input type="radio" id="checkboxLabelFour" class="" name="estado_inscripciones" value="1" <?php if(isset($estado_inscripciones) && $estado_inscripciones == "1") echo "checked";?>/>
+                              <input type="radio" id="checkboxLabelFour" required class="" name="estado_inscripciones" value="1" <?php if(isset($estado_inscripciones) && $estado_inscripciones == "1") echo "checked";?>/>
                             </div>
                             Activo
                           </label>
@@ -83,7 +83,7 @@
                         <div >
                           <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                             <div class="relative">
-                              <input type="radio" id="checkboxLabelFour" class="" name="estado_inscripciones" value="0" <?php if(isset($estado_inscripciones) && $estado_inscripciones == "0") echo "checked";?>/>
+                              <input type="radio" id="checkboxLabelFour" required class="" name="estado_inscripciones" value="0" <?php if(isset($estado_inscripciones) && $estado_inscripciones == "0") echo "checked";?>/>
                             </div>
                             Inactivo
                           </label>
@@ -93,13 +93,13 @@
 
                     <div class="mb-6">
                       <label class="mb-2.5 block font-medium text-black dark:text-white">
-                        Estado del Año Escolar<span class="text-meta-1 ">*</span>
+                        Estado del lapso academico<span class="text-meta-1 ">*</span>
                       </label>
                       <div class="flex items-center space-x-2">
                         <div class="mr-3">
                           <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                             <div class="relative">
-                              <input type="radio" id="checkboxLabelFour" class="" name="estado_ano_escolar" value="1" <?php if(isset($estado_ano_escolar) && $estado_ano_escolar == "1") echo "checked";?>/>
+                              <input type="radio" id="checkboxLabelFour" class="" requried name="estado_ano_escolar" value="1" <?php if(isset($estado_ano_escolar) && $estado_ano_escolar == "1") echo "checked";?>/>
                             </div>
                             Activo
                           </label>
@@ -108,7 +108,7 @@
                         <div >
                           <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                             <div class="relative">
-                              <input type="radio" id="checkboxLabelFour" class="" name="estado_ano_escolar" value="0" <?php if(isset($estado_ano_escolar) && $estado_ano_escolar == "0") echo "checked";?>/>
+                              <input type="radio" id="checkboxLabelFour" class="" required name="estado_ano_escolar" value="0" <?php if(isset($estado_ano_escolar) && $estado_ano_escolar == "0") echo "checked";?>/>
                             </div>
                             Inactivo
                           </label>

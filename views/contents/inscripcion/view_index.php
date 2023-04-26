@@ -17,7 +17,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Seccion"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Inscripcion"]);
         ?>
           <!-- ====== Table Three Start -->
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -26,16 +26,16 @@
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Id seccion
-                    </th>
-                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      numero de seccion
+                      Id Inscripcion
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Carrera
                     </th>
-                    <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                      Estado
+                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                      Seccion
+                    </th>
+                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                      Datos del estudiante
                     </th>
                     <th class="py-4 px-4 font-medium text-black dark:text-white">
                       Opciones
@@ -44,31 +44,28 @@
                 </thead>
                 <tbody>
                   <?php 
-                    require_once("./models/cls_seccion.php");
-                    $model = new cls_seccion();
-                    $datos = $model->Get_secciones();
+                    require_once("./models/cls_inscripcion.php");
+                    $model = new cls_inscripcion();
+                    $datos = $model->Get_inscripciones();
                     
-                    foreach($datos as $sec){
+                    foreach($datos as $ins){
                       ?>
                       <tr>
                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                          <h5 class="font-medium text-black dark:text-white"><?php echo $sec['id_seccion'];?></h5>
+                          <h5 class="font-medium text-black dark:text-white"><?php echo $ins['id_inscripcion'];?></h5>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $sec['numero_seccion'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $ins['nombre_carrera'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $sec['nombre_carrera'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $ins['numero_seccion'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <?php $text = ($sec['estado_seccion'] == '1') ? "text-success" : "text-danger";?>
-                          <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium <?php echo $text;?>">
-                          <?php echo ($sec['estado_seccion'] == '1') ? "Activo" : "Inactivo";?>
-                          </p>
+                          <p class="text-black dark:text-white"><?php echo $ins['cedula_usuario']." ".$ins['nombre_usuario'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('seccion/formulario/b/'.$sec['id_seccion']);?>">Editar</a>
+                            <a href="<?php $this->SetURL('inscripcion/formulario/b/'.$ins['id_inscripcion']);?>">Editar</a>
                           </div>
                         </td>
                       </tr>
