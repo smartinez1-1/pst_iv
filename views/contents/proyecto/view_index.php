@@ -29,7 +29,16 @@
                       Id proyecto
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                      Titulo
+                    </th>
+                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                      Comunidad
+                    </th>
+                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Grupo
+                    </th>
+                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                      Carrera
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Lapso academico
@@ -54,16 +63,25 @@
                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                           <h5 class="font-medium text-black dark:text-white"><?php echo $pro['id_proyecto'];?></h5>
                         </td>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $pro['id_grupo'];?></p>
+                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                          <h5 class="font-medium text-black dark:text-white"><?php echo $pro['titulo_proyecto'];?></h5>
+                        </td>
+                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                          <h5 class="font-medium text-black dark:text-white"><?php echo $pro['nombre_comunidad'];?></h5>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo $pro['id_ano_escolar'];?></p>
+                          <p class="text-black dark:text-white"><?php echo $pro['nombre_grupo'];?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <?php $text = ($pro['estado_proyecto'] == '1') ? "text-success" : "text-danger";?>
+                          <p class="text-black dark:text-white"><?php echo $pro['nombre_carrera'];?></p>
+                        </td>
+                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <p class="text-black dark:text-white"><?php echo $pro['ano_escolar_nombre'];?></p>
+                        </td>
+                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <?php $text = ($pro['estado_proyecto'] == '1') ? "text-success" : "text-warning";?>
                           <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium <?php echo $text;?>">
-                          <?php echo ($pro['estado_proyecto'] == '1') ? "Activo" : "Inactivo";?>
+                          <?php echo ($pro['estado_proyecto'] == '1') ? "Aprobado" : "En proceso";?>
                           </p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">

@@ -48,7 +48,7 @@
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
             <div class="flex flex-col gap-9">
               <!-- Contact Form -->
-              <div
+              <div id="app_vue"
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
@@ -64,13 +64,13 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Descripcion<span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" placeholder="" maxlength="45" minlength="5" pattern="[a-zA-Z]" name="des_semestre" value="<?php echo $des_semestre;?>"
+                        <input type="text" placeholder="" maxlength="45" minlength="5" name="des_semestre" value="<?php echo $des_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 
                       <div class="relative">
                         <label class="mb-2.5 block text-black dark:text-white">Fecha de Inicio</label>
-                        <input type="date" name="fecha_inicio_semestre" value="<?php echo $fecha_inicio_semestre;?>"
+                        <input type="date" :max="fecha_maxima" v-model="fecha_minima" name="fecha_inicio_semestre" value="<?php echo $fecha_inicio_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                         <span
                           class="absolute right-0.5 top-0.5 block rounded-tr rounded-br bg-white p-3.5 dark:bg-form-input">
@@ -85,7 +85,7 @@
 
                       <div class="relative">
                         <label class="mb-2.5 block text-black dark:text-white">Fecha de Cierre</label>
-                        <input type="date" name="fecha_cierre_semestre" value="<?php echo $fecha_cierre_semestre;?>"
+                        <input type="date" :min="fecha_minima" v-model="fecha_maxima" name="fecha_cierre_semestre" value="<?php echo $fecha_cierre_semestre;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
                         <span
@@ -142,6 +142,18 @@
 	</div>
 	<!-- ===== Page Wrapper End ===== -->
 	<?php $this->GetComplement('scripts');?>
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data(){
+        return {
+          fecha_minima:"",
+          fecha_maxima:""
+        }
+      },
+    }).mount("#app_vue");
+  </script>
 </body>
 
 </html>

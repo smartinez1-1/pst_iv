@@ -8,6 +8,7 @@
       '05AUTH' => "Usuario no registrado",
       '06AUTH' => "Usuario Inactivo o bloqueado!",
       '07AUTH' => "La clave ingresada no coincide!",
+      '08AUTH' => "Respuestas de seguridad no coindiden!",
       '08AUTH' => "No tienes permisos para entrar a esta ruta",
       '01ERR' => "Operación fallida!",
       '02ERR' => "El registro no se puede duplicar",
@@ -17,6 +18,7 @@
       '01DONE' => "Operación exitosa!",
       '01AUTH' => "Login exitoso!",
       '02AUTH' => "Registro de usuario exitoso!",
+      '03AUTH' => "Cambio de clave exitoso!"
     ];
 
     public function printError($indexError){

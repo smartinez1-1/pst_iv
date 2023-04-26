@@ -17,26 +17,38 @@
   $model_t = new cls_tutor();
   $tutores = $model_t->Get_tutores();
 
+  $model_l = new cls_lapso_academico();
+  $lapso = $model_l->Get_lapso_activo();
+
   $op = "Registrar";
   $id_proyecto = null;
   $id_comunidad = null;
   $id_grupo = null;
   $id_tutor  = null;
-  $numero_seccion = null;
-  $carrera_id = null;
-  $estado_seccion = null;
+  $titulo_proyecto = null;
+  $planteamiento_proyecto = null;
+  $objetivos_especificos_proyecto = null;
+  $objetivos_generales_proyecto = null;
+  $tipo_proyecto = null;
+  $estado_proyecto = null;
 
   if(isset($this->id_consulta)){
-    require_once("./models/cls_seccion.php");
-    $model = new cls_seccion();
+    require_once("./models/cls_proyecto.php");
+    $model = new cls_proyecto();
     $datos = $model->consulta($this->id_consulta);
 
     if(isset($datos['id_proyecto'])){      
       $op = "Actualizar";
       $id_proyecto = $datos['id_proyecto'];
-      $numero_seccion = $datos['numero_seccion'];
-      $carrera_id = $datos['carrera_id'];
-      $estado_seccion = $datos['estado_seccion'];
+      $id_comunidad = $datos['id_comunidad'];
+      $id_grupo = $datos['id_grupo'];
+      $id_tutor  = $datos['id_tutor'];
+      $titulo_proyecto = $datos['titulo_proyecto'];
+      $planteamiento_proyecto = $datos['planteamiento_proyecto'];
+      $objetivos_especificos_proyecto = $datos['objetivos_especificos_proyecto'];
+      $objetivos_generales_proyecto = $datos['objetivos_generales_proyecto'];
+      $tipo_proyecto = $datos['tipo_proyecto'];
+      $estado_proyecto = $datos['estado_proyecto'];
     }
   }
 
@@ -73,6 +85,7 @@
                 <form action="<?php $this->SetURL('controllers/proyecto_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="id_proyecto" value="<?php echo $id_proyecto;?>">
+                  <input type="hidden" name="id_ano_escolar" value="<?php echo $lapso['id_ano_escolar'];?>">
                   <div class="p-6.5">
                     <div class="mb-4.5 grid grid-cols-3 gap-6">
                       <div class="w-full xl:w-4/6">
@@ -80,7 +93,7 @@
                           Seleccione una comunidad
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="carrera_id"
+                          <select required name="id_comunidad"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <?php foreach($comunidades as $comu){?>
@@ -103,7 +116,7 @@
                           Seleccione un grupo
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="carrera_id"
+                          <select required name="id_grupo"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <?php foreach($grupos as $grup){?>
@@ -126,11 +139,11 @@
                           Seleccione una Tutor
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="carrera_id"
+                          <select required name="id_tutor"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <?php foreach($tutores as $tut){?>
-                              <option <?php echo ($id_tutor == $tut['id_tutor']) ? "selected" : "";?> value="<?php echo $tut['id_tutor'];?>"><?php echo $tut['nombre_usuario'];?></option>
+                              <option <?php echo ($id_tutor == $tut['id_tutor']) ? "selected" : "";?> value="<?php echo $tut['id_tutor'];?>"><?php echo $tut['cedula_usuario']." ".$tut['nombre_usuario'];?></option>
                             <?php }?>
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
@@ -148,21 +161,21 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Titulo del proyecto <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="" name="numero_seccion" value="<?php echo $numero_seccion;?>"
+                        <input type="text" maxlength="45" minlength="4" required placeholder="" name="titulo_proyecto" value="<?php echo $titulo_proyecto;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Titulo del proyecto <span class="text-meta-1">*</span>
+                          Planteamiento del proyecto <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="" name="numero_seccion" value="<?php echo $numero_seccion;?>"
+                        <input type="text" maxlength="45" minlength="4" required placeholder="" name="planteamiento_proyecto" value="<?php echo $planteamiento_proyecto;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
-                       <div class="w-full xl:w-4/6">
+                      <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Titulo del proyecto <span class="text-meta-1">*</span>
+                          Tipo de proyecto <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="" name="numero_seccion" value="<?php echo $numero_seccion;?>"
+                        <input type="text" maxlength="45" minlength="4" required placeholder="" name="tipo_proyecto" value="<?php echo $tipo_proyecto;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full">
@@ -170,8 +183,10 @@
                           <label class="mb-2.5 block text-black dark:text-white">
                           Objetivos generales <span class="text-meta-1">*</span>
                           </label>
-                          <textarea rows="6" maxlength="80" minlength="5" pattern="[a-zA-Z]" placeholder="Ingrese su Direccion" name="direccion_comunidad" value="<?php echo $direccion_comunidad;?>"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
+                          <textarea rows="6" maxlength="80" minlength="5" placeholder="Ingrese su texto" name="objetivos_generales_proyecto"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                            <?php echo $objetivos_generales_proyecto;?>
+                          </textarea>
                         </div>
                       </div>
                       <div class="w-full">
@@ -179,31 +194,33 @@
                           <label class="mb-2.5 block text-black dark:text-white">
                           Objetivos especificos <span class="text-meta-1">*</span>
                           </label>
-                          <textarea rows="6" maxlength="80" minlength="5" pattern="[a-zA-Z]" placeholder="Ingrese su Direccion" name="direccion_comunidad" value="<?php echo $direccion_comunidad;?>"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
+                          <textarea rows="6" maxlength="80" minlength="5" placeholder="Ingrese su texto" name="objetivos_especificos_proyecto"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                            <?php echo $objetivos_especificos_proyecto;?>
+                          </textarea>
                         </div>
                       </div>
 
                       <div class="w-full xl:w-2/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Estado de la seccion <span class="text-meta-1">*</span>
+                          Estado del proyecto <span class="text-meta-1">*</span>
                         </label>
                         <div class="flex items-center space-x-2">
                           <div class="mr-3">
                             <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                               <div class="relative">
-                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_seccion" value="1" <?php echo ($estado_seccion == '1') ? "checked" : "";?>/>
+                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="1" <?php echo ($estado_proyecto == '1') ? "checked" : "";?>/>
                               </div>
-                              Activo
+                              Aprobado
                             </label>
                           </div>
 
                           <div >
                             <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                               <div class="relative">
-                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_seccion" value="0" <?php echo ($estado_seccion == '0') ? "checked" : "";?>/>
+                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="0" <?php echo ($estado_proyecto == '0') ? "checked" : "";?>/>
                               </div>
-                              Inactivo
+                              En proceso
                             </label>
                           </div>
                         </div>

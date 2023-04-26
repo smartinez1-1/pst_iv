@@ -64,7 +64,7 @@
 										<div class="mb-6">
 											<label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
 											<div class="relative">
-												<input type="password" required maxlength="12" minlength="8" placeholder="6+ Characters, 1 Capital letter" name="clave_usuario"
+												<input type="password" required maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" placeholder="6+ Characters, 1 Capital letter" name="clave_usuario"
 													class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
 												<span class="absolute right-4 top-4">
@@ -93,6 +93,7 @@
 												No posees una cuenta de usuario?
 												<a href="<?php $this->SetURL($this->controlador."/registro_estudiante");?>" class="text-primary">Registro de Estudiante</a> o 
 												<a href="<?php $this->SetURL($this->controlador."/registro_tutor");?>" class="text-primary">Registro de Docente</a>
+												<a href="<?php $this->SetURL($this->controlador."/recuperar_clave");?>" class="text-primary">Click aqui para recupera tu clave de acceso</a>
 											</p>
 										</div>
 									</form>

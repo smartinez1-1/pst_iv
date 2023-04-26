@@ -1,8 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
-  $if_tutor = false;
   $this->GetHeader("SGSC | UNEFA");
+
+  $formulario = 1;
+  $pregunta1 = $pregunta2 = $pregunta3 = null;
+  $cedula_usuario = null;
+
+  if(isset($_POST['op'])){
+    require_once("./models/cls_auth.php");
+    $model = new cls_auth();
+        
+    if($_POST['op'] == "busqueda"){
+      $datos = $model->consulta($_POST['cedula_usuario']);
+      
+      if(isset($datos)){
+        $pregunta1 = $datos['pregunta_1'];
+        $pregunta2 = $datos['pregunta_2'];
+        $pregunta3 = $datos['pregunta_3'];
+        $cedula_usuario = $_POST['cedula_usuario'];
+        
+        $formulario = 2;
+      }else header("Location: ".constant("URL")."auth/login/err/05AUTH");
+    }
+
+    if($_POST['op'] == "Preguntas"){
+      $datos = $model->ValidaPreguntas($_POST);
+
+      if(isset($datos)){
+        $cedula_usuario = $_POST['cedula_usuario'];
+
+        $formulario = 3;
+      }else header("Location: ".constant("URL")."auth/login/err/08AUTH");
+    }
+
+    if($_POST['op'] == "Cambio"){
+      $datos = $model->ChangePsw($_POST);
+      require_once("./models/config.php");
+
+      if(isset($datos)){
+        header("Location: ".constant("URL")."auth/login/msg/03AUTH");
+
+      }else header("Location: ".constant("URL")."auth/login/err/01AUTH");
+    }
+  }
 ?>
 <body
 	x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -15,53 +56,156 @@
 	<div class="flex h-screen overflow-hidden">
 		<!-- ===== Content Area Start ===== -->
 		<div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-			<!-- ===== Main Content Start ===== -->
-			<main>
-				<div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-					
-          <!-- ====== Forms Section Start -->
-          <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-            <form action="<?php $this->SetURL("controllers/estudiante_controller.php");?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
-              <div class="w-1/2 border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-                <div class="w-full p-4 sm:p-12.5 xl:p-17.5">
-                  <span class="mb-1.5 block font-medium">Por favor verifica todos tus datos antes de guardar</span>
-                  <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                    Bienvenido al registro de Estudiante
-                  </h2>
-                  <input type="hidden" name="permisos_usuario" value="3">
-                  <input type="hidden" name="tipo_usuario" value="Estudiante">
-                  <input type="hidden" name="return" value="auth/registro_estudiante">
-                  <input type="hidden" name="ope" value="Registrar">
-                  <?php require_once("./views/includes/campos_datos_usuario.php");?>
-                </div>
-              </div>
-              <div class="w-1/2 border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-                <div class="w-full p-4 sm:p-12.5 xl:p-17.5">
-                  <!-- Preguntas de seguridad  -->
-                  <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                  Preguntas De Seguridad
-                  </h2>
-                  <?php require_once("./views/includes/campos_seguridad_usuario.php");?>
-                  <!-- fin de las preguntas de seguridad -->
-                  <div class="mb-5">
-                    <input type="submit" value="Registrar datos"
-                      class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90" />
+    <main>
+        <!-- FORMULARIO DE EJEMPLO -->
+        <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
+          <?php if($formulario == 1){?>
+          <!-- ====== Form Layout Section Start -->
+          <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
+            <!-- ====== Form Layout Section Start -->
+            <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
+              <div class="flex flex-col gap-9">
+                <!-- Contact Form -->
+                <div
+                  class=" rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                  <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                    <h3 class="font-semibold text-black dark text-center">
+                      Consultar datos del usuario
+                    </h3>
                   </div>
+                  <form action="#" method="POST" class="" autocomplete="off">
+                    <input type="hidden" name="op" value="busqueda">
+                    <div class="p-6.5">
+                      <div class="mb-4.5 flex justify-center items-center">
+                        <div class="w-1/2 xl:w-2/6">
+                          <label class="mb-2.5 block text-black dark">
+                            Cedula del Usuario<span class="ml-4 text-meta-1 ">*</span>
+                          </label>
+                          <input type="text" placeholder="" name="cedula_usuario" pattern="[0-9]{7,8}"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
 
-                  <div class="mt-6 text-center">
-                    <p class="font-medium">
-                      Ya tienes una cuenta?
-                      <a href="<?php $this->SetURL($this->controlador."/login");?>" class="text-primary">Login</a>
-                    </p>
-                  </div>
+                      <div id="abrir" class="flex flex-row justify-center items-center mb-6 ">
+                        <button type="submit"
+                          class=" flex w-72 flex-col justify-center items-center rounded bg-primary p-3 font-medium text-gray cursor-pointer">
+                          <label class="" for="btn">Enviar</label>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
-          <!-- ====== Forms Section End -->
-				</div>
-			</main>
-			<!-- ===== Main Content End ===== -->
+          <?php 
+            }
+            if($formulario == 2){
+          ?>
+          <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
+            <!-- ====== Form Layout Section Start -->
+            <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
+              <div class="flex flex-col gap-9">
+                <!-- Contact Form -->
+                <div
+                  class=" rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                  <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                    <h3 class="font-semibold text-black dark text-center">
+                      Preguntas de Seguridad
+                    </h3>
+                  </div>
+                  <form action="#" method="POST" class="" autocomplete="off">
+                    <input type="hidden" name="op" value="Preguntas">
+                    <input type="hidden" name="cedula_usuario" value="<?php echo $cedula_usuario;?>">
+                    <div class="p-6.5">
+                      <div class="mb-6">
+                        <label class="mb-2.5 block font-medium text-black dark:text-white"><?php echo $pregunta1; ?>?</label>
+                        <div class="relative">
+                          <input type="text" placeholder="Ingrese Respuesta de Seguridad" name="respuesta_1"
+                            class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
+
+                      <div class="mb-6">
+                        <label class="mb-2.5 block font-medium text-black dark:text-white"><?php echo $pregunta2; ?>?</label>
+                        <div class="relative">
+                          <input type="text" placeholder="Ingrese Respuesta de Seguridad" name="respuesta_2"
+                            class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
+
+                      <div class="mb-6">
+                        <label class="mb-2.5 block font-medium text-black dark:text-white"><?php echo $pregunta3; ?>?</label>
+                        <div class="relative">
+                          <input type="text" placeholder="Ingrese Respuesta de Seguridad" name="respuesta_3"
+                            class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="flex flex-row justify-center items-center mb-6">
+                      <button type="submit"
+                        class=" flex w-72 flex-col justify-center items-center rounded bg-primary p-3 font-medium text-gray cursor-pointer">
+                        <label class="" for="btn">Enviar</label>
+                      </button>
+                    </div>
+                </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+          <?php 
+            }
+            if($formulario == 3){
+          ?>
+          <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
+            <!-- ====== Form Layout Section Start -->
+            <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
+              <div class="flex flex-col gap-9">
+                <!-- Contact Form -->
+                <div
+                  class=" rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                  <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                    <h3 class="font-semibold text-black dark text-center">
+                      Actualicacion de Clave de acceso
+                    </h3>
+                  </div>
+                  <form action="#" method="POST" class="" autocomplete="off">
+                    <input type="hidden" name="op" value="Cambio">
+                    <div class="p-6.5">
+                      <div class="mb-4.5 flex justify-center items-center">
+                        <div class="m-4 w-full xl:w-2/6">
+                          <label class="mb-2.5 block text-black dark">
+                            Cedula del Usuario<span class="ml-4 text-meta-1 ">*</span>
+                          </label>
+                          <input type="text" placeholder="" readonly value="<?php echo $cedula_usuario;?>" name="cedula_usuario"
+                            class=" w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                        <div class=" m-4 w-full xl:w-2/6">
+                          <label class="mb-2.5 block text-black dark">
+                            Contraseña<span class="ml-4 text-meta-1 ">*</span>
+                          </label>
+                          <input type="password" placeholder="" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="clave_usuario"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
+                      <div id="abrir" class="flex flex-row justify-center items-center mb-6 ">
+                        <button type="submit"
+                          class=" flex w-72 flex-col justify-center items-center rounded bg-primary p-3 font-medium text-gray cursor-pointer">
+                          <label class="" for="btn">Enviar</label>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php 
+            }
+          ?>
+      </main>
 		</div>
 		<!-- ===== Content Area End ===== -->
 	</div>

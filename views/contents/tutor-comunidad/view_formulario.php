@@ -70,7 +70,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Cedula del tutor <span class="text-meta-1">*</span>
                         </label>
-                        <input required type="text" maxlength="8" pattern="[0-9]{8}" title="Solo de admiten numeros" required placeholder="Ingrese la cedula" name="cedula_tutor" value="<?php echo $cedula_tutor;?>" <?php echo (isset($cedula_tutor)) ? "readonly" : "";?>
+                        <input required type="text" maxlength="8" minlength="7" pattern="[0-9]{7,8}" title="Solo de admiten numeros" required placeholder="Ingrese la cedula" name="cedula_tutor" value="<?php echo $cedula_tutor;?>" <?php echo (isset($cedula_tutor)) ? "readonly" : "";?>
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                     </div>

@@ -27,7 +27,7 @@
 		}
 
 		public function update(){
-			$sqlConsulta = "SELECT * FROM carrera WHERE codigo_carrera = '$this->codigo_carrera' AND nombre_carrera = '$this->nombre_carrera';";
+			$sqlConsulta = "SELECT * FROM carrera WHERE codigo_carrera = '$this->codigo_carrera' AND nombre_carrera = '$this->nombre_carrera' AND estado_carrera = '1';";
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";
@@ -37,7 +37,7 @@
 				nombre_carrera = '$this->nombre_carrera',
 				estado_carrera = '$this->estado_carrera'
 				WHERE id_carrera = $this->id_carrera ;";
-
+			
       $this->Query($sql);
 			return "msg/01DONE";
 		}
