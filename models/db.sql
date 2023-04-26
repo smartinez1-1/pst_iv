@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2023 a las 03:40:29
+-- Tiempo de generación: 26-04-2023 a las 18:22:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -57,7 +57,7 @@ CREATE TABLE `carrera` (
 
 CREATE TABLE `comunidad` (
   `id_comunidad` int(11) NOT NULL,
-  `nombre_comunidad` varchar(45) NOT NULL,
+  `nombre_comunidad` varchar(80) NOT NULL,
   `tipo_comunidad` varchar(45) NOT NULL,
   `direccion_comunidad` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -83,6 +83,7 @@ CREATE TABLE `estudiante` (
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(30) NOT NULL,
+  `id_seccion` int(11) NOT NULL,
   `estado_grupo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -125,9 +126,9 @@ CREATE TABLE `proyecto` (
   `id_ano_escolar` int(11) NOT NULL,
   `id_tutor` int(11) NOT NULL,
   `titulo_proyecto` varchar(45) NOT NULL,
-  `plantamiento_proyecto` varchar(45) NOT NULL,
+  `planteamiento_proyecto` varchar(45) NOT NULL,
   `objetivos_generales_proyecto` varchar(45) NOT NULL,
-  `objetivos_espesificos_proyecto` varchar(45) NOT NULL,
+  `objetivos_especificos_proyecto` varchar(45) NOT NULL,
   `tipo_proyecto` varchar(45) NOT NULL,
   `estado_proyecto` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -216,11 +217,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula_usuario`, `clave_usuario`, `nombre_usuario`, `estatus_usuario`, `edad_usuario`, `genero_usuario`, `permiso_usuario`, `tipo_usuario`, `telefono_usuario`, `correo_usuario`, `pregunta_1`, `pregunta_2`, `pregunta_3`, `respuesta_1`, `respuesta_2`, `respuesta_3`) VALUES
-(0, '$2y$12$drodwFHKs/pabezUp6zrO.oOb.vV/eikgP4Z2IC0jFjc3n/iCZKMu', '', 1, '', '', '', '', '', '', '', '', '', '', '', ''),
-(14558985, '$2y$12$vlOaahB.ESH2K.DYCS1m9.1rvPcTss2ZykEKF8o5lJoiRUtDu5/He', 'JOSEEE MORALES', 1, '29', 'M', '2', 'TUTOR', '04245111111', 'CORREOEEEE@GMAIL.COM', 'FASDFASDF', 'FSFSD', 'FGSFSFD', 'FSADFSD', 'FDSFSFD', 'FGSDFSFSD'),
-(24654564, '$2y$12$7fJjTzr3GlA7O/4MZHNbLOa1BHtIGKlhBzQlBMduSCglh/HWlGW1K', 'FREDY', 1, '20', 'M', '2', 'TUTOR', '04650456406', 'GSDGSDFGDF@GMAIL.COM', 'KHKJHJ', 'KJHJK', 'JKHJKH', 'JKHJKH', 'HKJHJK', 'JKHJK'),
-(27111222, '$2y$12$GkY9DcPH6AmaDl5zN/ySweXlDxpj21mQQXQ3vwZo7alW4UC9awL.m', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(27132642, 'FASDFASDFASDF', 'JESUS MORALES', 1, '20', 'M', '3', 'ESTUDIANTE', '04245198398', 'FASDFASDFASDF@GMAIL.COM', 'FASDFASDF', 'FSADFSADF', 'DFSAFSDF', 'FGASDFSADF', 'FSFSDF', 'FSFASDFASD');
+(27111222, '$2y$12$JsbcpoGQWTTxlzxpe2pONObPgeKtTzwknr24KcUpRTVKKyeDiuYOu', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N');
 
 --
 -- Índices para tablas volcadas
@@ -256,7 +253,8 @@ ALTER TABLE `estudiante`
 -- Indices de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`id_grupo`);
+  ADD PRIMARY KEY (`id_grupo`),
+  ADD KEY `id_seccion` (`id_seccion`);
 
 --
 -- Indices de la tabla `grupo_alumno`
@@ -281,10 +279,10 @@ ALTER TABLE `inscripcion`
 --
 ALTER TABLE `proyecto`
   ADD PRIMARY KEY (`id_proyecto`),
-  ADD KEY `fk_proyecto_tutor_comunidad1` (`id_comunidad`),
   ADD KEY `fk_proyecto_grupo1` (`id_grupo`),
   ADD KEY `fk_proyecto_ano_escolar1` (`id_ano_escolar`),
-  ADD KEY `fk_proyecto_tutor1` (`id_tutor`);
+  ADD KEY `fk_proyecto_tutor1` (`id_tutor`),
+  ADD KEY `fk_proyecto_tutor_comunidad1` (`id_comunidad`);
 
 --
 -- Indices de la tabla `seccion`
@@ -394,6 +392,12 @@ ALTER TABLE `estudiante`
   ADD CONSTRAINT `fk_alumno_usuario1` FOREIGN KEY (`cedula_usuario`) REFERENCES `usuario` (`cedula_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `grupo`
+--
+ALTER TABLE `grupo`
+  ADD CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`id_seccion`) REFERENCES `seccion` (`id_seccion`);
+
+--
 -- Filtros para la tabla `grupo_alumno`
 --
 ALTER TABLE `grupo_alumno`
@@ -417,7 +421,7 @@ ALTER TABLE `proyecto`
   ADD CONSTRAINT `fk_proyecto_ano_escolar1` FOREIGN KEY (`id_ano_escolar`) REFERENCES `ano_escolar` (`id_ano_escolar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_proyecto_grupo1` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_proyecto_tutor1` FOREIGN KEY (`id_tutor`) REFERENCES `tutor` (`id_tutor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_proyecto_tutor_comunidad1` FOREIGN KEY (`id_comunidad`) REFERENCES `tutor_comunidad` (`id_tutor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_proyecto_tutor_comunidad1` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id_comunidad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `seccion`
