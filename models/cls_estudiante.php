@@ -33,7 +33,7 @@
 
 		public function Get_estudiantes($condicion = ''){
 			if($condicion == '') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario";
-			if($condicion == 'NO-INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE NOT EXISTS (SELECT * FROM inscripcion WHERE estudiante.id_estudiante = inscripcion.id_alumno);";
+			if($condicion == 'NO-INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE NOT EXISTS (SELECT * FROM inscripcion WHERE estudiante.id_estudiante = inscripcion.id_estudiante);";
 			
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);

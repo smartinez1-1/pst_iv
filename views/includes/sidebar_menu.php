@@ -155,8 +155,8 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									href="<?php $this->SetURL('grupo/');?>" @click="selected = (selected === 'grupo' ? '':'grupo')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'grupo') && (page === 'grupo') }">
 									Grupo
 								</a>
 							</li>
@@ -164,8 +164,8 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									href="<?php $this->SetURL('proyecto/');?>" @click="selected = (selected === 'proyecto' ? '':'proyecto')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'proyecto') && (page === 'proyecto') }">
 									proyecto
 								</a>
 							</li>
@@ -173,8 +173,8 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<button type="button" onclick="document.getElementById('form_logout').submit()" class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="calendar.html" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									href="calendar.html" @click="selected = (selected === 'logout' ? '':'logout')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'logout') && (page === 'logout') }">
 									<svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none"
 										xmlns="http://www.w3.org/2000/svg">
 										<path

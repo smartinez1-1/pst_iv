@@ -14,6 +14,14 @@
 		}
 	}
 
+	if(isset($_GET['ope'])){
+		switch($_GET['ope']){
+			case "Get_estudiantes_seccion":
+				fn_Consultar_estu_seccion();
+			break;
+		}
+	}
+
 	function fn_Registrar(){
 		$model_s = new cls_inscripcion();
 		
@@ -30,5 +38,12 @@
 		$mensaje = $model_s->update();
 
 		header("Location: ".constant("URL")."inscripcion/index/$mensaje");	
+	}
+
+	function fn_Consultar_estu_seccion(){
+		$models_s = new cls_inscripcion();
+		$result = $models_s->consultaPorSeccion($_GET['id_seccion']);
+
+		print json_encode(["data" => $result]);
 	}
 ?>

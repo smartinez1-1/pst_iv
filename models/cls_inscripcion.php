@@ -62,7 +62,8 @@
 		}
 
 		public function Get_inscripciones(){
-			$sql = "SELECT * FROM inscripcion INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
+			$sql = "SELECT * FROM inscripcion 
+				INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
         INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar 
         INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
         INNER JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion 
@@ -73,12 +74,23 @@
 		}
 
 		public function consulta($id){
-			$sql = "SELECT * FROM inscripcion INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
+			$sql = "SELECT * FROM inscripcion 
+				INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
         INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar 
         INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
         INNER JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion WHERE inscripcion.id_inscripcion = '$id';";
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
+		}
+
+		public function consultaPorSeccion($id){
+			$sql = "SELECT * FROM inscripcion 
+				INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
+				INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar 
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario
+				WHERE ano_escolar.estado_ano_escolar = 1 AND inscripcion.id_seccion = $id;";
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
 		}
 	}
 ?>
