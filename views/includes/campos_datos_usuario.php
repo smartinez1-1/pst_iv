@@ -24,7 +24,7 @@
         <?php
       }
     ?>
-    <input type="text" maxlength="8" placeholder="Ingrese su cedula" name="cedula_usuario" value="<?php echo $cedula;?>" <?php echo ($op == "Actualizar") ? "readonly" : "";?>
+    <input type="text" maxlength="8" title="solo se admiten numeros" pattern="[0-9]{7,8}" placeholder="Ingrese su cedula" name="cedula_usuario" value="<?php echo $cedula;?>" <?php echo ($op == "Actualizar") ? "readonly" : "";?>
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -38,7 +38,7 @@
   </label>
   <div class="relative">
     
-    <input type="text" maxlength="45" placeholder="Ingrese su Nombre" name="nombre_usuario" value="<?php echo $nombre;?>"
+    <input type="text" maxlength="45" placeholder="Ingrese su Nombre" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" name="nombre_usuario" value="<?php echo $nombre;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -54,7 +54,7 @@
 <div class="mb-4">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Edad</label>
   <div class="relative">
-    <input type="text" maxlength="2" placeholder="edad" name="edad_usuario" value="<?php echo $edad;?>"
+    <input type="text" maxlength="2" placeholder="edad" pattern="[0-9]{1,2}" title="solo se ingresan numeros" name="edad_usuario" value="<?php echo $edad;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -70,7 +70,7 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Numero de Teléfono</label>
   <div class="relative">
-    <input type="text" minmength="11" maxlength="11" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
+    <input type="text" minmength="11" maxlength="11" pattern="[0-9]{11}" title="solo se admiten numeros" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -81,7 +81,7 @@
     <div class="mr-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
-          <input type="radio" id="checkboxLabelFour" class="" name="genero_usuario" value="F" <?php if(isset($sexo) && $sexo == "F") echo "checked";?>/>
+          <input type="radio" id="checkboxLabelFour" required class="" name="genero_usuario" value="F" <?php if(isset($sexo) && $sexo == "F") echo "checked";?>/>
         </div>
         Femenino
       </label>
@@ -90,7 +90,7 @@
     <div class="ml-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
-          <input type="radio" id="checkboxLabelFour" class="" name="genero_usuario" value="M" <?php if(isset($sexo) && $sexo == "M") echo "checked";?>/>
+          <input type="radio" id="checkboxLabelFour" required class="" name="genero_usuario" value="M" <?php if(isset($sexo) && $sexo == "M") echo "checked";?>/>
         </div>
         Masculino
       </label>
@@ -105,7 +105,7 @@
     Categoria Docente
   </label>
   <div class="relative z-20 bg-white dark:bg-form-input">
-    <select required name="categoria_tutor" required
+    <select required name="categoria_tutor"
       class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
       <option value="">Seleccione una opcion</option>
       <option <?php echo ($categoria == 'EXCL') ? "selected" : "";?> value="EXCL">Educacion exclusiva</option>
@@ -131,7 +131,7 @@
     Tipo de personal
   </label>
   <div class="relative z-20 bg-white dark:bg-form-input">
-    <select required name="tipo_tutor" required
+    <select required name="tipo_tutor"
       class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
       <option value="">Seleccione una opcion</option>
       <option <?php echo ($tipo_tutor == 'DOCENTE') ? "selected" : "";?> value="DOCENTE">Docente</option>

@@ -70,7 +70,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Nombre de la carrera <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="45" minlength="5" required placeholder="Enter your last name" name="nombre_carrera" value="<?php echo $nombre_carrera;?>"
+                        <input type="text" maxlength="45" minlength="5" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required placeholder="Ingresa el nombre de la carrera" name="nombre_carrera" value="<?php echo $nombre_carrera;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 

@@ -112,7 +112,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Nombre del grupo <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="45" minlength="4"  title="Solo de admiten numeros" required placeholder="Enter your first name" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
+                        <input type="text" maxlength="45" minlength="4" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo de admiten numeros" required placeholder="Ingrese su texto" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full xl:w-2/6">
