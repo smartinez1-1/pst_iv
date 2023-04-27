@@ -40,7 +40,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Comunidad"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Comunidad"]);
         ?>
         <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
             <div class="flex flex-col gap-9">
@@ -76,10 +76,10 @@
                   <div>
                     <div class="mb-6">
                       <label class="mb-2.5 block text-black dark:text-white">
-                       Direccion de la comunidad <span class="text-meta-1">*</span>
+                       Direcciòn de la comunidad <span class="text-meta-1">*</span>
                       </label>
-                      <textarea rows="6" maxlength="80" minlength="5" placeholder="Ingrese su Direccion" name="direccion_comunidad" value="<?php echo $direccion_comunidad;?>"
-                        class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
+                      <textarea rows="6" maxlength="80" minlength="5" placeholder="Ingrese su Direccion" name="direccion_comunidad"
+                        class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo $direccion_comunidad;?></textarea>
                     </div>
                     <div class="flex flex-row justify-center items-center">
                       <button class="flex w-72 flex-col justify-center items-center rounded bg-primary p-3 font-medium text-gray">

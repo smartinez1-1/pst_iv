@@ -40,7 +40,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Carrera"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestiòn Carrera"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -60,9 +60,9 @@
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-2/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Codigo de carrera <span class="text-meta-1">*</span>
+                          Còdigo de la carrera <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="Enter your first name" name="codigo_carrera" value="<?php echo $codigo_carrera;?>"
+                        <input type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" title="Solo de admiten numeros" required placeholder="" name="codigo_carrera" value="<?php echo $codigo_carrera;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
 

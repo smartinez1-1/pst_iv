@@ -48,7 +48,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Tutor-Comunidad"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Tutor-Comunidad"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -68,7 +68,7 @@
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Cedula del tutor <span class="text-meta-1">*</span>
+                          Cédula del tutor <span class="text-meta-1">*</span>
                         </label>
                         <input required type="text" maxlength="8" minlength="7" pattern="[0-9]{7,8}" title="Solo de admiten numeros" required placeholder="Ingrese la cedula" name="cedula_tutor" value="<?php echo $cedula_tutor;?>" <?php echo (isset($cedula_tutor)) ? "readonly" : "";?>
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
@@ -94,7 +94,7 @@
                     </div>
                     <div class="mb-4.5">
                       <label class="mb-3 block font-medium text-black dark:text-white">
-                        Seleccione una comunidad
+                        Seleccione la comunidad representada  <span class="text-meta-1">*</span>
                       </label>
                       <div class="relative z-20 bg-white dark:bg-form-input">
                         <select required name="id_comunidad"

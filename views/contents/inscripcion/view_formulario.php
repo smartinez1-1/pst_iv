@@ -78,7 +78,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Inscripcion"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Inscripción"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -88,7 +88,7 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Inscripcion
+                    Getion de Inscripción
                   </h3>
 
                   <div class="flex items-center space-x-2">
@@ -160,7 +160,7 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione una Seccion <span class="text-meta-1">*</span>
+                          Seleccione una Sección <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
                           <select required name="id_seccion" v-model="id_seccion"
@@ -224,7 +224,7 @@
                           </select>
                           <select v-if="tipo_registro == 'R' && if_estudiante == false " required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
-                            <option value="">Seleccione una opciooon</option>
+                            <option value="">Seleccione una opcion</option>
                             <option v-for="estudi in estudiantes" :key="estudi.id_estudiante" :value="estudi.id_estudiante">{{ estudi.cedula_usuario }} {{ estudi.nombre_usuario }}</option>
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
@@ -240,7 +240,7 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          lapso academico activo <span class="text-meta-1">*</span>
+                          lapso académico activo <span class="text-meta-1">*</span>
                         </label>
                         <input type="text" disabled placeholder="" value="<?php echo ($lapso) ? $lapso['ano_escolar_nombre'] : '';?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />

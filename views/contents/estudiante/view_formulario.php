@@ -54,7 +54,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Estudiante"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Estudiante"]);
         ?>
 					<div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
 						<div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">

@@ -43,10 +43,10 @@
 		}
 
 		public function update(){
-			$sqlConsulta = "SELECT * FROM grupo WHERE nombre_grupo = '$this->nombre_grupo' AND estado_grupo = '1';";
-			$result = $this->Query($sqlConsulta);
+			// $sqlConsulta = "SELECT * FROM grupo WHERE nombre_grupo = '$this->nombre_grupo' AND estado_grupo = '1';";
+			// $result = $this->Query($sqlConsulta);
 			
-			if($result->num_rows > 0) return "err/02ERR";
+			// if($result->num_rows > 0) return "err/02ERR";
       
 			try{
 				$this->Start_transacction();

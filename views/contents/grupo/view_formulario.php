@@ -55,7 +55,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Grupo"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Grupo"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -109,7 +109,7 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione una Seccion <span class="text-meta-1">*</span>
+                          Seleccione una Sección <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
                           <select required id="sel_id_seccion" name="id_seccion" v-model="id_seccion" v-on:change="Get_estudiantes_por_seccion"
@@ -134,7 +134,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Nombre del grupo <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="45" minlength="4" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo de admiten numeros" required placeholder="Ingrese su texto" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
+                        <input type="text" maxlength="45" minlength="4" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo de admiten letras" required placeholder="Ingrese su texto" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full xl:w-2/6">

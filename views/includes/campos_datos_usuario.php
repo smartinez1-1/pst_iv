@@ -16,7 +16,7 @@
   }
 ?>
 <div class="mb-4">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Cedula</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Cèdula</label>
   <div class="relative">
     <?php 
       if($this->controlador == "tutor"){
@@ -63,7 +63,8 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
   <div class="relative">
-    <input type="password" minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Su clave debe de tener almenos, uan letra miniscula, mayuscula, caracteres especiales, numero de 8 caracteres minimo" placeholder="Ingrese su Contraseña" name="clave_usuario" value="<?php echo $clave;?>"
+    <input type="password" minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Su clave debe de tener almenos, uan letra miniscula, mayuscula, caracteres especiales, numero de 8 caracteres minimo"  
+      placeholder="8+ Caracteres, 1 mayuscula, 1 numero, 1 caracter especial" name="clave_usuario" value="<?php echo $clave;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
