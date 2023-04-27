@@ -35,14 +35,14 @@
 							</div>
 							<div class="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
 								<div class="w-full p-4 sm:p-12.5 xl:p-17.5">
-									<span class="mb-1.5 block font-medium">Sistema de Gestion de Servicios Comunitarios (SGSC)</span>
+									<span class="mb-1.5 block font-medium">Sistema de Gestión de Servicios Comunitarios (SGSC)</span>
 									<h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
 										Inicia sesion
 									</h2>
 
 									<form action="<?php $this->SetURL("controllers/auth_controller.php");?>" method="POST" autocomplete="off">
 										<div class="mb-4">
-											<label class="mb-2.5 block font-medium text-black dark:text-white">Cedula del usuario</label>
+											<label class="mb-2.5 block font-medium text-black dark:text-white">Cédula del usuario</label>
 											<div class="relative">
 												<input type="hidden" name="ope" value="Login">
 												<input type="text" required maxlength="8" minlength="7" pattern="[0-4]{7,8)" placeholder="Ingresa tu cedula" name="cedula_usuario"
