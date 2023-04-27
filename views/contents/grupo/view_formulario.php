@@ -5,7 +5,21 @@
 
   require_once("./models/cls_carrera.php");
   $model_c = new cls_carrera();
+
+  require_once("./models/cls_grupo.php");
+  $model_g = new cls_grupo();
+
+  require_once("./models/cls_inscripcion.php");
+  $model_i = new cls_inscripcion();
+
   $carreras = $model_c->Get_carreras();
+
+  if($_SESSION['permisos'] == 3){
+    $date_now = $model_g->consultar_grupo($_SESSION['cedula']);
+    $datos_inscripcion = $model_i->consultar_inscripcion($_SESSION['cedula'],'NOW');
+    // var_dump($datos_inscripcion[0]['id_carrera']);
+    // die("DFD");
+  }
 
   $op = "Registrar";
   $id_grupo = null;
@@ -13,9 +27,8 @@
   $estado_grupo = null;
 
   if(isset($this->id_consulta)){
-    require_once("./models/cls_grupo.php");
-    $model = new cls_grupo();
-    $datos = $model->consulta($this->id_consulta);
+    
+    $datos = $model_g->consulta($this->id_consulta);
 
     if(isset($datos['id_grupo'])){      
       $op = "Actualizar";
@@ -58,6 +71,15 @@
                 <form action="<?php $this->SetURL('controllers/grupo_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="id_grupo" value="<?php echo $id_grupo;?>">
+                  <?php 
+                    if($op == "Registrar" && (isset($date_now))){
+                      ?>
+                      <div class="w-full p-4 text-center">
+                        <h1 class="text-danger">El estudiante ya se encuentra registrado en un grupo</h1>
+                      </div>
+                      <?php
+                    }else{
+                  ?>
                   <div class="p-6.5">
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-4/6">
@@ -65,7 +87,7 @@
                           Seleccione una carrera <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="id_carrera" v-model="id_carrera" v-on:change="consultar_seccione_por_carrera"
+                          <select required id="sel_id_carrera" name="id_carrera" v-model="id_carrera" v-on:change="consultar_seccione_por_carrera"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <?php foreach($carreras as $carr){?>
@@ -90,7 +112,7 @@
                           Seleccione una Seccion <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="id_seccion" v-model="id_seccion" v-on:change="Get_estudiantes_por_seccion"
+                          <select required id="sel_id_seccion" name="id_seccion" v-model="id_seccion" v-on:change="Get_estudiantes_por_seccion"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <option v-for="sec in secciones" :key="sec.id_seccion" :value="sec.id_seccion">{{ sec.numero_seccion}}</option>
@@ -158,9 +180,10 @@
                         </tr>
                       </thead>
                       <tbody>
+                      
                         <tr v-for="(d,index) in grupo_est">
                           <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <select required name="id_estudiante[]" v-model="grupo_est[index].id_estudiante" v-on:change="set_datos(index)"
+                            <select required name="id_estudiante[]" v-model="grupo_est[index].id_estudiante" v-on:change="set_datos(grupo_est[index].id_estudiante)"
                               class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                               <option value="">Seleccione una opcion</option>
                               <option v-for="est in estudiantes" :key="est.id_estudiante" :value="est.id_estudiante">{{ est.cedula_usuario}}</option>
@@ -177,6 +200,7 @@
                       Guardar
                     </button>
                   </div>
+                  <?php }?>
                 </form>
               </div>
             </div>
@@ -207,8 +231,15 @@
         add(){ this.grupo_est.push({}); },
         remo(){ this.grupo_est.pop(); },
         set_datos(i){
-          let datos = this.estudiantes[i];
-          this.grupo_est[i].nombre = datos['nombre_usuario'];
+          if(i == '') return false;
+
+          let datos = this.estudiantes.find( item =>{
+            if(item.id_estudiante == i) return item;
+          });
+
+          this.grupo_est = this.grupo_est.map( item =>{
+            if(item.id_estudiante == i) return {id_estudiante: i, nombre: datos['nombre_usuario']}; else return item;
+          })
         },
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
@@ -257,6 +288,23 @@
           }).then( () =>{
             this.Get_estu_grupo(datos.id_grupo)
           })
+        },
+        bloqueoCampos(){
+          let sel_c = document.querySelector('#sel_id_carrera');
+          let sel_s = document.querySelector('#sel_id_seccion');
+
+          for (let i = 0; i < sel_c.children.length; ++i) {
+            let child_c = sel_c.children[i];
+            if (child_c.tagName == 'OPTION' && child_c.value != this.id_carrera) child_c.disabled = "disabled";
+          }
+
+          setTimeout(() => {
+            for (let x = 0; x < (this.secciones.length + 1); ++x) {
+              let child_s = sel_s.children[x];
+              // console.log(child.value, this.id_seccion)
+              if (child_s.tagName == 'OPTION' && child_s.value != this.id_seccion) child_s.disabled = "disabled";
+            }  
+          }, 100);
         }
       },
     }).mount("#app_vue");
@@ -265,6 +313,20 @@
       if(isset($this->id_consulta)){
         ?>
         app.consultar('<?php echo $this->id_consulta?>')
+        <?php
+      }
+
+      if(isset($datos_inscripcion) && $op == "Registrar"){
+        ?>
+        app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
+        app.id_seccion = '<?php echo $datos_inscripcion[0]['id_seccion'];?>'  
+        setTimeout(() => {
+          app.consultar_seccione_por_carrera();
+          app.Get_estudiantes_por_seccion();
+          app.bloqueoCampos();
+        }, 100);
+        
+        // app.consultar('<?php //echo $this->id_consulta?>')
         <?php
       }
     ?>

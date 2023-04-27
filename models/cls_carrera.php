@@ -53,5 +53,15 @@
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}
+
+		public function ConsultaEstudiantesPorCarrera($carrera){
+			$sql = "SELECT * FROM estudiante 
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario 
+				INNER JOIN inscripcion ON inscripcion.id_estudiante = estudiante.id_estudiante
+				INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar
+				WHERE ano_escolar.estado_ano_escolar = '0' AND inscripcion.id_carrera = '$carrera'";
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
+		}
 	}
 ?>

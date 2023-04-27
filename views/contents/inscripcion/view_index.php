@@ -46,8 +46,12 @@
                   <?php 
                     require_once("./models/cls_inscripcion.php");
                     $model = new cls_inscripcion();
-                    $datos = $model->Get_inscripciones();
-                    
+                    if($_SESSION['permisos'] == 3){
+                      $datos = $model->consultar_inscripcion($_SESSION['cedula'],'ALL');
+                    }else{
+                      $datos = $model->Get_inscripciones();
+                    }
+                                        
                     foreach($datos as $ins){
                       ?>
                       <tr>

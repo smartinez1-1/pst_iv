@@ -33,14 +33,20 @@
 
 		public function Get_estudiantes($condicion = ''){
 			if($condicion == '') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario";
-			if($condicion == 'NO-INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE NOT EXISTS (SELECT * FROM inscripcion WHERE estudiante.id_estudiante = inscripcion.id_estudiante);";
-			
+			if($condicion == 'NO-INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE NOT EXISTS (SELECT * FROM inscripcion INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar WHERE estudiante.id_estudiante = inscripcion.id_estudiante AND ano_escolar.estado_ano_escolar = '1');";
+	
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
 
 		public function consulta($id){
 			$sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE estudiante.id_estudiante = $id;";
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
+		}
+
+		public function Get_me($cedula){
+			$sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE estudiante.cedula_usuario = '$cedula';";
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}
