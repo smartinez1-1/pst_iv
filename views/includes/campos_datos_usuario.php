@@ -9,6 +9,7 @@
     $telefono = null;
     $categoria = null;
     $tipo_tutor = null;
+    $op = null;
 
     $id_tutor = null;
     $id_estudiante = null;
@@ -24,7 +25,7 @@
         <?php
       }
     ?>
-    <input type="text" maxlength="8" title="solo se admiten numeros" pattern="[0-9]{7,8}" placeholder="Ingrese su cedula" name="cedula_usuario" value="<?php echo $cedula;?>" <?php echo ($op == "Actualizar") ? "readonly" : "";?>
+    <input type="text" maxlength="8" title="solo se admiten numeros" pattern="[0-9]{7,8}" placeholder="Ingrese su cedula" name="cedula_usuario" value="<?php echo $cedula;?>" <?php echo (isset($op) && $op == "Actualizar") ? "readonly" : "";?>
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>

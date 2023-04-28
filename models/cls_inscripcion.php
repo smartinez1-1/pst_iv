@@ -92,5 +92,22 @@
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
+
+		public function consultar_inscripcion($cedula, $filtro = ''){
+			if($filtro == 'NOW') $con = "ano_escolar.estado_ano_escolar = 1 AND"; 
+			if($filtro == 'BEFORE') $con = "ano_escolar.estado_ano_escolar = 0 AND";
+			if($filtro == "ALL") $con = '';
+
+			$sql = "SELECT * FROM inscripcion 
+				INNER JOIN estudiante ON estudiante.id_estudiante = inscripcion.id_estudiante 
+        INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar 
+        INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
+        INNER JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion 
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario
+				WHERE $con estudiante.cedula_usuario = '$cedula';";
+
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
+		}
 	}
 ?>

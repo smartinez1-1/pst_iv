@@ -37,10 +37,10 @@
           $this->Redirect("auth/login","err/01AUTH");
         }
 
-        if(isset($_SESSION['cedula'])){
-          if($_SESSION['permisos'] == 1 && $this->file_view_name == "form") $this->Redirect($this->controlador.'/index',"err/08AUTH");
-          if($_SESSION['permisos'] < 3 && $this->controlador == "usuarios" && $this->file_view_name == "index") $this->Redirect("inicio/index","err/08AUTH");
-        }
+        // if(isset($_SESSION['cedula'])){
+        //   if($_SESSION['permisos'] == 1 && $this->file_view_name == "form") $this->Redirect($this->controlador.'/index',"err/08AUTH");
+        //   if($_SESSION['permisos'] < 3 && $this->controlador == "usuarios" && $this->file_view_name == "index") $this->Redirect("inicio/index","err/08AUTH");
+        // }
       }
     }
     private function DateNow($param = ""){

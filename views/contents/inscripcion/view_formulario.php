@@ -6,7 +6,10 @@
   require_once("./models/cls_carrera.php");
   require_once("./models/cls_semestre.php");
   require_once("./models/cls_estudiante.php");
+  require_once("./models/cls_inscripcion.php");
   require_once("./models/cls_lapso_academico.php");
+
+  $model_i = new cls_inscripcion();
 
   $model_c = new cls_carrera();
   $carreras = $model_c->Get_carreras();
@@ -15,10 +18,11 @@
   $semestres = $model_s->Get_semestres();
 
   $model_e = new cls_estudiante();
-  $estudiantes = $model_e->Get_estudiantes("NO-INS");
-
+  
   $model_l = new cls_lapso_academico();
   $lapso = $model_l->Get_lapso_activo();
+
+  $tipo_registro = "N";
 
   $op = "Registrar";
   $id_inscripcion = null;
@@ -29,21 +33,34 @@
   $numero_seccion = null;
   $carrera_id = null;
   $turno_estudiante = null;
+  $date_before = $date_now = '';
+
+  if($_SESSION['permisos'] == 3){
+    $date_now = $model_i->consultar_inscripcion($_SESSION['cedula'],'NOW');    
+    $date_before = $model_i->consultar_inscripcion($_SESSION['cedula'],'BEFORE');
+
+    if(isset($date_before[0])){
+      $id_estudiante = $date_before[0]['id_estudiante'];
+      $turno_estudiante = $date_before[0]['turno_estudiante'];     
+      $tipo_registro = "R";
+    }
+
+    $estudiantes = $model_e->Get_me($_SESSION['cedula']);
+  }else{
+    $estudiantes = $model_e->Get_estudiantes("NO-INS");
+  }
 
   if(isset($this->id_consulta)){
-    require_once("./models/cls_inscripcion.php");
-    $model_i = new cls_inscripcion();
     $datos = $model_i->consulta($this->id_consulta);
 
-    if(isset($datos['id_seccion'])){      
+    if(isset($datos['id_inscripcion'])){      
       $op = "Actualizar";
       $id_seccion = $datos['id_seccion'];
       $numero_seccion = $datos['numero_seccion'];
-      $carrera_id = $datos['carrera_id'];
+      $id_carrera = $datos['carrera_id'];
       $turno_estudiante = $datos['turno_estudiante'];
     }
   }
-
 ?>
 <body
 	x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -67,7 +84,7 @@
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
             <div class="flex flex-col gap-9">
               <!-- Contact Form -->
-              <div
+              <div id="app_vue"
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
@@ -78,7 +95,7 @@
                     <div class="mr-3">
                       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                         <div class="relative">
-                          <input type="radio" required id="checkboxLabelFour" class="" name="tipo_registro" checked value="N"/>
+                          <input type="radio" v-model="tipo_registro" :checked="tipo_registro == 'N'" required id="checkboxLabelFour" class="" name="tipo_registro" checked value="N"/>
                         </div>
                         Nuevo ingreso
                       </label>
@@ -87,17 +104,32 @@
                     <div >
                       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                         <div class="relative">
-                          <input type="radio" required id="checkboxLabelFour" class="" name="tipo_registro" value="R"/>
+                          <input type="radio" v-model="tipo_registro" :checked="tipo_registro == 'R'" required id="checkboxLabelFour" class="" name="tipo_registro" value="R"/>
                         </div>
                         Estudiante regular
                       </label>
                     </div>
                   </div>
                 </div>
-                <form id="app_vue" action="<?php $this->SetURL('controllers/inscripcion_controller.php');?>" autocomplete="off" method="POST">
+                <form  action="<?php $this->SetURL('controllers/inscripcion_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="id_inscripcion" value="<?php echo $id_inscripcion;?>">
-                  <input type="hidden" name="id_ano_escolar" value="<?php echo $lapso['id_ano_escolar'];?>">
+                  <input type="hidden" name="id_ano_escolar" value="<?php echo (isset($lapso['id_ano_escolar']) ? $lapso['id_ano_escolar'] : '');?>">
+                  <?php 
+                    if(!isset($lapso)){
+                      ?>
+                      <div class="w-full p-4 text-center">
+                        <h1 class="text-danger">No existe un lapso academico activo</h1>
+                      </div>
+                      <?php
+                    }else if(isset($date_now[0])){
+                      ?>
+                      <div class="w-full p-4 text-center">
+                        <h1 class="text-danger">El estudiante ya se encuentra inscrito</h1>
+                      </div>
+                      <?php
+                    }else{
+                  ?>
                   <div class="p-6.5">
                     <div class="mb-4.5 grid grid-cols-3 gap-6 xl:grid-cols-1">
                       <div class="w-full xl:w-4/6">
@@ -175,12 +207,25 @@
                           Seleccione un estudiante <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
+                          <select v-if="tipo_registro == 'N' && if_estudiante == false " required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
-                            <?php foreach($estudiantes as $est){?>
-                              <option <?php echo ($id_estudiante == $est['id_estudiante']) ? "selected" : "";?> value="<?php echo $est['id_estudiante'];?>"><?php echo $est['cedula_usuario']." ".$est['nombre_usuario'];?></option>
-                            <?php }?>
+                            <?php 
+                              if(!is_array($estudiantes)){
+                                ?>
+                                <option selected value="<?php echo $estudiantes['id_estudiante'];?>"><?php echo $estudiantes['cedula_usuario']." ".$estudiantes['nombre_usuario'];?></option>
+                                <?php
+                              }else{
+                                foreach($estudiantes as $est){?>
+                                  <option <?php echo ($id_estudiante == $est['id_estudiante']) ? "selected" : "";?> value="<?php echo $est['id_estudiante'];?>"><?php echo $est['cedula_usuario']." ".$est['nombre_usuario'];?></option>
+                            <?php 
+                                }
+                              }?>
+                          </select>
+                          <select v-if="tipo_registro == 'R' && if_estudiante == false " required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
+                            class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                            <option value="">Seleccione una opciooon</option>
+                            <option v-for="estudi in estudiantes" :key="estudi.id_estudiante" :value="estudi.id_estudiante">{{ estudi.cedula_usuario }} {{ estudi.nombre_usuario }}</option>
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +242,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           lapso academico activo <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" disabled placeholder="" value="<?php echo $lapso['ano_escolar_nombre'];?>"
+                        <input type="text" disabled placeholder="" value="<?php echo ($lapso) ? $lapso['ano_escolar_nombre'] : '';?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full xl:w-2/6">
@@ -230,6 +275,7 @@
                       Guardar
                     </button>
                   </div>
+                  <?php }?>
                 </form>
               </div>
             </div>
@@ -245,7 +291,7 @@
   <script>
     const { createApp } = Vue;
 
-    createApp({
+    let app = createApp({
       data(){
         return {
           message: "hola vue",
@@ -254,7 +300,10 @@
           id_semestre: "",
           id_carrera: "",
           data_estudiante: "",
+          tipo_registro: "",
           secciones: [],
+          if_estudiante: false,
+          estudiantes: [],
         }
       },
       methods:{
@@ -266,6 +315,18 @@
           .then( result => {
             
             if(result) this.secciones = result['data']; else this.secciones = [];
+          }).catch( error => console.error(error))
+
+          await this.consultar_estudiantes_por_carrera();
+        },
+        async consultar_estudiantes_por_carrera(){
+          if(this.id_carrera == '') return false;
+
+          await fetch(`<?php $this->SetURL('controllers/carrera_controller.php?ope=Get_estudiantes_por_carrera&id_carrera=');?>${this.id_carrera}`)
+          .then( response => response.json())
+          .then( result => {
+            
+            if(result) this.estudiantes = result['data']; else this.estudiantes = [];
           }).catch( error => console.error(error))
         },
         async consultarEstudiante(){
@@ -280,6 +341,34 @@
         }
       }
     }).mount("#app_vue");
+    <?php
+      if(isset($date_before[0])){
+        $d = $date_before[0];
+        ?>
+        app.id_carrera = '<?php echo $d["id_carrera"];?>';
+        app.tipo_registro = "R";
+        app.if_estudiante = true;
+        app.consultar_seccione_por_carrera();
+
+        setTimeout(() => {
+          app.id_seccion = '<?php echo $d["id_seccion"];?>';
+          app.id_estudiante = '<?php echo $d["id_estudiante"];?>';
+
+          let sel = document.querySelector("#sel_estudiantes");
+
+          for (let x = 0; x < sel.children.length; ++x) {
+            let child_e = sel.children[x];
+            if (child_e.tagName == 'OPTION' && child_e.value != this.id_seccion) child_e.disabled = "disabled";
+          }  
+        }, 100);
+        
+        <?php
+      }else{
+        ?>
+        app.tipo_registro = "N";
+        <?php
+      }
+    ?>
   </script>
 </body>
 

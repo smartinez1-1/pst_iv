@@ -85,7 +85,16 @@
                 <form action="<?php $this->SetURL('controllers/proyecto_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="id_proyecto" value="<?php echo $id_proyecto;?>">
-                  <input type="hidden" name="id_ano_escolar" value="<?php echo $lapso['id_ano_escolar'];?>">
+                  <input type="hidden" name="id_ano_escolar" value="<?php echo (isset($lapso) ? $lapso['id_ano_escolar'] : '');?>">
+                  <?php 
+                    if(!isset($lapso)){
+                      ?>
+                      <div class="w-full p-4 text-center">
+                        <h1 class="text-danger">No existe un lapso academico activo</h1>
+                      </div>
+                      <?php
+                    }else{
+                  ?>
                   <div class="p-6.5">
                     <div class="mb-4.5 grid grid-cols-3 gap-6">
                       <div class="w-full xl:w-4/6">
@@ -231,6 +240,7 @@
                       Guardar
                     </button>
                   </div>
+                  <?php }?>
                 </form>
               </div>
             </div>
