@@ -12,6 +12,8 @@
   $sexo = null;
   $telefono = null;
   $if_tutor = false;
+  $if_estudiante = true;
+  $matricula = null;
   $categoria = null;
 
   if(isset($this->id_consulta)){
@@ -28,6 +30,7 @@
 			$clave = '';
 			$sexo = $datos['genero_usuario'];
 			$telefono = $datos['telefono_usuario'];
+      $matricula = $datos['matricula_estudiante'];
 			// $pregunta1 = $datos['pregunta1'];
 			// $respuesta1 = "";
 			// $pregunta2 = $datos['pregunta2'];
@@ -54,17 +57,17 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Estudiante"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Estudiante"]);
         ?>
 					<div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
 						<div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
 							<h3 class="font-semibold text-black dark:text-white">
-								Getion de Estudiante
+              Gestión de Estudiante
 							</h3>
 						</div>
             <form action="<?php $this->SetURL("controllers/estudiante_controller.php");?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
               <div class="<?php echo ($op != "Actualizar") ? "w-1/2 xl:w-1/2" : "w-full";?> border-stroke dark:border-strokedark xl:border-l-2">
-                <div class="w-full grid grid-cols-3 gap-4 p-4 sm:p-12.5 xl:p-17.5">
+                <div class="w-full grid grid-cols-2 gap-4 p-4 sm:p-12.5 xl:p-17.5">
                   <!-- <span class="mb-1.5 block font-medium">Por favor verifica todos tus datos antes de guardar</span>
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                     Bienvenido al registro de Estudiante

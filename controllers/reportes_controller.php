@@ -1,5 +1,5 @@
 <?php
-  require_once("../models/fpdf/fpdf.php");
+  require_once("./fpdf/fpdf.php");
   class new_fpdf extends FPDF
   {
     private $nombre;
@@ -29,9 +29,9 @@
     $pdf->setFont('Arial', 'B', 9);
     $pdf->cell(190, 5, "a.- Planilla S.C.1 Inscripcion",0,1,"L",0);
     $pdf->setFont('Arial', '', 8);
-    $pdf->Image("../views/img/logo_armas.png",10,25,20,25);
+    $pdf->Image("./views/img/logo_armas.png",10,25,20,25);
     $pdf->cell(190, 5, "MINISTERIO DEL PODER POPULAR PARA LA DEFENSA",0,1,"C",0);
-    $pdf->Image("../views/img/logo_unefa.png",180,25,20,25);
+    $pdf->Image("./views/img/logo_unefa.png",180,25,20,25);
     $pdf->cell(190, 5, "MINISTERIO DEL PODER POPULAR PARA LA EDUCACION UNIVERSITARIA, CIENCIA Y TECNOLOGIA",0,1,"C",0);
     $pdf->cell(190, 5, "UNIVERSIDAD NACIONAL EXPERIMENTAL POLITECNICA DE LA FUERZA ARMADA NACIONAL",0,1,"C",0);
     $pdf->cell(190, 5, "VICERECTORADO ACADEMICO",0,1,"C",0);
@@ -128,9 +128,9 @@
     $fpdf2 = new new_fpdf2();
     $fpdf2->addPage();
     $fpdf2->setFont('Arial', 'B', 7);
-    $fpdf2->Image("../views/img/logo_armas.png",10,6,20,25);
+    $fpdf2->Image("./views/img/logo_armas.png",10,6,20,25);
     $fpdf2->cell(330, 5, "MINISTERIO DEL PODER POPULAR PARA LA DEFENSA",0,0,"C");
-    $fpdf2->Image("../views/img/logo_unefa.png",315,6,20,25);
+    $fpdf2->Image("./views/img/logo_unefa.png",315,6,20,25);
     $fpdf2->ln();
     $fpdf2->cell(330, 5, "MINISTERIO DEL PODER POPULAR PARA LA EDUCACION UNIVERSITARIA, CIENCIA Y TECNOLOGIA",0,1,"C",0);
     $fpdf2->cell(330, 5, "UNIVERSIDAD NACIONAL EXPERIMENTAL POLITECNICA DE LA FUERZA ARMADA NACIONAL",0,1,"C",0);
@@ -186,5 +186,4 @@
     $fpdf2->Output();
   }
   
-  rp_inscripcion();
   ?>

@@ -6,3 +6,4 @@
 	<link rel="icon" href="favicon.ico">
 	<link href="<?php echo constant("URL");?>views/css/style.css" rel="stylesheet">
 </head>
+<!-- ESTE HEAD YA LES DIJE QUE SE MUESTRA EN TODAS LAS VISTAS -->

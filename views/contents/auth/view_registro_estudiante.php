@@ -32,6 +32,7 @@
                   <input type="hidden" name="tipo_usuario" value="Estudiante">
                   <input type="hidden" name="return" value="auth/registro_estudiante">
                   <input type="hidden" name="ope" value="Registrar">
+                  <!-- CAMPOS DEL ESTUDIANTE -->
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>
                 </div>
               </div>
@@ -41,6 +42,7 @@
                   <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Preguntas De Seguridad
                   </h2>
+                  <!-- CAMPOS DE SEGURIDAD DEL ESTUDIANTE -->
                   <?php require_once("./views/includes/campos_seguridad_usuario.php");?>
                   <!-- fin de las preguntas de seguridad -->
                   <div class="mb-5">

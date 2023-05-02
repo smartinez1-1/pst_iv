@@ -17,7 +17,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Proyecto"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Proyecto"]);
         ?>
           <!-- ====== Table Three Start -->
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -26,7 +26,7 @@
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Id proyecto
+                      ID
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Titulo
@@ -86,7 +86,8 @@
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
-                            <a href="<?php $this->SetURL('proyecto/formulario/b/'.$pro['id_proyecto']);?>">Editar</a>
+                            <a class="text-primary" href="<?php $this->SetURL('proyecto/formulario/b/'.$pro['id_proyecto']);?>">Editar</a>
+                            <a class="text-danger" target="__blank" href="<?php $this->SetURL('proyecto/rp/b/'.$pro['id_proyecto']);?>">PDF</a>
                           </div>
                         </td>
                       </tr>

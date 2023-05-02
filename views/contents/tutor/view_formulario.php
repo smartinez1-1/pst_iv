@@ -14,6 +14,7 @@
   $categoria = null;
   $tipo_tutor = null;
   $if_tutor = true;
+  $if_estudiante = false;
   $id_tutor = null;
 
   if(isset($this->id_consulta)){
@@ -59,12 +60,12 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Tutor"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Tutor"]);
         ?>
 					<div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
 						<div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
 							<h3 class="font-semibold text-black dark:text-white">
-								Getion de Tutor
+              Gestión de Tutor
 							</h3>
 						</div>
             <form action="<?php $this->SetURL("controllers/tutor_controller.php");?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
@@ -79,6 +80,7 @@
                   <input type="hidden" name="permisos_usuario" value="2" readonly>
                   <input type="hidden" name="tipo_usuario" value="Tutor" readonly>
                   <input type="hidden" name="return" value="tutor/index" readonly>
+                  <!-- AQUI ESTAMOS EN LA VISTA DEL TUTOR DENTRO DEL SISTEMA, Y DE NUEVO ESTA LOS MISMO CAMPOS -->
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>
                   <?php if($op == "Actualizar"){?>
                     <div class="mb-5 block mx-auto w-full col-3">

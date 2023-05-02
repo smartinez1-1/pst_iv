@@ -1,6 +1,9 @@
 <?php
+	// BUENO, ESTA CLASE 'CLS_DB', ES LA QUE SE USA PARA LA CONEXION A LA BASE DE DATOS, ES LA UNICA, DE AQUI EL RESTO DE CLASES DE CONECTAN PARA PODER PEDIR INFORMACION DE LA DB
     class cls_db{
+			// ESTOS ATRIBUTOS SOLO SON DE ESTA CLASE, NO SE PUEDEN USAR EN OTROS ARCHIVOS EXTERNOS, SOLO AQUI, ES PARA MAYOR SEGURIDAD
 			private $host, $dbname, $user, $pass, $conexion;
+			// YA LES COMENTE QUE EL CONSTRUCTOR ES ALGO QUE SE EJECUTA AUTOMATICAMENTE
 			public function __construct(){
 				if(!isset($_SESSION)) session_start();
 
@@ -10,34 +13,31 @@
 				$this->pass = "";
 				$this->Connect();
 			}
-
+			// ESTO CREA LA CONEXION A LA DB (POR SI HAY ALGUN PROBLEMA DE CONEXION DESPUES)
 			private function Connect(){
 				$this->conexion = mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
 				if(mysqli_connect_error()) die("NO SE PUEDO CONECTAR A LA BASE DE DATOS: ".mysqli_connect_error());
 			}
-
-        // protected function reg_bitacora($datos_array){
-        //     $descripcion = $datos_array['des'];
-        //     $id_user = $datos_array['user_id'];
-        //     $table_name = $datos_array['table_name'];
-            
-        //     $sql = "INSERT INTO bitacora(descripcion, tabla_change, hora_fecha, id_usuario)
-        //         VALUES('$descripcion','$table_name',NOW(),$id_user)";
-        //     $this->Query($sql);
-        // }
-
+			// CON ESTA FUNCION SE EJECUTAN TODAS LAS CONSULTAS
 			protected function Query($sql){ $this->Connect(); return mysqli_query($this->conexion, $sql); }
+			// CON ESTA FUNCION SE INICIAN LAS TRANSACCIONES (SABES LO QUE ES UNA TRANSACCION?),SON BASICAMENTE CONSULTAS QUE SE EJECUTAN SECUENCIALMENTE, UNA DETRAS DE OTRA, SI ALGUNA DE ESAS CONSULTAS FALLA, LA TRANSACCION SE DETIENE Y SE REVIERTEN LOS CAMBIOS QUE SE HAYAN HECHO, PARA NO DEJAR NADA A MEDIAS
 			protected function Start_transacction(){ mysqli_autocommit($this->conexion, false); }
+			// ESTO FINALIZA DICHA TRANSACCION
 			protected function End_transacction(){ mysqli_commit($this->conexion); }
+			// ESTA FUNCION REVIERTE CUALQUIER CAMBIO QUE HAYA REALIZADO
 			protected function Rollback(){ mysqli_rollback($this->conexion); }
+			// ESTA FUNCION ES PARA SABER SI MI CONSULTA TIENE ALGUN RESULTADO
 			protected function Result_last_query(){ return (mysqli_affected_rows($this->conexion)) ? true : false;}
+			// ESTAS DOS FUNCIONES DE ABAJO SON PARA EXTRAER DATOS DE LAS CONSULTAS
 			protected function Get_array($results){ return mysqli_fetch_array($results); }
 			protected function Get_todos_array($results){
 				if($results) return mysqli_fetch_all($results, MYSQLI_ASSOC); else return [];
 			}
 			protected function Returning_id(){ return mysqli_insert_id($this->conexion); }
+			// CON ESTA FUNCION LIMPIO TODO LO QUE MANDO A LA BASE DE DATOS (PARA EVITAR INYECCION SQL), ES CUANDO EJEMPLO, CUANDO TE HACER LOGIN EN UNA PAGINA, ESTAS METIENDO DATOS, DICHOS DATOS SE INTEGRAN A UNA CONSULTA QUE SE EJECUTA EN LA DB, Y SI TU METES UN COMANDO SQL, PARA ELIMINAR ALGO, Y SE LLEGA A EJECUTAR, SE PUEDE JODER LA BASE DE DATOS
 			protected function Clean($variable){
 				$variable = stripslashes($variable);
+				// SI DETECTA QUE ESCRIBI CUALQUIERA DE ESTAS CONSULTAS, LAS ELIMINA, OSEA SI DETECTA ALGO DE LO QUE HAY ABAJO, LO ELIMINA
 				$variable = str_ireplace("SELECT * FROM","",$variable);
 				$variable = str_ireplace("DELETE * FROM","",$variable);
 				$variable = str_ireplace("INSERT INTO","",$variable);
@@ -57,6 +57,7 @@
 				else $variable = str_ireplace(" ","",$variable);
 				return $variable;
 			}
+			// Y ESTA ES UNA FUNCION PARA DESTRUIR LA CONEXION A LA BASE DE DATOS, YA QUE EN CADA CONSULTA SE CREA UNA, Y LUEGO SE TIENE QUE DESTRUIR (ASI NO SE COLAPSA LA BASE DE DATOS, PORQUE ELLA ESPERA TODAS ESAS CONEXIONES SI ES QUE QUEDAN ABIERTAS)
 			public function __destruct(){ mysqli_close($this->conexion); }
     }
 ?>

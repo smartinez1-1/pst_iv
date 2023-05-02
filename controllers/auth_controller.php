@@ -4,7 +4,7 @@
     
   if(isset($_POST['ope'])){
     switch($_POST['ope']){
-      case "Login":
+      case "Ingresar":
         fn_Login();
       break;
 

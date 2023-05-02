@@ -1,4 +1,5 @@
 <?php 
+// ESTE ARCHIVO, AQUI ESTAN LOS CAMPOS DE LA VISTA DE REGISTRO DE USUARIO, TUTOR Y ESTUDIANTE, 1 SOLO ARCHIVO PARA 3 VISTAS, SI AQUI ARRIBA, SI LA VARIABLE ID_CONSULTA NO TIENE NADA, PUES TODO TIENE QUE ESTAR VACIO
   if(!isset($this->id_consulta)){
     $cedula = null;
     $nombre = null;
@@ -9,6 +10,7 @@
     $telefono = null;
     $categoria = null;
     $tipo_tutor = null;
+    $matricula = null;
     $op = null;
 
     $id_tutor = null;
@@ -32,10 +34,7 @@
 
 <div class="mb-4">
   <label class="mb-2.5 block font-medium text-black dark:text-white">
-    <?php 
-      if($this->controlador == "auth") echo "Nombre del Usuario";
-      else echo "Nombre y Apellido";
-    ?>
+    Nombre y Apellido
   </label>
   <div class="relative">
     
@@ -99,7 +98,17 @@
     </div>
   </div>
 </div>
-<?php if($if_tutor){?>
+<?php if($if_estudiante){?>
+  <div class="mb-6">
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Matricula</label>
+  <div class="relative">
+    <input type="text" minmength="2" maxlength="12" placeholder="Ingrese la matricula" name="matricula_estudiante" value="<?php echo $matricula;?>"
+      class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+  </div>
+</div>
+<?php 
+  }
+  if($if_tutor){?>
   
 <!-- SELECT CATEGORIA DOCENTE:  EDUCACION EXCLUSIVA, TIEMPO COMPLETO, MEDIO TIEMPO, TIEMPO VARIABLE -->
 <div class="w-full xl:w-4/6">

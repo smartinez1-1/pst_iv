@@ -69,7 +69,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Proyecto"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Proyecto"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -79,7 +79,7 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Proyecto
+                    Gestión de Proyecto
                   </h3>
                 </div>
                 <form action="<?php $this->SetURL('controllers/proyecto_controller.php');?>" autocomplete="off" method="POST">
@@ -99,7 +99,7 @@
                     <div class="mb-4.5 grid grid-cols-3 gap-6">
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione una comunidad
+                          Seleccione una comunidad <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
                           <select required name="id_comunidad"
@@ -122,7 +122,7 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione un grupo
+                          Seleccione un grupo <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
                           <select required name="id_grupo"
@@ -145,7 +145,7 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione una Tutor
+                          Seleccione una Tutor <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
                           <select required name="id_tutor"
@@ -166,73 +166,84 @@
                           </span>
                         </div>
                       </div>
-                      <div class="w-full xl:w-4/6">
+                      <div class="col-start-2 col-span-2">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Titulo del proyecto <span class="text-meta-1">*</span>
                         </label>
                         <input type="text" maxlength="45" minlength="4" required placeholder="" name="titulo_proyecto" value="<?php echo $titulo_proyecto;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
-                      <div class="w-full xl:w-4/6">
-                        <label class="mb-2.5 block text-black dark:text-white">
-                          Planteamiento del proyecto <span class="text-meta-1">*</span>
-                        </label>
-                        <input type="text" maxlength="45" minlength="4" required placeholder="" name="planteamiento_proyecto" value="<?php echo $planteamiento_proyecto;?>"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                      </div>
-                      <div class="w-full xl:w-4/6">
+                      <div class="col-end-6">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Tipo de proyecto <span class="text-meta-1">*</span>
                         </label>
                         <input type="text" maxlength="45" minlength="4" required placeholder="" name="tipo_proyecto" value="<?php echo $tipo_proyecto;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
-                      <div class="w-full">
+                      <div class="col-span-3">
+                        <label class="mb-2.5 block text-black dark:text-white">
+                          Planteamiento del proyecto <span class="text-meta-1">*</span>
+                        </label>
+                        <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="planteamiento_proyecto"
+                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($planteamiento_proyecto) ? $planteamiento_proyecto : '');?>
+                        </textarea>
+                      </div>
+                      <div class="col-span-3">
                         <div class="mb-6">
                           <label class="mb-2.5 block text-black dark:text-white">
                           Objetivos generales <span class="text-meta-1">*</span>
                           </label>
-                          <textarea rows="6" maxlength="120" minlength="5" placeholder="Ingrese su texto" name="objetivos_generales_proyecto"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo $objetivos_generales_proyecto;?>
+                          <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="objetivos_generales_proyecto"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_generales_proyecto) ? $objetivos_generales_proyecto : '');?>
                           </textarea>
                         </div>
                       </div>
-                      <div class="w-full">
+                      <div class="col-span-3">
                         <div class="mb-6">
                           <label class="mb-2.5 block text-black dark:text-white">
                           Objetivos especificos <span class="text-meta-1">*</span>
                           </label>
-                          <textarea rows="6" maxlength="120" minlength="5" placeholder="Ingrese su texto" name="objetivos_especificos_proyecto"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo $objetivos_especificos_proyecto;?>
+                          <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="objetivos_especificos_proyecto"
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_especificos_proyecto) ? $objetivos_especificos_proyecto : '');?>
                           </textarea>
                         </div>
                       </div>
-
-                      <div class="w-full xl:w-2/6">
-                        <label class="mb-2.5 block text-black dark:text-white">
-                          Estado del proyecto <span class="text-meta-1">*</span>
-                        </label>
-                        <div class="flex items-center space-x-2">
-                          <div class="mr-3">
-                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                              <div class="relative">
-                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="1" <?php echo ($estado_proyecto == '1') ? "checked" : "";?>/>
-                              </div>
-                              Aprobado
+                      <?php 
+                        if($_SESSION['permisos'] != 3){
+                          ?>
+                          <div class="w-full xl:w-2/6">
+                            <label class="mb-2.5 block text-black dark:text-white">
+                              Estado del proyecto <span class="text-meta-1">*</span>
                             </label>
-                          </div>
-
-                          <div >
-                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                              <div class="relative">
-                                <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="0" <?php echo ($estado_proyecto == '0') ? "checked" : "";?>/>
+                            <div class="flex items-center space-x-2">
+                              <div class="mr-3">
+                                <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                                  <div class="relative">
+                                    <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="1" <?php echo ($estado_proyecto == '1') ? "checked" : "";?>/>
+                                  </div>
+                                  Aprobado
+                                </label>
                               </div>
-                              En proceso
-                            </label>
+
+                              <div >
+                                <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                                  <div class="relative">
+                                    <input type="radio" required id="checkboxLabelFour" class="" name="estado_proyecto" value="0" <?php echo ($estado_proyecto == '0') ? "checked" : "";?>/>
+                                  </div>
+                                  En proceso
+                                </label>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                          <?php
+                        }else{
+                          ?>
+                          <input type="hidden" required id="checkboxLabelFour" class="" name="estado_proyecto" value="0" checked="checked"/>
+                          <?php
+                        }
+                      ?>
+                      
 
                     <button class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
                       Guardar

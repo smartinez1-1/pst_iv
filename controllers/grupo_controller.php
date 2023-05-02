@@ -47,9 +47,10 @@
 
 	function fn_Consultar_grupo(){
 		$models_g = new cls_grupo();
-		$result = $models_g->consulta($_GET['id_grupo']);
+		$result_grupo = $models_g->consulta($_GET['id_grupo']);
+		$result_est = $models_g->Get_estudiasntes_grup($_GET['id_grupo']);
 
-		print json_encode(["data" => $result]);
+		print json_encode(["data" => ['grupo' => $result_grupo, 'est' => $result_est]]);
 	}
 
 	function fn_Consultar_grupo_est(){

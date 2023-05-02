@@ -55,10 +55,14 @@
 
     if(isset($datos['id_inscripcion'])){      
       $op = "Actualizar";
+      $id_inscripcion = $datos['id_inscripcion'];
       $id_seccion = $datos['id_seccion'];
       $numero_seccion = $datos['numero_seccion'];
       $id_carrera = $datos['carrera_id'];
       $turno_estudiante = $datos['turno_estudiante'];
+      $id_semestre = $datos['id_semestre'];
+      $estudiantes = $model_e->Get_me($datos['cedula_usuario']);
+    
     }
   }
 ?>
@@ -78,7 +82,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Inscripción"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Inscripción"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -88,7 +92,7 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Inscripción
+                  Gestión de Inscripción
                   </h3>
 
                   <div class="flex items-center space-x-2">
@@ -128,6 +132,12 @@
                         <h1 class="text-danger">El estudiante ya se encuentra inscrito</h1>
                       </div>
                       <?php
+                    }else if(isset($lapso['id_ano_escolar']) && $lapso['estado_incripciones'] == '0'){
+                      ?>
+                      <div class="w-full p-4 text-center">
+                        <h1 class="text-danger">El periodo de inscripción se encuentra cerrado</h1>
+                      </div>
+                      <?php
                     }else{
                   ?>
                   <div class="p-6.5">
@@ -144,7 +154,8 @@
                               <option 
                                 <?php echo ($id_carrera == $carr['id_carrera']) ? "selected" : "";?> 
                                 value="<?php echo $carr['id_carrera'];?>">
-                                  <?php echo $carr['nombre_carrera'];?></option>
+                                  <?php echo $carr['nombre_carrera'];?>
+                              </option>
                             <?php }?>
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
@@ -204,25 +215,10 @@
                       </div>
                       <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
-                          Seleccione un estudiante <span class="text-meta-1">*</span>
+                          Seleccione un estudiante<span class="text-meta-1">*</span>
                         </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select v-if="tipo_registro == 'N' && if_estudiante == false " required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
-                            class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
-                            <option value="">Seleccione una opcion</option>
-                            <?php 
-                              if(!is_array($estudiantes)){
-                                ?>
-                                <option selected value="<?php echo $estudiantes['id_estudiante'];?>"><?php echo $estudiantes['cedula_usuario']." ".$estudiantes['nombre_usuario'];?></option>
-                                <?php
-                              }else{
-                                foreach($estudiantes as $est){?>
-                                  <option <?php echo ($id_estudiante == $est['id_estudiante']) ? "selected" : "";?> value="<?php echo $est['id_estudiante'];?>"><?php echo $est['cedula_usuario']." ".$est['nombre_usuario'];?></option>
-                            <?php 
-                                }
-                              }?>
-                          </select>
-                          <select v-if="tipo_registro == 'R' && if_estudiante == false " required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante" v-on:change="consultarEstudiante"
+                        <div class="relative z-20 bg-white dark:bg-form-input">                          
+                          <select required id="sel_estudiantes" name="id_estudiante" v-model="id_estudiante"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <option v-for="estudi in estudiantes" :key="estudi.id_estudiante" :value="estudi.id_estudiante">{{ estudi.cedula_usuario }} {{ estudi.nombre_usuario }}</option>
@@ -320,13 +316,32 @@
           await this.consultar_estudiantes_por_carrera();
         },
         async consultar_estudiantes_por_carrera(){
-          if(this.id_carrera == '') return false;
+          if(this.id_carrera == '' || this.id_estudiante != '' || this.tipo_registro == "N") return false;
 
           await fetch(`<?php $this->SetURL('controllers/carrera_controller.php?ope=Get_estudiantes_por_carrera&id_carrera=');?>${this.id_carrera}`)
           .then( response => response.json())
           .then( result => {
             
             if(result) this.estudiantes = result['data']; else this.estudiantes = [];
+          }).catch( error => console.error(error))
+        },
+        async get_estudiante(){
+          let url = '';
+          if(this.tipo_registro == "N"  && this.id_estudiante == '') url = "<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos'); ?>";
+          else if(this.tipo_registro == "R" && this.id_estudiante == ''){
+            this.consultar_estudiantes_por_carrera();
+            return false;
+          }else if(this.id_estudiante != '') url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_estudiante&id_estudiante=');?>${this.id_estudiante}`;
+
+          await fetch(url)
+          .then( response => response.json())
+          .then( result => {
+            if(result){
+
+              if(typeof result['data'][0] == "object") this.estudiantes = result['data']; else this.estudiantes.push(result['data']); 
+
+            }else this.estudiantes = [];
+            console.log(this.estudiantes)
           }).catch( error => console.error(error))
         },
         async consultarEstudiante(){
@@ -366,6 +381,23 @@
       }else{
         ?>
         app.tipo_registro = "N";
+        <?php
+      }
+      
+      if(isset($this->id_consulta)){  
+        ?>
+        app.tipo_registro = "R";
+        app.id_carrera = '<?php echo $datos['id_carrera'];?>';
+        app.id_seccion = '<?php echo $datos['id_seccion'];?>';
+        app.id_semestre = '<?php echo $datos['id_semestre'];?>';
+        app.id_estudiante = '<?php echo $datos['id_estudiante'];?>';
+        app.get_estudiante();        
+        app.consultar_seccione_por_carrera();
+        // app.consultar_estudiantes_por_carrera();
+        <?php
+      }else{
+        ?>
+        app.get_estudiante();
         <?php
       }
     ?>

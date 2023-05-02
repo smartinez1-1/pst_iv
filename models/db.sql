@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2023 a las 18:22:35
+-- Tiempo de generación: 02-05-2023 a las 18:54:36
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -71,7 +71,8 @@ CREATE TABLE `comunidad` (
 CREATE TABLE `estudiante` (
   `id_estudiante` int(11) NOT NULL,
   `cedula_usuario` int(11) NOT NULL,
-  `turno_estudiante` varchar(45) NOT NULL
+  `turno_estudiante` varchar(45) NOT NULL,
+  `matricula_estudiante` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -126,11 +127,11 @@ CREATE TABLE `proyecto` (
   `id_ano_escolar` int(11) NOT NULL,
   `id_tutor` int(11) NOT NULL,
   `titulo_proyecto` varchar(45) NOT NULL,
-  `planteamiento_proyecto` varchar(45) NOT NULL,
-  `objetivos_generales_proyecto` varchar(45) NOT NULL,
-  `objetivos_especificos_proyecto` varchar(45) NOT NULL,
+  `planteamiento_proyecto` varchar(150) NOT NULL,
+  `objetivos_generales_proyecto` varchar(150) NOT NULL,
+  `objetivos_especificos_proyecto` varchar(150) NOT NULL,
   `tipo_proyecto` varchar(45) NOT NULL,
-  `estado_proyecto` varchar(45) NOT NULL
+  `estado_proyecto` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -141,7 +142,7 @@ CREATE TABLE `proyecto` (
 
 CREATE TABLE `seccion` (
   `id_seccion` int(11) NOT NULL,
-  `numero_seccion` varchar(5) NOT NULL,
+  `numero_seccion` varchar(13) NOT NULL,
   `carrera_id` int(11) NOT NULL,
   `estado_seccion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -217,7 +218,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula_usuario`, `clave_usuario`, `nombre_usuario`, `estatus_usuario`, `edad_usuario`, `genero_usuario`, `permiso_usuario`, `tipo_usuario`, `telefono_usuario`, `correo_usuario`, `pregunta_1`, `pregunta_2`, `pregunta_3`, `respuesta_1`, `respuesta_2`, `respuesta_3`) VALUES
-(27111222, '$2y$12$JsbcpoGQWTTxlzxpe2pONObPgeKtTzwknr24KcUpRTVKKyeDiuYOu', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N');
+(25656565, '$2y$12$d/rKdA4eZkkO28D2QQvWL.Fb1yC7k1gNsBDLSRb/isAnFW5AjNL.6', 'ALFONSOO', 1, '20', 'M', '2', 'TUTOR', '05640650456', 'FASDFASDFASDF@GMAIL.COM', 'KFSHDJKFHJ', 'FASDFJAKLSDF', 'FALSKDFJKALSDJF', 'NADA', 'NADA', 'NADA'),
+(27111222, '$2y$12$JsbcpoGQWTTxlzxpe2pONObPgeKtTzwknr24KcUpRTVKKyeDiuYOu', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N'),
+(27122321, '$2y$12$drEjdK2hZh0mPjdFVMy4neayxzHqXClkWJeXYz2sxzqVtGI0BxwJi', 'JOSE', 1, '20', 'M', '3', 'ESTUDIANTE', '04506540564', 'GSDGSDFGSDFGSDFG@GMAIL.COM', 'FASDFASD', 'JHGHJG', 'HJGH', 'JHHJG', 'HJGHJG', 'KJGHJKHJFSF'),
+(27132642, '$2y$12$jQ2Y89e2/w.kiHy7itOvfuiA1d2AzYtd6G/Ioeo5hjaZggNd.3CVi', 'JESUS MORALES', 1, '20', 'M', '3', 'ESTUDIANTE', '04245198398', 'JESUFSDFASDFASDF@GMAIL.COM', 'NOSE', 'NOSE', 'NOSE ', 'NADA', 'NADA', 'NADA'),
+(27132643, '$2y$12$Giycu5NMhZqGNIrCwiLHWugs1cluBx.uqMe4bMZwmFcWw2dqXssgG', 'JESUS  SEGUNDO', 1, '20', 'M', '3', 'ESTUDIANTE', '04245165656', 'FASDFASDFAFD@GMAIL.COM', 'FASFDA', 'FASDFASD', 'FASDFASDF', 'NOSE', 'NOSE', 'NOSE');
 
 --
 -- Índices para tablas volcadas

@@ -55,7 +55,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Grupo"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Grupo"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -65,7 +65,7 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Grupo
+                  Gestión de Grupo
                   </h3>
                 </div>
                 <form action="<?php $this->SetURL('controllers/grupo_controller.php');?>" autocomplete="off" method="POST">
@@ -183,7 +183,7 @@
                       
                         <tr v-for="(d,index) in grupo_est">
                           <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                            <select required name="id_estudiante[]" v-model="grupo_est[index].id_estudiante" v-on:change="set_datos(grupo_est[index].id_estudiante)"
+                            <select required id="est" name="id_estudiante[]" v-model="grupo_est[index].id_estudiante" :data-index="index" v-on:change="set_datos"
                               class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                               <option value="">Seleccione una opcion</option>
                               <option v-for="est in estudiantes" :key="est.id_estudiante" :value="est.id_estudiante">{{ est.cedula_usuario}}</option>
@@ -231,15 +231,25 @@
         add(){ this.grupo_est.push({}); },
         remo(){ this.grupo_est.pop(); },
         set_datos(i){
-          if(i == '') return false;
+          if(!i.target.dataset.index) return false;
 
-          let datos = this.estudiantes.find( item =>{
-            if(item.id_estudiante == i) return item;
-          });
+          let index = i.target.dataset.index;
+          let contador = 0;
+          
 
-          this.grupo_est = this.grupo_est.map( item =>{
-            if(item.id_estudiante == i) return {id_estudiante: i, nombre: datos['nombre_usuario']}; else return item;
+          this.grupo_est.forEach( item =>{
+            if(item.id_estudiante == this.grupo_est[index].id_estudiante) contador++
           })
+
+          if(contador > 1){
+            this.grupo_est[index].id_estudiante = '';
+            this.grupo_est[index].nombre = '';
+            
+            return false;
+          }
+
+          this.grupo_est[index].nombre = this.estudiantes.find(item => item.id_estudiante == this.grupo_est[index].id_estudiante)['nombre_usuario'];
+          return false;
         },
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
@@ -274,13 +284,26 @@
           }).catch( error => console.error(error))
         },
         async consultar(id){
-          let datos = await fetch(`<?php $this->SetURL('controllers/grupo_controller.php?ope=Get_grupo&id_grupo=');?>${id}`)
+          await fetch(`<?php $this->SetURL('controllers/grupo_controller.php?ope=Get_grupo&id_grupo=');?>${id}`)
           .then( response => response.json())
-          .then( ({data}) => {
-            this.id_carrera = data.carrera_id;
-            return data;            
+          .then( async ({data}) => {
+            
+            let grupo = data['grupo'];
+            let estudiantes = data['est'];
+            this.id_carrera = grupo['carrera_id'];
+            this.id_seccion = grupo['id_seccion'];
+            
+            await this.consultar_seccione_por_carrera();
+            await this.Get_estudiantes_por_seccion();
+
+            this.grupo_est = [];
+            estudiantes.forEach( item =>{
+              this.grupo_est.push({id_estudiante: item.id_estudiante, nombre: item.nombre_usuario});
+            })
+                  
           }).catch( error => console.error(error))
 
+          return false;
           await this.consultar_seccione_por_carrera().then( ()=>{
             this.id_seccion = datos.id_seccion;
           }).then( () =>{

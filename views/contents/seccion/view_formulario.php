@@ -44,7 +44,7 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestion Sección"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Sección"]);
         ?>
           <!-- ====== Form Layout Section Start -->   
           <div class="grid grid-cols-1 gap-9 sm:grid-cols-1">
@@ -54,7 +54,7 @@
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
-                    Getion de Sección
+                  Gestión de Sección
                   </h3>
                 </div>
                 <form action="<?php $this->SetURL('controllers/seccion_controller.php');?>" autocomplete="off" method="POST">

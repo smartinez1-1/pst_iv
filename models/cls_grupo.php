@@ -28,7 +28,9 @@
 				$this->Query($sql);
 
 				$id = $this->Returning_id();
-				foreach($this->estudiantes as $est) $this->Query("INSERT INTO grupo_alumno(id_grupo, id_alumno) VALUES('$id','$est');");
+				foreach($this->estudiantes as $est){
+					$this->Query("INSERT INTO grupo_alumno(id_grupo, id_alumno) VALUES('$id','$est');");
+				}
 
 				if($this->Result_last_query()){
           $this->End_transacction();
@@ -52,9 +54,9 @@
 				$this->Start_transacction();
 				$sql = "UPDATE grupo SET nombre_grupo = '$this->nombre_grupo', id_seccion = '$this->id_seccion', estado_grupo = '$this->estado_grupo' WHERE id_grupo = $this->id_grupo ;";
 				$this->Query($sql);
-				
-				foreach($this->estudiantes as $est){
-					$this->Query("DELETE FROM grupo_alumno WHERE id_grupo = '$this->id_grupo';");
+				$this->Query("DELETE FROM grupo_alumno WHERE id_grupo = '$this->id_grupo';");
+
+				foreach($this->estudiantes as $est){	
 					$this->Query("INSERT INTO grupo_alumno(id_grupo, id_alumno) VALUES('$this->id_grupo','$est');");
 				}
 
@@ -85,7 +87,9 @@
 		}
 
 		public function Get_estudiasntes_grup($id){
-			$sql = "SELECT * FROM grupo_alumno WHERE id_grupo = '$id';";
+			$sql = "SELECT * FROM grupo_alumno 
+				INNER JOIN estudiante ON estudiante.id_estudiante = grupo_alumno.id_alumno 
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE grupo_alumno.id_grupo = '$id';";
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}

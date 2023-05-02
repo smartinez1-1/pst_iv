@@ -23,8 +23,8 @@
 							<div class="hidden w-full xl:block xl:w-1/2">
 								<div class="py-17.5 px-26 text-center">
 									<a class="mb-5.5 flex justify-between" href="index.html">
-										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo 1" style="height:10rem;" />
 										<img class="" src="<?php $this->SetURL('views/img/logo_armas.png');?>" alt="Logo 2" style="height:10rem;" />
+										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo 1" style="height:10rem;" />
 									</a>
 
 									<p class="font-bold 2xl:px-20">
@@ -44,8 +44,8 @@
 										<div class="mb-4">
 											<label class="mb-2.5 block font-medium text-black dark:text-white">Cédula del usuario</label>
 											<div class="relative">
-												<input type="hidden" name="ope" value="Login">
-												<input type="text" required maxlength="8" minlength="7" pattern="[0-4]{7,8)" placeholder="Ingresa tu cedula" name="cedula_usuario"
+												<input type="hidden" name="ope" value="Ingresar">
+												<input type="text" required maxlength="8" minlength="7" pattern="[0-9]{7,8)" placeholder="Ingresa tu cedula" name="cedula_usuario"
 													class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
 
 												<span class="absolute right-4 top-4">
@@ -84,7 +84,7 @@
 										</div>
 
 										<div class="mb-5">
-											<input type="submit" value="Login"
+											<input type="submit" value="Ingresar"
 												class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90" />
 										</div>
 

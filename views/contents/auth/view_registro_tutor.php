@@ -32,6 +32,7 @@
                   <input type="hidden" name="tipo_usuario" value="Tutor" readonly>
                   <input type="hidden" name="ope" value="Registrar" readonly>
                   <input type="hidden" name="return" value="auth/registro_tutor" readonly>
+                  <!-- LO MISMO PARA TUTOR -->
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>
                 </div>
               </div>

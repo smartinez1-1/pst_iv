@@ -10,6 +10,7 @@
 
 	<!-- ===== Page Wrapper Start ===== -->
 	<div class="flex h-screen overflow-hidden">
+    <!-- AQUI ESTAMOS EN LA VISTA DE CARRERA, AJA, AQUI USAMOS LOS METODOS GETCOMPLEMENT PARA IR METIENDO, LO QUE NECESITAMOS EN LA VISTA, EL SIDEBAR_MENU, EL HEADER Y BREADCRUMB (SON EL TITULO Y EL ENLACE QUE SALEN ARRIBA DE CADA MODULO) -->
 		<?php $this->GetComplement('sidebar_menu');?>
 		<!-- ===== Content Area Start ===== -->
 		<div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
@@ -17,11 +18,12 @@
       <main>
         <div class="max-w-screen-2xl mx-auto p-4 md:p-6 2xl:p-10">
         <?php 
-          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Modulo Carrera"]);
+          $this->GetComplement('breadcrumb',['title_breadcrumb' => "Gestión Carrera"]);
         ?>
           <!-- ====== Table Three Start -->
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div class="max-w-full overflow-x-auto">
+              <!-- YA QUE ESTA ES LA VISTA INDEX, AQUI TENEMOS UNA TABLA DONDE SE MUESTRAN TODOS LOS DATOS REGISTRADOS -->
               <table class="w-full table-auto">
                 <thead>
                   <tr class="bg-gray-2 text-left dark:bg-meta-4">
@@ -44,6 +46,7 @@
                     require_once("./models/cls_carrera.php");
                     $model = new cls_carrera();
                     $datos = $model->Get_carreras();
+                    // AQUI HAGO USO DE EL METODO GET_CARRERAS PARA CONSULTAR TODAS LAS CARRERAS REGISTRADAS (PUEDO USAR DICHO METODO YA QUE GET_CARRERAS ES UNA METODO PUBLICO), ABAJO LO QUE HAY ES UN FOREACH PARA RECORRER CADA CARRERA QUE ESTE REGISTRADA Y ASI IR CREANDO LOS TR DE LA TABLA
                     
                     foreach($datos as $car){
                       ?>
@@ -62,6 +65,7 @@
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
+                            <!-- SET_URL ES PARA IMPRIMIR LA URL ESTATICA, AÑADIENDO QUE VAMOS A APUNTAR AL MODULO CARRERA, VISTA FORMULARIO, AGREGAMOS LA 'B' PARA DECIR QUE VAMOS A 'BUSCAR' Y LUEGO AGREGO EL ID DEL REGISTRO (OSEA EL ID DE LA CARRERA), PARA PODER ENTRAR A DICHA VISTA Y CONSULTAR LA INFORMACION Y ASI PODER EDITAR -->
                             <a href="<?php $this->SetURL('carrera/formulario/b/'.$car['id_carrera']);?>">Editar</a>
                           </div>
                         </td>

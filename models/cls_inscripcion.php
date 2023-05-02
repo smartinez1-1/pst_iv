@@ -31,16 +31,25 @@
         VALUES('$this->id_carrera','$this->id_seccion','$this->id_estudiante','$this->id_semestre','$this->id_ano_escolar');";
         $this->Query($sql);
 
-        $sql2 = "UPDATE estudiante SET turno_estudiante = '$this->turno' WHERE id_estudiante = '$this->id_estudiante';";
+				// $sqlCon = "SELECT * FROM estudiante WHERE id_estudiante = '$this->id_estudiante' AND turno_estudiante <> '$this->turno';";
+				// $result2 = $this->Query($sqlCon);
+
+        $sql2 = "UPDATE estudiante SET turno_estudiante = '$this->turno' WHERE id_estudiante = '$this->id_estudiante' AND turno_estudiante <> '$this->turno';";
         $this->Query($sql2);
+				        
+				$this->End_transacction();
+				return "msg/01DONE"; 
+
+				// var_dump($this->Result_last_query());
 				
-        if($this->Result_last_query()){
-          $this->End_transacction();
-          return "msg/01DONE"; 
-        }else{
-          $this->Rollback();
-          return "err/01ERR";
-        }
+
+        // if($this->Result_last_query()){
+          
+        // }else{
+        //   $this->Rollback();
+				// 	die("FDFD");
+        //   return "err/01ERR";
+        // }
       }catch (Exception $e) {
         die("AH OCURRIDO UN ERROR: " . $e->getMessage());
       }
@@ -52,10 +61,10 @@
 			
 			// if($result->num_rows > 0) return "err/02ERR";
 			// numero_seccion = '$this->numero_seccion',
-			$sql = "UPDATE seccion SET 
-				carrera_id = '$this->carrera_id',
-				estado_seccion = '$this->estado_seccion'
-				WHERE id_seccion = $this->id_seccion ;";
+			$sql = "UPDATE inscripcion SET 
+				id_carrera = '$this->id_carrera',
+				id_seccion = '$this->id_seccion'
+				WHERE id_inscripcion = $this->id_inscripcion ;";
 
       $this->Query($sql);
 			return "msg/01DONE";
