@@ -51,7 +51,7 @@
 		$model_u->Update();
 
 		$model_e->setDatos($_POST);
-		$result = $model_e->Update();
+		$mensaje = $model_e->Update();
 
 		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
 	}

@@ -31,9 +31,6 @@
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Descripción
                     </th>
-                    <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      Fecha de incio - cierre
-                    </th>
                     <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
                       Estado
                     </th>
@@ -56,9 +53,6 @@
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <p class="text-black dark:text-white"><?php echo $sem['des_semestre'];?></p>
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <p class="text-black dark:text-white"><?php echo date_format(date_create($sem['fecha_inicio_semestre']),"d/m/Y").' - '.date_format(date_create($sem['fecha_cierre_semestre']),"d/m/Y");?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <?php $text = ($sem['estado_semestre'] == '1') ? "text-success" : "text-danger";?>

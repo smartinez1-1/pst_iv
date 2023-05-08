@@ -5,6 +5,8 @@
   // los arhivos de arriba son de configuracion y un controlador para el tema de las alertas por pantalla, ya luego los veremos, aqui abajo vemos la primera clase 'APP', esta tiene atributos privados que solo puede usar la misma clase, tiene un constructor que se ejecuta automaticamente en cada peticion
   class App{
     private $ruta_actual, $code_error, $code_done, $titleContent, $controlador, $file_view_name, $ObjMessage, $id_consulta;
+//    - comunidad y tutor comunidad (dar acceso al estudiante)
+//    - los estudiantes pueden ser de diferentes secciones (modulo grupo)
 
     public function __construct(){
       // session_start es una funcion para activar la sesion de usuario, si la hay, se puede entrar al sistema, sino, pues no deja entrar, id_consulta es una variable global que uso para todas las consultas de cada modulo

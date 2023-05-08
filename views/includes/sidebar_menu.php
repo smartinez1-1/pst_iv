@@ -125,6 +125,47 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('lapso-academico/');?>" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
+										<path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
+									</svg>
+									Lapso académico
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('semestre/');?>" @click="selected = (selected === 'semestre' ? '':'semestre')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'semestre') && (page === 'semestre') }">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+										<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+									</svg>
+									semestre
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<?php 
+								}
+								if($_SESSION['permisos'] == '1' || $_SESSION['permisos'] == '3'){
+							?>
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+									href="<?php $this->SetURL('inscripcion/');?>" @click="selected = (selected === 'inscripcion' ? '':'inscripcion')"
+									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'inscripcion') && (page === 'inscripcion') }">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+										<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+										<path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+									</svg>
+									inscripción
+								</a>
+							</li>
+							<!-- Menu Item Calendar -->
+							<!-- Menu Item Calendar -->
+							<li>
+								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
 									href="<?php $this->SetURL('comunidad/');?>" @click="selected = (selected === 'comunidad' ? '':'comunidad')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'comunidad') && (page === 'comunidad') }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
@@ -151,45 +192,6 @@
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('lapso-academico/');?>" @click="selected = (selected === 'lapso-academico' ? '':'lapso-academico')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'lapso-academico') && (page === 'lapso-academico') }">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
-										<path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
-									</svg>
-									Lapso académico
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('semestre/');?>" @click="selected = (selected === 'semestre' ? '':'semestre')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'semestre') && (page === 'semestre') }">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
-										<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
-									</svg>
-									semestre
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('inscripcion/');?>" @click="selected = (selected === 'inscripcion' ? '':'inscripcion')"
-									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'inscripcion') && (page === 'inscripcion') }">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-										<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-										<path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
-									</svg>
-									inscripción
-								</a>
-							</li>
-							<!-- Menu Item Calendar -->
-							<?php }?>
-							<!-- Menu Item Calendar -->
-							<li>
-								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
 									href="<?php $this->SetURL('grupo/');?>" @click="selected = (selected === 'grupo' ? '':'grupo')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'grupo') && (page === 'grupo') }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
@@ -211,6 +213,7 @@
 								</a>
 							</li>
 							<!-- Menu Item Calendar -->
+							<?php }?>
 							<!-- Menu Item Calendar -->
 							<li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"

@@ -35,7 +35,7 @@
   </div>
 
   <div class="mb-6">
-    <label class="mb-2.5 block font-medium text-black dark:text-white">tercera pregunta de seguridad</label>
+    <label class="mb-2.5 block font-medium text-black dark:text-white">Tercera pregunta de seguridad</label>
     <div class="relative">
       <input type="text" maxlength="45" placeholder="Ingrese pregunta de Seguridad" value="<?php echo $pregunta3;?>" name="pregunta3"
         class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
@@ -43,7 +43,7 @@
   </div>
 
     <div class="mb-6">
-    <label class="mb-2.5 block font-medium text-black dark:text-white">tercera respuesta de seguridad</label>
+    <label class="mb-2.5 block font-medium text-black dark:text-white">Tercera respuesta de seguridad</label>
     <div class="relative">
       <input type="text" maxlength="45" placeholder="Ingrese respuesta" value="<?php echo $respuesta3;?>" name="respuesta3"
         class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />

@@ -94,26 +94,6 @@
                   <h3 class="font-semibold text-black dark:text-white">
                   Gestión de Inscripción
                   </h3>
-
-                  <div class="flex items-center space-x-2">
-                    <div class="mr-3">
-                      <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                        <div class="relative">
-                          <input type="radio" v-model="tipo_registro" :checked="tipo_registro == 'N'" required id="checkboxLabelFour" class="" name="tipo_registro" checked value="N"/>
-                        </div>
-                        Nuevo ingreso
-                      </label>
-                    </div>
-
-                    <div >
-                      <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                        <div class="relative">
-                          <input type="radio" v-model="tipo_registro" :checked="tipo_registro == 'R'" required id="checkboxLabelFour" class="" name="tipo_registro" value="R"/>
-                        </div>
-                        Estudiante regular
-                      </label>
-                    </div>
-                  </div>
                 </div>
                 <form  action="<?php $this->SetURL('controllers/inscripcion_controller.php');?>" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
@@ -316,7 +296,7 @@
           await this.consultar_estudiantes_por_carrera();
         },
         async consultar_estudiantes_por_carrera(){
-          if(this.id_carrera == '' || this.id_estudiante != '' || this.tipo_registro == "N") return false;
+          if(this.id_carrera == '' || this.id_estudiante != '') return false;
 
           await fetch(`<?php $this->SetURL('controllers/carrera_controller.php?ope=Get_estudiantes_por_carrera&id_carrera=');?>${this.id_carrera}`)
           .then( response => response.json())
@@ -325,13 +305,16 @@
             if(result) this.estudiantes = result['data']; else this.estudiantes = [];
           }).catch( error => console.error(error))
         },
+        Sel_estudiante(cedula){
+          console.log(cedula)
+          console.log(this.estudiantes)
+        },
         async get_estudiante(){
           let url = '';
-          if(this.tipo_registro == "N"  && this.id_estudiante == '') url = "<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos'); ?>";
-          else if(this.tipo_registro == "R" && this.id_estudiante == ''){
+          if(this.id_estudiante == ''){
             this.consultar_estudiantes_por_carrera();
-            return false;
-          }else if(this.id_estudiante != '') url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_estudiante&id_estudiante=');?>${this.id_estudiante}`;
+            return false;            
+          }else url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_estudiante&id_estudiante=');?>${this.id_estudiante}`;
 
           await fetch(url)
           .then( response => response.json())
@@ -380,7 +363,7 @@
         <?php
       }else{
         ?>
-        app.tipo_registro = "N";
+        app.id_estudiante = '<?php echo $estudiantes['id_estudiante'];?>';
         <?php
       }
       

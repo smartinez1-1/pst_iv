@@ -25,14 +25,14 @@
 							<div
 								class="border-b border-stroke py-4 px-6.5 dark:border-strokedark justify-center items-center text-center">
 
-								<h3 class="font-semibold text-black dark text-center py-6 text-3xl">
+								<h3 class="font-semibold text-center py-6 text-3xl">
 									Nombre
 								</h3>
 
 								<p>Universidad Nacional Experimental Politécnica De La Fuerza Armada Nacional Bolivariana (UNEFA) –
 									Núcleo Portuguesa, extensión Acarigua.</p>
 
-								<h3 class="font-semibold text-black dark text-center py-6 text-3xl">
+								<h3 class="font-semibold text-center py-6 text-3xl">
 									Misión
 								</h3>
 
@@ -42,14 +42,14 @@
 									promoviendo la producción y el intercambio de saberes, como mecanismo de integración latinoamericana
 									y caribeña.</p>
 
-								<h3 class="font-semibold text-black dark text-center py-6  text-3xl">
+								<h3 class="font-semibold text-center py-6  text-3xl">
 									Visión
 								</h3>
 
 								<p> ser la primera universidad socialista, reconocida por su Excelencia Educativa en el territorio
 									nacional e internacional, líder en los saberes humanistas, científicos, tecnológicos y militares,
 									inspirada en el ideario bolivariano.</p>
-								<h3 class="font-semibold text-black dark text-center py-6 text-3xl">
+								<h3 class="font-semibold text-center py-6 text-3xl">
 									Reseña Histórica (NÚCLEO PORTUGUESA – EXTENSIÓN ACARIGUA)
 								</h3>
 
@@ -81,7 +81,7 @@
 								<p>Fuente: Ángela Castillo, Cofundadora de la UNEFA Extensión Portuguesa (2022).</p>
 								<br>
 
-								<h3 class="font-semibold text-black dark text-center py-6 text-3xl">
+								<h3 class="font-semibold text-center py-6 text-3xl">
 									Reseña Histórica (UNEFA – GENERAL)
 								</h3>
 
@@ -150,7 +150,7 @@
 									la necesidad de alcanzar la equidad como nuevo orden de justicia social y base material de la
 									sociedad venezolana.</p>
 								<br>
-								<h3 class="font-semibold text-black dark text-center py-6 text-3xl">
+								<h3 class="font-semibold text-center py-6 text-3xl">
 									Fuente: página web de la Universidad Nacional Experimental Politécnica de la Fuerza Armada Nacional
 									Bolivariana (UNEFA).
 								</h3>

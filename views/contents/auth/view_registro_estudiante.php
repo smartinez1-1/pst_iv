@@ -2,6 +2,7 @@
 <html lang="en">
 <?php 
   $if_tutor = false;
+  $if_estudiante = true;
   $this->GetHeader("SGSC | UNEFA");
 ?>
 <body

@@ -22,13 +22,16 @@
 						<div class="flex flex-wrap items-center">
 							<div class="hidden w-full xl:block xl:w-1/2">
 								<div class="py-17.5 px-26 text-center">
-									<a class="mb-5.5 flex justify-between" href="index.html">
+									<a class="mb-5.5 flex justify-center" href="<?php $this->SetURL("auth/login");?>">
 										<img class="" src="<?php $this->SetURL('views/img/logo_armas.png');?>" alt="Logo 2" style="height:10rem;" />
 										<img class="" src="<?php $this->SetURL('views/img/logo_unefa.png');?>" alt="Logo 1" style="height:10rem;" />
 									</a>
-
-									<p class="font-bold 2xl:px-20">
-										Universidad Nacional Experimental de la Fuerza Armada Nacional Bolivariana (UNEFA)
+									<p class="font-bold 2xl:px-20 text-sm">
+										REPÚBLICA BOLIVARIANA DE VENEZUELA <br>
+										MINISTERIO DEL PODER POPULAR PARA LA DEFENSA <br>
+										UNIVERSIDAD NACIONAL EXPERIMENTAL POLITÉCNICA DE LA FUERZA ARMADA NACIONAL BOLIVARIANA  <br>
+										VICERRECTORADO REGIÓN LOS LLANOS <br>
+										NÚCLEO PORTUGUESA - EXTENSIÓN ACARIGUA
 									</p>
 
 								</div>

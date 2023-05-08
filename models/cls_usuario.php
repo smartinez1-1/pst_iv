@@ -15,7 +15,7 @@
 
 		public function setDatos($d){
 			$this->cedula_usuario = isset($d['cedula_usuario']) ? $this->Clean(intval($d['cedula_usuario'])) : null;
-			$this->clave_usuario = isset($d['clave_usuario']) ? $this->Clean($d['clave_usuario']) : null;
+			$this->clave_usuario = isset($d['clave_usuario']) ? $this->Clean($d['clave_usuario'], false) : null;
       $this->nombre_usuario = isset($d['nombre_usuario']) ? $this->Clean($d['nombre_usuario']) : null;
       $this->genero_usuario = isset($d['genero_usuario']) ? $this->Clean($d['genero_usuario']) : null;
       $this->edad_usuario = isset($d['edad_usuario']) ? $this->Clean(intval($d['edad_usuario'])) : null;
@@ -37,6 +37,7 @@
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return false;
+			$pss = $this->clave_usuario;
 			$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT,['cost' => 12]);
 			$sql = "INSERT INTO usuario
         (cedula_usuario,clave_usuario,nombre_usuario,estatus_usuario,edad_usuario,genero_usuario,permiso_usuario,

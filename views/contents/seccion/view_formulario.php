@@ -64,9 +64,9 @@
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                       <div class="w-full xl:w-4/6">
                         <label class="mb-2.5 block text-black dark:text-white">
-                          Numero de sección <span class="text-meta-1">*</span>
+                          Código de la sección <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="13" minlength="12" title="Solo de admiten numeros" required placeholder="" name="numero_seccion" value="<?php echo $numero_seccion;?>"
+                        <input type="text" maxlength="13" minlength="10" id="seccion_code" style="text-transform: uppercase;" title="Solo de admiten numeros" required placeholder="" name="numero_seccion" value="<?php echo $numero_seccion;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                       <div class="w-full xl:w-4/6">

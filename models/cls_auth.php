@@ -68,6 +68,7 @@
 
     public function ChangePsw($d){
       $clave_usuario = password_hash($d['clave_usuario'], PASSWORD_BCRYPT,['cost' => 12]);
+      
       $cedula = $d['cedula_usuario'];
       $sql = "UPDATE usuario SET clave_usuario = '$clave_usuario' WHERE cedula_usuario = '$cedula';";
 

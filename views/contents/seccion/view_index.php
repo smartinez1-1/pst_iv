@@ -29,7 +29,7 @@
                       ID
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                      numero de sección
+                      Código de la sección
                     </th>
                     <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                       Carrera

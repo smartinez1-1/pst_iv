@@ -28,6 +28,7 @@
 
 		public function update(){
 			$sql = "UPDATE estudiante SET matricula_estudiante = '$this->matricula_estudiante' WHERE id_estudiante = $this->id_estudiante ;";
+			
       $this->Query($sql);
 			return "msg/01DONE";
 		}

@@ -112,7 +112,7 @@
                           Seleccione una Sección <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required id="sel_id_seccion" name="id_seccion" v-model="id_seccion" v-on:change="Get_estudiantes_por_seccion"
+                          <select required id="sel_id_seccion" name="id_seccion" v-model="id_seccion"
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <option v-for="sec in secciones" :key="sec.id_seccion" :value="sec.id_seccion">{{ sec.numero_seccion}}</option>
@@ -260,14 +260,25 @@
             
             if(result) this.secciones = result['data']; else this.secciones = [];
           }).catch( error => console.error(error))
+          await this.consultar_estudiantes_por_carrera();
         },
-        async Get_estudiantes_por_seccion(){
-          if(this.id_seccion == '') return false;
+        // async Get_estudiantes_por_seccion(){
+        //   if(this.id_seccion == '') return false;
 
-          await fetch(`<?php $this->SetURL('controllers/inscripcion_controller.php?ope=Get_estudiantes_seccion&id_seccion=');?>${this.id_seccion}`)
+        //   await fetch(`<?php //$this->SetURL('controllers/inscripcion_controller.php?ope=Get_estudiantes_seccion&id_seccion=');?>${this.id_seccion}`)
+        //   .then( response => response.json())
+        //   .then( result => {
+            
+        //     if(result) this.estudiantes = result['data']; else this.estudiantes = [];
+        //   }).catch( error => console.error(error))
+        // },
+        async consultar_estudiantes_por_carrera(){
+          if(this.id_carrera == '') return false;
+
+          await fetch(`<?php $this->SetURL('controllers/carrera_controller.php?ope=Get_estudiantes_por_carrera&id_carrera=');?>${this.id_carrera}`)
           .then( response => response.json())
           .then( result => {
-            
+            console.log(result)
             if(result) this.estudiantes = result['data']; else this.estudiantes = [];
           }).catch( error => console.error(error))
         },
@@ -294,7 +305,7 @@
             this.id_seccion = grupo['id_seccion'];
             
             await this.consultar_seccione_por_carrera();
-            await this.Get_estudiantes_por_seccion();
+            // await this.Get_estudiantes_por_seccion();
 
             this.grupo_est = [];
             estudiantes.forEach( item =>{
@@ -306,8 +317,6 @@
           return false;
           await this.consultar_seccione_por_carrera().then( ()=>{
             this.id_seccion = datos.id_seccion;
-          }).then( () =>{
-            this.Get_estudiantes_por_seccion();
           }).then( () =>{
             this.Get_estu_grupo(datos.id_grupo)
           })
@@ -345,7 +354,8 @@
         app.id_seccion = '<?php echo $datos_inscripcion[0]['id_seccion'];?>'  
         setTimeout(() => {
           app.consultar_seccione_por_carrera();
-          app.Get_estudiantes_por_seccion();
+          // app.Get_estudiantes_por_seccion();
+          app.consultar_estudiantes_por_carrera();
           app.bloqueoCampos();
         }, 100);
         

@@ -4,12 +4,7 @@
   $this->GetHeader("SGSC | UNEFA");
 
   $op = "Registrar";
-  $cedula = null;
-  $nombre = null;
-  $correo = null;
-  $edad = null;
-  $clave = null;
-  $sexo = null;
+  $id_estudiante = $cedula = $nombre = $correo = $edad = $clave = $sexo = null;
   $telefono = null;
   $if_tutor = false;
   $if_estudiante = true;
@@ -23,6 +18,7 @@
 
     if(isset($datos['cedula_usuario'])){      
       $op = "Actualizar";
+      $id_estudiante = $this->id_consulta;
 			$cedula = $datos['cedula_usuario'];
 			$nombre = $datos['nombre_usuario'];
 			$correo = $datos['correo_usuario'];
@@ -75,6 +71,7 @@
 
 									<input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="permisos_usuario" value="3">
+                  <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante;?>">
                   <input type="hidden" name="tipo_usuario" value="Estudiante">
                   <input type="hidden" name="return" value="estudiante/index">
                   <?php require_once("./views/includes/campos_datos_usuario.php");?>

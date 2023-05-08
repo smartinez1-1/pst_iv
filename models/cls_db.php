@@ -35,7 +35,7 @@
 			}
 			protected function Returning_id(){ return mysqli_insert_id($this->conexion); }
 			// CON ESTA FUNCION LIMPIO TODO LO QUE MANDO A LA BASE DE DATOS (PARA EVITAR INYECCION SQL), ES CUANDO EJEMPLO, CUANDO TE HACER LOGIN EN UNA PAGINA, ESTAS METIENDO DATOS, DICHOS DATOS SE INTEGRAN A UNA CONSULTA QUE SE EJECUTA EN LA DB, Y SI TU METES UN COMANDO SQL, PARA ELIMINAR ALGO, Y SE LLEGA A EJECUTAR, SE PUEDE JODER LA BASE DE DATOS
-			protected function Clean($variable){
+			protected function Clean($variable, $upper = true){
 				$variable = stripslashes($variable);
 				// SI DETECTA QUE ESCRIBI CUALQUIERA DE ESTAS CONSULTAS, LAS ELIMINA, OSEA SI DETECTA ALGO DE LO QUE HAY ABAJO, LO ELIMINA
 				$variable = str_ireplace("SELECT * FROM","",$variable);
@@ -53,7 +53,7 @@
 				$variable = str_ireplace("<script src= >","",$variable);
 				$variable = str_ireplace("src=","",$variable);
 
-				if(!is_numeric($variable)) $variable = strtoupper($variable);
+				if(!is_numeric($variable) && $upper) $variable = strtoupper($variable);
 				else $variable = str_ireplace(" ","",$variable);
 				return $variable;
 			}

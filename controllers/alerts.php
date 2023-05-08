@@ -14,6 +14,7 @@
       '08AUTH' => "No tienes permisos para entrar a esta ruta",
       '01ERR' => "Operación fallida!",
       '02ERR' => "El registro no se puede duplicar",
+      '03ERR' => "No pueden existir dos registros activos al mismo tiempo",
     ];
 
     private $list_messages = [

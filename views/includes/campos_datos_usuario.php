@@ -71,7 +71,7 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Numero de Teléfono</label>
   <div class="relative">
-    <input type="text" minmength="11" maxlength="11" pattern="[0-9]{11}" title="solo se admiten numeros" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
+    <input type="text" id="telefono" minmength="13" maxlength="13" pattern="[0-9]{13}" title="solo se admiten numeros" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>
@@ -82,7 +82,7 @@
     <div class="mr-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
-          <input type="radio" id="checkboxLabelFour" required class="" name="genero_usuario" value="F" <?php if(isset($sexo) && $sexo == "F") echo "checked";?>/>
+          <input type="radio" id="checkboxLabelFour1" required class="" name="genero_usuario" value="F" <?php if(isset($sexo) && $sexo == "F") echo "checked";?>/>
         </div>
         Femenino
       </label>
@@ -91,7 +91,7 @@
     <div class="ml-3">
       <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
         <div class="relative">
-          <input type="radio" id="checkboxLabelFour" required class="" name="genero_usuario" value="M" <?php if(isset($sexo) && $sexo == "M") echo "checked";?>/>
+          <input type="radio" id="checkboxLabelFour2" required class="" name="genero_usuario" value="M" <?php if(isset($sexo) && $sexo == "M") echo "checked";?>/>
         </div>
         Masculino
       </label>
@@ -119,7 +119,7 @@
     <select required name="categoria_tutor"
       class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
       <option value="">Seleccione una opcion</option>
-      <option <?php echo ($categoria == 'EXCL') ? "selected" : "";?> value="EXCL">Educacion exclusiva</option>
+      <option <?php echo ($categoria == 'DXCL') ? "selected" : "";?> value="DXCL">Dedicación exclusiva</option>
       <option <?php echo ($categoria == 'TC') ? "selected" : "";?> value="TC">Tiempo completo</option>
       <option <?php echo ($categoria == 'MT') ? "selected" : "";?> value="MT">Medio tiempo</option>
       <option <?php echo ($categoria == 'TV') ? "selected" : "";?> value="TV">Tiempo variable</option>

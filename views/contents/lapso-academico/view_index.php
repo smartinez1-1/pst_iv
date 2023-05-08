@@ -37,6 +37,9 @@
                     <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
                       Estado inscripciones
                     </th>
+                    <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                      Fecha inicio - fin
+                    </th>
                     <th class="py-4 px-4 font-medium text-black dark:text-white">
                       Opciones
                     </th>
@@ -68,6 +71,9 @@
                           <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium <?php echo $text;?>">
                           <?php echo ($lap['estado_incripciones'] == '1') ? "Activo" : "Inactivo";?>
                           </p>
+                        </td>
+                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <p class="text-black dark:text-white"><?php echo date_format(date_create($lap['fecha_inicio']),"d/m/Y").' - '.date_format(date_create($lap['fecha_cierre']),"d/m/Y");?></p>
                         </td>
                         <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                           <div class="flex items-center space-x-3.5">
