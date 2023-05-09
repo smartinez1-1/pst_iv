@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2023 a las 18:54:36
+-- Tiempo de generación: 08-05-2023 a las 09:30:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -33,7 +33,9 @@ CREATE TABLE `ano_escolar` (
   `id_ano_escolar` int(11) NOT NULL,
   `ano_escolar_nombre` varchar(45) NOT NULL,
   `estado_ano_escolar` tinyint(1) NOT NULL,
-  `estado_incripciones` tinyint(1) NOT NULL
+  `estado_incripciones` tinyint(1) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_cierre` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -156,8 +158,6 @@ CREATE TABLE `seccion` (
 CREATE TABLE `semestre` (
   `id_semestre` int(11) NOT NULL,
   `des_semestre` varchar(15) NOT NULL,
-  `fecha_inicio_semestre` date NOT NULL,
-  `fecha_cierre_semestre` date NOT NULL,
   `estado_semestre` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -203,7 +203,7 @@ CREATE TABLE `usuario` (
   `genero_usuario` char(2) DEFAULT NULL,
   `permiso_usuario` varchar(45) NOT NULL,
   `tipo_usuario` varchar(45) NOT NULL,
-  `telefono_usuario` varchar(11) DEFAULT NULL,
+  `telefono_usuario` varchar(13) DEFAULT NULL,
   `correo_usuario` varchar(120) DEFAULT NULL,
   `pregunta_1` varchar(50) DEFAULT NULL,
   `pregunta_2` varchar(50) DEFAULT NULL,
@@ -218,11 +218,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula_usuario`, `clave_usuario`, `nombre_usuario`, `estatus_usuario`, `edad_usuario`, `genero_usuario`, `permiso_usuario`, `tipo_usuario`, `telefono_usuario`, `correo_usuario`, `pregunta_1`, `pregunta_2`, `pregunta_3`, `respuesta_1`, `respuesta_2`, `respuesta_3`) VALUES
-(25656565, '$2y$12$d/rKdA4eZkkO28D2QQvWL.Fb1yC7k1gNsBDLSRb/isAnFW5AjNL.6', 'ALFONSOO', 1, '20', 'M', '2', 'TUTOR', '05640650456', 'FASDFASDFASDF@GMAIL.COM', 'KFSHDJKFHJ', 'FASDFJAKLSDF', 'FALSKDFJKALSDJF', 'NADA', 'NADA', 'NADA'),
-(27111222, '$2y$12$JsbcpoGQWTTxlzxpe2pONObPgeKtTzwknr24KcUpRTVKKyeDiuYOu', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N'),
-(27122321, '$2y$12$drEjdK2hZh0mPjdFVMy4neayxzHqXClkWJeXYz2sxzqVtGI0BxwJi', 'JOSE', 1, '20', 'M', '3', 'ESTUDIANTE', '04506540564', 'GSDGSDFGSDFGSDFG@GMAIL.COM', 'FASDFASD', 'JHGHJG', 'HJGH', 'JHHJG', 'HJGHJG', 'KJGHJKHJFSF'),
-(27132642, '$2y$12$jQ2Y89e2/w.kiHy7itOvfuiA1d2AzYtd6G/Ioeo5hjaZggNd.3CVi', 'JESUS MORALES', 1, '20', 'M', '3', 'ESTUDIANTE', '04245198398', 'JESUFSDFASDFASDF@GMAIL.COM', 'NOSE', 'NOSE', 'NOSE ', 'NADA', 'NADA', 'NADA'),
-(27132643, '$2y$12$Giycu5NMhZqGNIrCwiLHWugs1cluBx.uqMe4bMZwmFcWw2dqXssgG', 'JESUS  SEGUNDO', 1, '20', 'M', '3', 'ESTUDIANTE', '04245165656', 'FASDFASDFAFD@GMAIL.COM', 'FASFDA', 'FASDFASD', 'FASDFASDF', 'NOSE', 'NOSE', 'NOSE');
+(27111222, '$2y$12$JsbcpoGQWTTxlzxpe2pONObPgeKtTzwknr24KcUpRTVKKyeDiuYOu', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N');
 
 --
 -- Índices para tablas volcadas

@@ -28,7 +28,7 @@
 		}
 
 		public function update(){
-			$sqlConsulta = "SELECT * FROM semestre WHERE des_semestre = '$this->des_semestre';";
+			$sqlConsulta = "SELECT * FROM semestre WHERE des_semestre = '$this->des_semestre' AND id_semestre != '$this->id_semestre';";
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";

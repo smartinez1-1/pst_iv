@@ -285,10 +285,11 @@
       methods:{
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
-
+          
           await fetch(`<?php $this->SetURL('controllers/seccion_controller.php?ope=Get_seccion_por_carrera&id_carrera=');?>${this.id_carrera}`)
           .then( response => response.json())
           .then( result => {
+            console.log(result)
             
             if(result) this.secciones = result['data']; else this.secciones = [];
           }).catch( error => console.error(error))
@@ -311,10 +312,17 @@
         },
         async get_estudiante(){
           let url = '';
-          if(this.id_estudiante == ''){
-            this.consultar_estudiantes_por_carrera();
-            return false;            
-          }else url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_estudiante&id_estudiante=');?>${this.id_estudiante}`;
+          if(this.id_estudiante != '' && this.id_carrera != ''){
+            url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_estudiante&id_estudiante=');?>${this.id_estudiante}`;
+          }
+
+          if(this.id_estudiante == '' && this.id_carrera == ''){
+            url = `<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos');?>`;
+          }
+          // if(this.id_estudiante == '' && this.id_carrera != ''){
+          //   this.consultar_estudiantes_por_carrera();
+          //   return false;
+          // }          
 
           await fetch(url)
           .then( response => response.json())
@@ -344,7 +352,6 @@
         $d = $date_before[0];
         ?>
         app.id_carrera = '<?php echo $d["id_carrera"];?>';
-        app.tipo_registro = "R";
         app.if_estudiante = true;
         app.consultar_seccione_por_carrera();
 
@@ -362,14 +369,15 @@
         
         <?php
       }else{
-        ?>
-        app.id_estudiante = '<?php echo $estudiantes['id_estudiante'];?>';
-        <?php
+        if(isset($estudiantes['id_estudiante'])){
+          ?>
+          app.id_estudiante = '<?php echo $estudiantes['id_estudiante'];?>';
+          <?php
+        }
       }
       
       if(isset($this->id_consulta)){  
         ?>
-        app.tipo_registro = "R";
         app.id_carrera = '<?php echo $datos['id_carrera'];?>';
         app.id_seccion = '<?php echo $datos['id_seccion'];?>';
         app.id_semestre = '<?php echo $datos['id_semestre'];?>';

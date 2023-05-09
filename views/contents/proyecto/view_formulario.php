@@ -212,8 +212,7 @@
                           Planteamiento del proyecto <span class="text-meta-1">*</span>
                         </label>
                         <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="planteamiento_proyecto"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($planteamiento_proyecto) ? $planteamiento_proyecto : '');?>
-                        </textarea>
+                          class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($planteamiento_proyecto) ? $planteamiento_proyecto : '');?></textarea>
                       </div>
                       <div class="col-span-3">
                         <div class="mb-6">
@@ -221,8 +220,7 @@
                           Objetivos generales <span class="text-meta-1">*</span>
                           </label>
                           <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="objetivos_generales_proyecto"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_generales_proyecto) ? $objetivos_generales_proyecto : '');?>
-                          </textarea>
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_generales_proyecto) ? $objetivos_generales_proyecto : '');?></textarea>
                         </div>
                       </div>
                       <div class="col-span-3">
@@ -231,8 +229,7 @@
                           Objetivos especificos <span class="text-meta-1">*</span>
                           </label>
                           <textarea rows="6" maxlength="180" minlength="5" placeholder="Ingrese su texto" name="objetivos_especificos_proyecto"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_especificos_proyecto) ? $objetivos_especificos_proyecto : '');?>
-                          </textarea>
+                            class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"><?php echo (isset($objetivos_especificos_proyecto) ? $objetivos_especificos_proyecto : '');?></textarea>
                         </div>
                       </div>
                       <?php 

@@ -18,7 +18,7 @@
   }
 ?>
 <div class="mb-4">
-  <label class="mb-2.5 block font-medium text-black dark:text-white">Cèdula</label>
+  <label class="mb-2.5 block font-medium text-black dark:text-white">Cédula</label>
   <div class="relative">
     <?php 
       if($this->controlador == "tutor"){
@@ -71,7 +71,7 @@
 <div class="mb-6">
   <label class="mb-2.5 block font-medium text-black dark:text-white">Numero de Teléfono</label>
   <div class="relative">
-    <input type="text" id="telefono" minmength="13" maxlength="13" pattern="[0-9]{13}" title="solo se admiten numeros" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
+    <input type="text" id="telefono" minmength="13" maxlength="13" title="solo se admiten numeros" placeholder="Ingrese su Numero de Teléfono" name="telefono_usuario" value="<?php echo $telefono;?>"
       class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
   </div>
 </div>

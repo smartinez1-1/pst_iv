@@ -88,7 +88,7 @@
                         <label class="mb-2.5 block text-black dark:text-white">
                           Telefono <span class="text-meta-1">*</span>
                         </label>
-                        <input type="text" maxlength="11" pattern="[0-9]{11}" title="Solo de admiten numeros" required placeholder="Ingrese el numero de telefono" name="telefono_tutor" value="<?php echo $telefono_tutor;?>"
+                        <input type="text" minlength="13" maxlength="13" id="telefono" title="Solo de admiten numeros" required placeholder="Ingrese el numero de telefono" name="telefono_tutor" value="<?php echo $telefono_tutor;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                     </div>
