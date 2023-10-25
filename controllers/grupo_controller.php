@@ -23,6 +23,10 @@
 			case "Get_estu_grup":
 				fn_Consultar_grupo_est();
 			break;
+				
+			case "if_estudiante_exists":
+				fn_Consulta_ifExiste_estudiante();
+			break;
 		}
 	}
 	
@@ -56,6 +60,13 @@
 	function fn_Consultar_grupo_est(){
 		$models_g = new cls_grupo();
 		$result = $models_g->Get_estudiasntes_grup($_GET['id_grupo']);
+
+		print json_encode(["data" => $result]);
+	}
+
+	function fn_Consulta_ifExiste_estudiante(){
+		$models_g = new cls_grupo();
+		$result = $models_g->Get_ifExist_estudiante($_GET['id_estudiante']);
 
 		print json_encode(["data" => $result]);
 	}

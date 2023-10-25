@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2023 a las 09:30:14
+-- Tiempo de generación: 10-05-2023 a las 06:41:52
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -380,6 +380,12 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT de la tabla `tutor`
 --
 ALTER TABLE `tutor`
+  MODIFY `id_tutor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tutor_comunidad`
+--
+ALTER TABLE `tutor_comunidad`
   MODIFY `id_tutor` int(11) NOT NULL AUTO_INCREMENT;
 
 --

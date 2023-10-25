@@ -98,5 +98,85 @@
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
+
+		public function consultaPdfProyecto($id){
+			$sql_pr = "SELECT * FROM proyecto 
+				INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = proyecto.id_ano_escolar
+				INNER JOIN comunidad ON comunidad.id_comunidad = proyecto.id_comunidad
+				INNER JOIN tutor_comunidad ON comunidad.id_comunidad = tutor_comunidad.id_comunidad
+				INNER JOIN tutor ON tutor.id_tutor = proyecto.id_tutor WHERE proyecto.id_proyecto = '$id';";
+			$results_pr = $this->Query($sql_pr);
+
+			$datos_proyecto =  $this->Get_array($results_pr);
+			if(!isset($datos_proyecto)) return false;
+
+			$id_grupo = $datos_proyecto['id_grupo'];
+
+			$sql_est = "SELECT * FROM grupo_alumno 
+				INNER JOIN estudiante ON estudiante.id_estudiante = grupo_alumno.id_alumno
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario 
+				INNER JOIN inscripcion ON inscripcion.id_estudiante = estudiante.id_estudiante
+				INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
+				INNER JOIN semestre ON semestre.id_semestre = inscripcion.id_semestre 
+				WHERE grupo_alumno.id_grupo = '$id_grupo';";
+			$results_est = $this->Query($sql_est);
+			$datos_estudiantes = $this->Get_todos_array($results_est);
+
+			return [$datos_proyecto, $datos_estudiantes];
+		}
+
+		public function consultaPdfWithFiltros($filtros){
+			$filtro = $filtros['filtro_lapsos'];
+			$carreras = $filtros['filtro_carreras'];
+			$tipos = $filtros['tipo_proyecto'];
+			$where = "WHERE";
+			$d_proyectos = [];
+
+			if($filtro == "All_lapsos"){
+				$where .= " ano_escolar.id_ano_escolar != '' ";
+			}else $where .= " ano_escolar.id_ano_escolar = $filtro ";
+
+			if($carreras == "All_carreras"){
+				$where .= " AND carrera.id_carrera != '' ";
+			}else $where .= " AND carrera.id_carrera = '$carreras' ";
+
+			if($tipos == "All_proyectos"){
+				$where .= " AND proyecto.tipo_proyecto != '' ";
+			}else $where .= " AND proyecto.tipo_proyecto = '$tipos' ";
+
+			$sql = "SELECT * FROM proyecto
+				INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = proyecto.id_ano_escolar
+				INNER JOIN comunidad ON comunidad.id_comunidad = proyecto.id_comunidad 
+				INNER JOIN tutor_comunidad ON comunidad.id_comunidad = tutor_comunidad.id_comunidad
+				INNER JOIN tutor ON tutor.id_tutor = proyecto.id_tutor
+				INNER JOIN usuario ON usuario.cedula_usuario = tutor.cedula_usuario
+				INNER JOIN grupo ON grupo.id_grupo = proyecto.id_grupo
+				INNER JOIN grupo_alumno ON grupo_alumno.id_grupo = grupo.id_grupo
+				INNER JOIN estudiante ON estudiante.id_estudiante = grupo_alumno.id_alumno
+				INNER JOIN inscripcion ON inscripcion.id_estudiante = estudiante.id_estudiante
+				INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera $where GROUP BY proyecto.id_proyecto";
+			
+			$results_pt = $this->Query($sql);
+			$d_pt = $this->Get_todos_array($results_pt);
+			
+			foreach($d_pt as $d){
+				$id_grupo = $d['id_grupo'];
+				$sql = "SELECT * FROM grupo_alumno 
+				INNER JOIN estudiante ON estudiante.id_estudiante = grupo_alumno.id_alumno 
+				INNER JOIN inscripcion ON inscripcion.id_estudiante = estudiante.id_estudiante
+				INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
+				INNER JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion
+				INNER JOIN semestre ON semestre.id_semestre = inscripcion.id_semestre
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE grupo_alumno.id_grupo = '$id_grupo';";
+				$results = $this->Query($sql);
+				$estudiantes = $this->Get_todos_array($results);
+				array_push($d_proyectos, [
+					'pt' => $d,
+					'estu' => $estudiantes
+				]);
+			}
+
+			return $d_proyectos;
+		}
 	}
 ?>

@@ -184,7 +184,7 @@
                         <tr v-for="(d,index) in grupo_est">
                           <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                             <select required id="est" name="id_estudiante[]" v-model="grupo_est[index].id_estudiante" :data-index="index" v-on:change="set_datos"
-                              class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                              class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input sel_est">
                               <option value="">Seleccione una opcion</option>
                               <option v-for="est in estudiantes" :key="est.id_estudiante" :value="est.id_estudiante">{{ est.cedula_usuario}}</option>
                             </select>
@@ -230,12 +230,24 @@
       methods:{
         add(){ this.grupo_est.push({}); },
         remo(){ this.grupo_est.pop(); },
-        set_datos(i){
+        async set_datos(i){
           if(!i.target.dataset.index) return false;
 
           let index = i.target.dataset.index;
           let contador = 0;
           
+          let result = await this.consulta_siEstudiante(this.grupo_est[index].id_estudiante);
+          if(!result){
+            this.grupo_est[index].nombre = '';
+            this.grupo_est[index].id_estudiante = '';
+            
+            Toast.fire({
+              icon: "error",
+              title: "el estudiante ya esta inscrito en otro grupo"
+            });
+
+            return false;
+          }
 
           this.grupo_est.forEach( item =>{
             if(item.id_estudiante == this.grupo_est[index].id_estudiante) contador++
@@ -250,6 +262,15 @@
 
           this.grupo_est[index].nombre = this.estudiantes.find(item => item.id_estudiante == this.grupo_est[index].id_estudiante)['nombre_usuario'];
           return false;
+        },
+        async consulta_siEstudiante(id){
+          // consulta para validar si el estudiante ya no esta inscrito en otro grupo
+          let res = await fetch(`<?php $this->SetURL('controllers/grupo_controller.php?ope=if_estudiante_exists&id_estudiante=');?>${id}`)
+          .then( response => response.json())
+          .then( result => {
+            if(result.data == null) return true; else return false;
+          }).catch( error => console.error(error))
+          return res;
         },
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
@@ -278,7 +299,7 @@
           await fetch(`<?php $this->SetURL('controllers/carrera_controller.php?ope=Get_estudiantes_por_carrera&id_carrera=');?>${this.id_carrera}`)
           .then( response => response.json())
           .then( result => {
-            console.log(result)
+            
             if(result) this.estudiantes = result['data']; else this.estudiantes = [];
           }).catch( error => console.error(error))
         },

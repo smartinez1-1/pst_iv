@@ -68,12 +68,15 @@ protected $metadata;           // document properties
 protected $CreationDate;       // document creation date
 protected $PDFVersion;         // PDF version number
 
+public $cantidad_cells;
+
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
 
 function __construct($orientation='P', $unit='mm', $size='A4')
 {
+	$this->cantidad_cells = 0;
 	// Initialization of properties
 	$this->state = 0;
 	$this->page = 0;

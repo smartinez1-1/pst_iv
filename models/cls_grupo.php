@@ -73,10 +73,11 @@
 		}
 
 		public function Get_grupos(){
-			$sql = "SELECT grupo.*,COUNT(grupo_alumno.id_grupo) AS cantidad FROM grupo INNER JOIN grupo_alumno ON grupo_alumno.id_grupo = grupo.id_grupo;";
+			$sql = "SELECT grupo.*,COUNT(grupo_alumno.id_grupo) AS cantidad FROM grupo INNER JOIN grupo_alumno ON grupo_alumno.id_grupo = grupo.id_grupo  GROUP BY grupo.id_grupo;";
 			$results = $this->Query($sql);
 			$d = $this->Get_todos_array($results);
-			if($d[0]['cantidad'] > 0) return $d; else return [];
+
+			if(isset($d[0]) && $d[0]['cantidad'] > 0) return $d; else return [];
 		}
 
 		public function consulta($id){
@@ -98,6 +99,14 @@
 			$sql = "SELECT grupo.id_grupo FROM grupo_alumno INNER JOIN estudiante ON estudiante.id_estudiante = grupo_alumno.id_alumno
 				INNER JOIN grupo On grupo.id_grupo = grupo_alumno.id_grupo WHERE grupo.estado_grupo = 1 AND estudiante.cedula_usuario = '$cedula';";
 
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
+		}
+
+		public function Get_ifExist_estudiante($id){
+			$sql = "SELECT * FROM grupo_alumno INNER JOIN grupo On grupo.id_grupo = grupo_alumno.id_grupo 
+			WHERE grupo.estado_grupo = 1 AND grupo_alumno.id_alumno = '$id';";
+			
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}

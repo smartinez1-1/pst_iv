@@ -22,6 +22,7 @@
 			
 			if($result->num_rows > 0) return "err/02ERR";
 			$sql = "INSERT INTO tutor_comunidad(cedula_tutor,nombre_tutor_comunidad,telefono_tutor,id_comunidad) VALUES('$this->cedula_tutor','$this->nombre_tutor_comunidad','$this->telefono_tutor','$this->id_comunidad');";
+			// die($sql);
 			$this->Query($sql);
 
 			if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
