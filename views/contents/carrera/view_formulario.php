@@ -8,6 +8,8 @@ $id_carrera = null;
 $codigo_carrera = null;
 $nombre_carrera = null;
 $estado_carrera = null;
+$turno_carrera = null;
+$admite_grupos_mixtos = null;
 // AHORA, EN EL CASO DE QUE VAYAMOS A CONSULTAR, LA VARIABLE ID_CONSULTA YA ES DEFINIDA EN LA CLASE APP, AQUI VERIFICAMOS QUE DICHA ID EXISTA, SI EXISTE, REQUERIMOS LA CLASE CARRERA PARA PODER HACER LA CONSULTA DE LA INFORMACION Y ABAJO DEFINIR LAS VARIABLES
 // EN EL CASO DE QUE NO VAYAMOS A EDITAR NADA, LA OPERACION SERA REGISTRAR, SINO, LA OPERACION SERA ACTUALIZAR
 if (isset($this->id_consulta)) {
@@ -21,6 +23,9 @@ if (isset($this->id_consulta)) {
     $codigo_carrera = $datos['codigo_carrera'];
     $nombre_carrera = $datos['nombre_carrera'];
     $estado_carrera = $datos['estado_carrera'];
+    $turno_carrera = $datos['turno_carrera'];
+    $admite_grupos_mixtos = $datos['admite_grupos_mixtos'];
+    var_dump($datos);
   }
 }
 
@@ -107,10 +112,10 @@ if (isset($this->id_consulta)) {
                           Turno <span class="text-meta-1"></span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="tipo_proyecto" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                          <select required name="turno_carrera" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
 
-                            <option>Diurno</option>
-                            <option>Nocturno</option>
+                            <option value="D" <?php print((($turno_carrera == "D") ? "selected='selected'" : "")); ?>>Diurno</option>
+                            <option value="N" <?php print((($turno_carrera == "N") ? "selected='selected'" : "")); ?>>Nocturno</option>
 
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
@@ -130,10 +135,10 @@ if (isset($this->id_consulta)) {
                           Grupo <span class="text-meta-1"></span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required name="tipo_proyecto" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                          <select required name="admite_grupos_mixtos" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
 
-                            <option>Mixto</option>
-                            <option>No Mixto</option>
+                            <option value="1" <?php print((($admite_grupos_mixtos == "1") ? "selected = 'selected'" : "")); ?>>Mixto</option>
+                            <option value="0" <?php print((($admite_grupos_mixtos == "0") ? "selected = 'selected'" : "")); ?>>No Mixto</option>
 
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
