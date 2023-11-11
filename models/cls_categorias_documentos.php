@@ -17,7 +17,6 @@ class cls_categorias_documentos extends cls_db{
     }
 
     public function setDatos($d){
-        // $this->id_estudiante = isset($d['id_estudiante']) ? $this->Clean(intval($d['id_estudiante'])) : null;
         $this->id_categoria=isset($d['id_categoria']) ? $this->Clean(intval($d['id_categoria'])) : null;
         $this->des_categoria=isset($d['des_categoria']) ? $this->Clean(intval($d['des_categoria'])) : null;
         $this->estatus_categoria=isset($d['estatus_categoria']) ? $this->Clean(intval($d['estatus_categoria'])) : null;
@@ -35,6 +34,10 @@ class cls_categorias_documentos extends cls_db{
         $results = $this->Query($sql);
         return $this->Get_todos_array($results);
     }
+
+    // public function create(){}
+    
+    // public function update(){}
 
 
 }
