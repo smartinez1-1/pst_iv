@@ -52,13 +52,13 @@
               <!-- Contact Form -->
               <div
                 class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-                <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                <!-- <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 class="font-semibold text-black dark:text-white">
                   Gestión de carreras
                   </h3>
-                </div>
+                </div> -->
                 <!-- ACA ESTA EL FOMULARIO, EL ACTION CONTIENE LA URL ESTATICA QUE APUNTA AL CONTROLADOR DE CARRERA, DICHO FORMULARIO CONTIENE PRIMERO 2 INPUTS DE TIPO HIDDEN (ESCONDIDO), UNO ES PARA DEFINIR QUE OPERACION VAMOS A REALIZAR OPE, Y EL OTRO CAMPO ES PARA METER EL ID DE LA CARRERA -->
-                <form action="<?php $this->SetURL('controllers/biblioteca_controller.php');?>" autocomplete="off" method="POST">
+                <form id="formulario" action="<?php $this->SetURL('controllers/biblioteca_controller.php');?>" onsubmit="guardar(event)" autocomplete="off" method="POST" enctype="multipart/form-data">
                     <?php
                         include_once("./models/cls_categorias_documentos.php");
                         $CategoriDocumento=new cls_categorias_documentos();
@@ -67,6 +67,7 @@
                     ?>
                   <input type="hidden" name="ope" value="<?php echo $op;?>">
                   <input type="hidden" name="id_documento" value="<?php print($id_documento);?>">
+                  <!-- <input type="submit" value=""> -->
                   <!-- OH BUENO, FALTA VER LA TRANSACCION -->
                   <div class="p-6.5">
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
@@ -106,7 +107,7 @@
                           <div class="mr-3">
                             <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                               <div class="relative">
-                                <input type="radio" required="" id="checkboxLabelFour" class="" name="estatus_documento" value="1" checked>
+                                <input type="radio" required="" id="checkboxLabelFour" name="estatus_documento" value="1" checked>
                               </div>
                               Activo
                             </label>
@@ -116,7 +117,7 @@
                           <div>
                             <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
                               <div class="relative">
-                                <input type="radio" required="" id="checkboxLabelFour" class="" name="estatus_documento" value="0">
+                                <input type="radio" required="" id="checkboxLabelFour" name="estatus_documento" value="0">
                               </div>
                               Inactivo
                             </label>
@@ -124,9 +125,15 @@
                         </div>
                       </div>
                   </div>
+                    <div class="w-full xl:w-2/6 relative mb-5">
+                      <div class="flex justify-center items-center" style="height: 100px;border: 5px #1a222c dashed;">
+                          <div class=" absolute z-10" id="textoInputFiles">Abjuntar Pdf</div>
+                      </div>
+                      <input class=" absolute z-99 top-1 w-full h-full opacity-0" type="file" name="archivoPdf" id="archivoPdf" draggable="draggable" onchange="mensajeCargarDeArchivo()" accept=".pdf">
+                    </div>
                     <div class="w-full xl:w-6/6">
                         <button class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                            Subir
+                            Guardar
                         </button>
                     </div>
                 </form>
@@ -140,6 +147,7 @@
 	</div>
 	<!-- ===== Page Wrapper End ===== -->
 	<?php $this->GetComplement('scripts');?>
+  <script src="<?php echo constant("URL");?>views/js/biblioteca/formulario.js"></script>
 </body>
 
 </html>
