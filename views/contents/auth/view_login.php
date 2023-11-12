@@ -60,7 +60,12 @@
 										<div class="mb-6">
 											<label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña</label>
 											<div class="relative">
+<<<<<<< HEAD
 												<input type="password" id="pass_user" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" placeholder="8+ Caracteres, 1 mayuscula, 1 numero, 1 caracter especial" name="clave_usuario" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+=======
+												<input type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" placeholder="8+ Caracteres, 1 mayuscula, 1 numero, 1 caracter especial" name="clave_usuario"
+													class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+>>>>>>> devGabriel
 
 												<span class="absolute right-4 top-4">
 													<svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
