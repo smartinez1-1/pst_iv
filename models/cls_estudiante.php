@@ -20,6 +20,8 @@
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";
+
+			
 			$sql = "INSERT INTO estudiante(cedula_usuario,turno_estudiante,matricula_estudiante) VALUES('$this->cedula_usuario','$this->turno_estudiante','$this->matricula_estudiante');";
 			$this->Query($sql);
 
@@ -52,5 +54,10 @@
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}
+
+		public function getListOfPreguntas(){
+			$sql = "SELECT * FROM preguntas_seguridad";
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
+		}
 	}
-?>

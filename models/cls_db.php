@@ -2,7 +2,7 @@
 	// BUENO, ESTA CLASE 'CLS_DB', ES LA QUE SE USA PARA LA CONEXION A LA BASE DE DATOS, ES LA UNICA, DE AQUI EL RESTO DE CLASES DE CONECTAN PARA PODER PEDIR INFORMACION DE LA DB
     class cls_db{
 			// ESTOS ATRIBUTOS SOLO SON DE ESTA CLASE, NO SE PUEDEN USAR EN OTROS ARCHIVOS EXTERNOS, SOLO AQUI, ES PARA MAYOR SEGURIDAD
-			private $host, $dbname, $user, $pass, $conexion;
+			private $host, $dbname, $user, $pass, $conexion, $port;
 			// YA LES COMENTE QUE EL CONSTRUCTOR ES ALGO QUE SE EJECUTA AUTOMATICAMENTE
 			public function __construct(){
 				if(!isset($_SESSION)) session_start();
@@ -10,12 +10,13 @@
 				$this->host = "localhost";
 				$this->dbname = "bd_pst";
 				$this->user = "root";
-				$this->pass = "";
+				$this->pass = "1234";
+				$this->port = "3002";
 				$this->Connect();
 			}
 			// ESTO CREA LA CONEXION A LA DB (POR SI HAY ALGUN PROBLEMA DE CONEXION DESPUES)
 			private function Connect(){
-				$this->conexion = mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
+				$this->conexion = mysqli_connect($this->host, $this->user, $this->pass, $this->dbname, $this->port);
 				if(mysqli_connect_error()) die("NO SE PUEDO CONECTAR A LA BASE DE DATOS: ".mysqli_connect_error());
 			}
 			// CON ESTA FUNCION SE EJECUTAN TODAS LAS CONSULTAS
