@@ -233,7 +233,7 @@ INSERT INTO `proyecto` (`id_proyecto`, `id_comunidad`, `id_grupo`, `id_ano_escol
 CREATE TABLE `seccion` (
   `id_seccion` int(11) NOT NULL,
   `numero_seccion` varchar(13) NOT NULL,
-  `carrera_id` int(11) NOT NULL,
+  `carrera_id` int(11) NULL,
   `estado_seccion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
