@@ -1,4 +1,7 @@
 <?php
+	require('../vendor/autoload.php');
+	$dotenv = Dotenv\Dotenv::createImmutable("../");
+	$dotenv->load();
 	// BUENO, ESTA CLASE 'CLS_DB', ES LA QUE SE USA PARA LA CONEXION A LA BASE DE DATOS, ES LA UNICA, DE AQUI EL RESTO DE CLASES DE CONECTAN PARA PODER PEDIR INFORMACION DE LA DB
     class cls_db{
 			// ESTOS ATRIBUTOS SOLO SON DE ESTA CLASE, NO SE PUEDEN USAR EN OTROS ARCHIVOS EXTERNOS, SOLO AQUI, ES PARA MAYOR SEGURIDAD
@@ -7,11 +10,11 @@
 			public function __construct(){
 				if(!isset($_SESSION)) session_start();
 
-				$this->host = "localhost";
-				$this->dbname = "bd_pst";
-				$this->user = "root";
-				$this->pass = "1234";
-				$this->port = "3002";
+				$this->host = $_ENV["HOST_DB"];
+				$this->dbname = $_ENV["NAME_DB"];
+				$this->user = $_ENV["USER_DB"];
+				$this->pass = $_ENV["PASS_USER_DB"];
+				$this->port = $_ENV["PORT_DB"];
 				$this->Connect();
 			}
 			// ESTO CREA LA CONEXION A LA DB (POR SI HAY ALGUN PROBLEMA DE CONEXION DESPUES)
