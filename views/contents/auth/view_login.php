@@ -99,6 +99,23 @@
 	<!-- ===== Page Wrapper End ===== -->
 	<?php $this->GetComplement('scripts'); ?>
 	<script>
+		// Obtén la modal
+		var modal = document.getElementById("myModal");
+
+		// Obtén el elemento que cierra la modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// Cuando el usuario haga clic en el elemento (x), cierra la modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// Cuando el usuario haga clic en cualquier lugar fuera de la modal, ciérrala
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
 		$("#pass_user").on("keyup", (e) => {
 			// var regex = new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}');
 			// console.log(regex.test(e.target.value))
