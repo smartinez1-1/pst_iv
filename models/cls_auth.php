@@ -54,6 +54,15 @@ class cls_auth extends cls_db
             }
           }
 
+          if ($datos['tipo_usuario'] === "TUTOR") {
+            $results = $this->conTutor($datos['cedula_usuario']);
+            if ($results->num_rows > 0) {
+              $_SESSION['update_required'] = true;
+              $d = $this->Get_array($results)['id_tutor'];
+              return [true, 'msg/01AUTH', "tutor/formulario/b/$d/"];
+            }
+          }
+
           $_SESSION['update_required'] = false;
           return [true, 'msg/01AUTH', "inicio/index/"];
         } else return [true, 'msg/01AUTH', "inicio/index/"];
@@ -65,6 +74,11 @@ class cls_auth extends cls_db
 
   public function conEstudiante($cedula){
     $sql = "SELECT * FROM estudiante WHERE cedula_usuario = $cedula";
+    return $this->Query($sql);
+  }
+
+  public function conTutor($cedula){
+    $sql = "SELECT * FROM tutor WHERE cedula_usuario = $cedula;";
     return $this->Query($sql);
   }
   public function consulta($id)

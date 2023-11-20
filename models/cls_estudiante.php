@@ -54,10 +54,4 @@
 			$results = $this->Query($sql);
 			return $this->Get_array($results);
 		}
-
-		public function getListOfPreguntas(){
-			$sql = "SELECT * FROM preguntas_seguridad";
-			$results = $this->Query($sql);
-			return $this->Get_todos_array($results);
-		}
 	}

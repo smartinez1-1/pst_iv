@@ -1,6 +1,15 @@
 <?php
-	require('../vendor/autoload.php');
-	$dotenv = Dotenv\Dotenv::createImmutable("../");
+
+	if(file_exists('../vendor/autoload.php')){
+		require('../vendor/autoload.php');
+		$dotenv = Dotenv\Dotenv::createImmutable("../");
+	}
+	
+	if(file_exists('./vendor/autoload.php')){
+		require('./vendor/autoload.php');
+		$dotenv = Dotenv\Dotenv::createImmutable("./");
+	}
+
 	$dotenv->load();
 	// BUENO, ESTA CLASE 'CLS_DB', ES LA QUE SE USA PARA LA CONEXION A LA BASE DE DATOS, ES LA UNICA, DE AQUI EL RESTO DE CLASES DE CONECTAN PARA PODER PEDIR INFORMACION DE LA DB
     class cls_db{
@@ -60,6 +69,30 @@
 				if(!is_numeric($variable) && $upper) $variable = strtoupper($variable);
 				else $variable = str_ireplace(" ","",$variable);
 				return $variable;
+			}
+
+			public function getListOfPreguntas(){
+				$sql = "SELECT * FROM preguntas_seguridad";
+				$results = $this->Query($sql);
+				return $this->Get_todos_array($results);
+			}
+
+			public function getListOfEstados(){
+				$sql = "SELECT * FROM estados";
+				$results = $this->Query($sql);
+				return $this->Get_todos_array($results);
+			}
+
+			public function getListOfMunicipios($id){
+				$sql = "SELECT * FROM municipios WHERE id_estado = $id";
+				$results = $this->Query($sql);
+				return $this->Get_todos_array($results);
+			}
+
+			public function getListOfParroquias($id){
+				$sql = "SELECT * FROM parroquias WHERE id_municipio = $id";
+				$results = $this->Query($sql);
+				return $this->Get_todos_array($results);
 			}
 			// Y ESTA ES UNA FUNCION PARA DESTRUIR LA CONEXION A LA BASE DE DATOS, YA QUE EN CADA CONSULTA SE CREA UNA, Y LUEGO SE TIENE QUE DESTRUIR (ASI NO SE COLAPSA LA BASE DE DATOS, PORQUE ELLA ESPERA TODAS ESAS CONEXIONES SI ES QUE QUEDAN ABIERTAS)
 			public function __destruct(){ mysqli_close($this->conexion); }

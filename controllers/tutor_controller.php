@@ -23,17 +23,17 @@
 		}
 	}
 
-	// if(isset($_GET['ope'])){
-	// 	switch($_GET['ope']){
-	// 		case "Todos_personas":
-	// 			fn_Consultar_todos();
-	// 		break;
+	if(isset($_GET['ope'])){
+		switch($_GET['ope']){
+			case "getMunicipios":
+				fn_municipios();
+			break;
 
-	// 		case "Consultar_persona":
-	// 			fn_Consultar_persona();
-	// 		break;
-	// 	}
-	// }
+			case "getParroquias":
+				fn_parroquias();
+			break;
+		}
+	}
 
 	function fn_Registrar(){
 		$model_u = new cls_usuario();
@@ -61,6 +61,18 @@
 
 		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
 	}
+
+	function fn_municipios(){
+		$model_u = new cls_usuario();
+		$municipios = $model_u->getListOfMunicipios($_GET['id_estado']);
+		print json_encode(['data' => $municipios]);
+	}
+
+	function fn_parroquias(){
+		$model_u = new cls_usuario();
+		$parroquias = $model_u->getListOfParroquias($_GET['id_municipio']);
+		print json_encode(['data' => $parroquias]);
+	}	
 
   //   function fn_Desactivar(){
   //       $model = new m_persona();
