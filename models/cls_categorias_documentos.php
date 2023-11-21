@@ -35,9 +35,44 @@ class cls_categorias_documentos extends cls_db{
         return $this->Get_todos_array($results);
     }
 
-    // public function create(){}
+    public function consultarPorId(){
+        $sql="SELECT * FROM categorias_documentos WHERE id_categoria=$this->id_categoria;";
+        $results = $this->Query($sql);
+        return $this->Get_todos_array($results);
+    }
+
+    public function create(){
+        $SQL="INSERT INTO categorias_documentos(
+            des_categoria,
+            estatus_categoria,
+            creacion_categoria,
+        )
+        VALUES(
+            '$this->des_categoria',
+            '$this->estatus_categoria',
+            '$this->creacion_categoria'
+        );
+        ";
+        $this->Query($SQL);
+        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+    }
     
-    // public function update(){}
+    public function update(){
+        $SQL="UPDATE categorias_documentos SET 
+            des_categoria='$this->des_categoria',
+            estatus_categoria='$this->estatus_categoria'
+        WHERE
+            id_categoria=$this->id_categoria;
+        ";
+        $this->Query($SQL);
+        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+    }
+
+    public function eliminar(){
+        $SQL="DELETE FROM categorias_documentos WHERE id_categoria=$this->id_categoria;";
+        $this->Query($SQL);
+        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+    }
 
 
 }
