@@ -38,9 +38,9 @@
 		if($result){
 			$model_e->setDatos($_POST);
 			$mensaje = $model_e->create();
-		}else $mensaje = "err/01ERR";
+		}else $mensaje = "estudiante/formulario/err/01ERR";
 
-		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
+		header("Location: ".constant("URL"). $mensaje);	
 	}
 
 	function fn_Actualizar(){
@@ -53,7 +53,7 @@
 		$model_e->setDatos($_POST);
 		$mensaje = $model_e->Update();
 
-		header("Location: ".constant("URL").$_POST['return']."/$mensaje");	
+		header("Location: ".constant("URL"). $mensaje);	
 	}
 
 	function fn_consulta_estudiante(){

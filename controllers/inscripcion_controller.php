@@ -28,7 +28,7 @@
 		$model_s->setDatos($_POST);
 		$mensaje = $model_s->create();
 
-		header("Location: ".constant("URL")."inscripcion/index/$mensaje");	
+		header("Location: ".constant("URL")."estudiante/index/$mensaje");	
 	}
 
 	function fn_Actualizar(){

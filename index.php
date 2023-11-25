@@ -4,7 +4,7 @@
 
   // los arhivos de arriba son de configuracion y un controlador para el tema de las alertas por pantalla, ya luego los veremos, aqui abajo vemos la primera clase 'APP', esta tiene atributos privados que solo puede usar la misma clase, tiene un constructor que se ejecuta automaticamente en cada peticion
   class App{
-    private $ruta_actual, $code_error, $code_done, $titleContent, $controlador, $file_view_name, $ObjMessage, $id_consulta;
+    private $ruta_actual, $code_error, $code_done, $titleContent, $controlador, $file_view_name, $ObjMessage, $id_consulta, $id_consulta_estudiante;
 //    - comunidad y tutor comunidad (dar acceso al estudiante)
 //    - los estudiantes pueden ser de diferentes secciones (modulo grupo)
 
@@ -74,6 +74,7 @@
       if(sizeof($url) > 2 && $url[2] === "err") $this->code_error = $url[3];
       if(sizeof($url) > 2 && $url[2] === "msg") $this->code_done = $url[3];
       if(sizeof($url) > 2 && $url[2] === "b") $this->id_consulta = $url[3];
+      if(sizeof($url) > 2 && $url[2] === "i") $this->id_consulta_estudiante = $url[3];
       return $url;
     }
 

@@ -161,9 +161,9 @@
 								if($_SESSION['permisos'] == '1' && $_SESSION['update_required'] === false || $_SESSION['permisos'] == '3' && $_SESSION['update_required'] === false){
 							?>
 							<!-- Menu Item Calendar -->
-							<li>
+							<!-- <li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('inscripcion/');?>" @click="selected = (selected === 'inscripcion' ? '':'inscripcion')"
+									href="<?php //$this->SetURL('inscripcion/');?>" @click="selected = (selected === 'inscripcion' ? '':'inscripcion')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'inscripcion') && (page === 'inscripcion') }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
 										<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -171,7 +171,7 @@
 									</svg>
 									inscripción
 								</a>
-							</li>
+							</li> -->
 							<!-- Menu Item Calendar -->
 							<!-- Menu Item Calendar -->
 							<li>
@@ -200,28 +200,28 @@
 							</li>
 							<!-- Menu Item Calendar -->
 							<!-- Menu Item Calendar -->
-							<li>
+							<!-- <li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('grupo/');?>" @click="selected = (selected === 'grupo' ? '':'grupo')"
+									href="<?php //$this->SetURL('grupo/');?>" @click="selected = (selected === 'grupo' ? '':'grupo')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'grupo') && (page === 'grupo') }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
 										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
 									</svg>
 									Grupo
 								</a>
-							</li>
+							</li> -->
 							<!-- Menu Item Calendar -->
 							<!-- Menu Item Calendar -->
-							<li>
+							<!-- <li>
 								<a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-									href="<?php $this->SetURL('proyecto/');?>" @click="selected = (selected === 'proyecto' ? '':'proyecto')"
+									href="<?php //$this->SetURL('proyecto/');?>" @click="selected = (selected === 'proyecto' ? '':'proyecto')"
 									:class="{ 'bg-graydark dark:bg-meta-4': (selected === 'proyecto') && (page === 'proyecto') }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-kanban-fill" viewBox="0 0 16 16">
 										<path d="M2.5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2h-11zm5 2h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm-5 1a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3zm9-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
 									</svg>
 									proyecto
 								</a>
-							</li>
+							</li> -->
 							<!-- Menu Item Calendar -->
 							<?php }?>
 							<!-- Menu Item Calendar -->

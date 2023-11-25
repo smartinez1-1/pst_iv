@@ -20,19 +20,24 @@
 			$result = $this->Query($sqlConsulta);
 			
 			if($result->num_rows > 0) return "err/02ERR";
-
 			
 			$sql = "INSERT INTO estudiante(cedula_usuario,turno_estudiante,matricula_estudiante) VALUES('$this->cedula_usuario','$this->turno_estudiante','$this->matricula_estudiante');";
-			$this->Query($sql);
+			$res = $this->Query($sql);
 
-			if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+			if($this->Result_last_query()){
+				$id = $this->Returning_id();
+				return "estudiante/formulario_inscripcion/b/$id";
+			}
+
+			return "estudiante/index/err/01ERR";
+			// if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
 		}
 
 		public function update(){
 			$sql = "UPDATE estudiante SET matricula_estudiante = '$this->matricula_estudiante' WHERE id_estudiante = $this->id_estudiante ;";
 			
-      $this->Query($sql);
-			return "msg/01DONE";
+      $res = $this->Query($sql);
+			if($res->num_rows > 0) return "estudiante/index/msg/01DONE"; else return "estudiante/index/err/01ERR";
 		}
 
 		public function Get_estudiantes($condicion = ''){

@@ -82,7 +82,7 @@ if (isset($this->id_consulta)) {
                   <input type="hidden" name="permisos_usuario" value="3">
                   <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante; ?>">
                   <input type="hidden" name="tipo_usuario" value="ESTUDIANTE">
-                  <input type="hidden" name="return" value="estudiante/index">
+                  <!-- <input type="hidden" name="return" value=""> -->
 
                   <div class="mb-4">
                     <label class="mb-2.5 block font-medium text-black dark:text-white">Cédula<span class="text-meta-1">*</span></label>

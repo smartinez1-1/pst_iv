@@ -2,10 +2,10 @@
 	if(!class_exists("cls_db")) require_once("cls_db.php");
 
 	class cls_inscripcion extends cls_db{
-		private $id_inscripcion, $id_carrera, $id_seccion, $id_estudiante, $id_semestre, $id_ano_escolar, $turno;
+		private $id_inscripcion, $id_carrera, $id_seccion, $id_estudiante, $id_semestre, $id_ano_escolar, $turno, $des_semestre;
 		public function __construct(){
 			parent::__construct();
-      $this->id_inscripcion = $this->id_carrera = $this->id_seccion = $this->id_estudiante = $this->id_semestre = $this->id_ano_escolar = $this->turno = "";
+      $this->id_inscripcion = $this->id_carrera = $this->id_seccion = $this->id_estudiante = $this->id_semestre = $this->id_ano_escolar = $this->turno = $this->des_semestre = "";
 		}
 
 		public function setDatos($d){
@@ -14,6 +14,7 @@
       $this->id_seccion = isset($d['id_seccion']) ? $this->Clean(intval($d['id_seccion'])) : null;
       $this->id_estudiante = isset($d['id_estudiante']) ? $this->Clean(intval($d['id_estudiante'])) : null;
 			$this->id_semestre = isset($d['id_semestre']) ? $this->Clean(intval($d['id_semestre'])) : null;
+			$this->des_semestre = isset($d['des_semestre']) ? $this->Clean(intval($d['des_semestre'])) : null;
       $this->id_ano_escolar = isset($d['id_ano_escolar']) ? $this->Clean(intval($d['id_ano_escolar'])) : null;
       $this->turno = isset($d['turno_estudiante']) ? $this->Clean($d['turno_estudiante']) : null;
 		}
@@ -21,14 +22,17 @@
 		public function create(){
 
       try{
+
+				// var_dump($_POST);
+				// die("fasdfsd");
         $sqlConsulta = "SELECT * FROM inscripcion WHERE id_estudiante = '$this->id_estudiante' AND id_ano_escolar = '$this->id_ano_escolar';";
         $result = $this->Query($sqlConsulta);
         
         if($result->num_rows > 0) return "err/02ERR";
 
         $this->Start_transacction();
-        $sql = "INSERT INTO inscripcion(id_carrera,id_seccion,id_estudiante,id_semestre,id_ano_escolar) 
-        VALUES('$this->id_carrera','$this->id_seccion','$this->id_estudiante','$this->id_semestre','$this->id_ano_escolar');";
+        $sql = "INSERT INTO inscripcion(id_carrera,id_seccion,id_estudiante,id_ano_escolar,des_semestre) 
+        VALUES('$this->id_carrera','$this->id_seccion','$this->id_estudiante','$this->id_ano_escolar','$this->des_semestre');";
         $this->Query($sql);
 
 				// $sqlCon = "SELECT * FROM estudiante WHERE id_estudiante = '$this->id_estudiante' AND turno_estudiante <> '$this->turno';";
