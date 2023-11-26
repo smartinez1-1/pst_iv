@@ -1,5 +1,4 @@
 <?php
-
 require_once("../models/config.php");
 require_once("../models/cls_categorias_documentos.php");
 // AQUI YA ES DIFERENTE LA COSA, AQUI YA NO USAMOS CLASES, AQUI USAMOS OBJETOS, ARRIBA INCLUIMOS LOS MODELOS DE CARRERA Y EL ARCHIVO DE CONFIGURACION
@@ -39,33 +38,24 @@ function guardar($post){
     $mensaje=null;
     $CategoriaDocumentosModelo=new cls_categorias_documentos();
     $CategoriaDocumentosModelo->setDatos($post);
-    if($post["id_categoria"]==""){
-        $mensaje=$CategoriaDocumentosModelo->create();
-    }
-    else{
-        $mensaje=$CategoriaDocumentosModelo->update();
-    }
-    print(json_encode(["mensaje" => $mensaje]));
+    if($post['id_categoria'] == "") $mensaje=$CategoriaDocumentosModelo->create();
+    else $mensaje=$CategoriaDocumentosModelo->update();
+
+    print(json_encode(["data" => $mensaje]));
 }
 
 function eliminar($post){
     $CategoriaDocumentosModelo=new cls_categorias_documentos();
     $CategoriaDocumentosModelo->setDatos($post);
     $mensaje=$CategoriaDocumentosModelo->eliminar();
-    print(json_encode(["mensaje" => $mensaje]));
+    print(json_encode(["data" => $mensaje]));
 }
 
 function consultarTodo(){
     $CategoriaDocumentosModelo=new cls_categorias_documentos();
     $respuesta=$CategoriaDocumentosModelo->consultarTodo();
-    if(count($respuesta)>0){
-        print(json_encode(["datos" => $respuesta]));
-    }
-    else{
-        print(json_encode(["datos" => []]));
-    }
+
+    if(count($respuesta)>0) print(json_encode(["data" => $respuesta]));
+    else print(json_encode(["data" => []]));
 }
-
-
-
 ?>

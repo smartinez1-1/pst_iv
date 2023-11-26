@@ -27,113 +27,96 @@
                   <div style="position: absolute;top: 20px;right: 20px;">
                     <svg @click="modalOpen = false" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                   </div>
-                  <div class="text-center">
-                    <h3 class="pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">
-                      Categoria
-                    </h3>
-                    <span class="mx-auto mb-6 inline-block h-1 w-22.5 rounded bg-primary"></span>
-                  </div>
-                  <form>
-                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-2/6">
-                        <label class="mb-2.5 block text-black dark:text-white">
-                          Nombre <span class="text-meta-1">*</span>
-                        </label>
-                        <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required placeholder="Nombre" name="des_categoria" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                      </div>
+                  <div id="app_vue" >
+                    <div class="text-center">
+                      <h3 class="pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">
+                        Categoria
+                      </h3>
+                      <span class="mx-auto mb-6 inline-block h-1 w-22.5 rounded bg-primary"></span>
                     </div>
-                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-2/6">
-                        <label class="mb-2.5 block text-black dark:text-white">
-                          Estado<span class="text-meta-1">*</span>
-                        </label>
-                        <div class="flex items-center space-x-2">
-                          <div class="mr-3">
-                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                              <div class="relative">
-                                <input type="radio" required="" id="checkboxLabelFour" name="estatus_documento" value="1" checked>
-                              </div>
-                              Activo
-                            </label>
-                          </div>
-                          <!-- LO QUE QUEDA ABAJO ES EL BOTON DE GUARDAR -->
-
-                          <div>
-                            <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
-                              <div class="relative">
-                                <input type="radio" required="" id="checkboxLabelFour" name="estatus_documento" value="0">
-                              </div>
-                              Inactivo
-                            </label>
+                    <form>
+                      <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                        <div class="w-full xl:w-2/6">
+                          <label class="mb-2.5 block text-black dark:text-white">
+                            Nombre <span class="text-meta-1">*</span>
+                          </label>
+                          <input type="text" v-model="formulario.des_categoria" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required placeholder="Nombre" name="des_categoria" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                        </div>
+                      </div>
+                      <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                        <div class="w-full xl:w-2/6">
+                          <label class="mb-2.5 block text-black dark:text-white">
+                            Estado<span class="text-meta-1">*</span>
+                          </label>
+                          <div class="flex items-center space-x-2">
+                            <div class="mr-3">
+                              <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                                <div class="relative">
+                                  <input type="radio" required="" v-model="formulario.estatus_categoria" id="checkboxLabelFour" name="estatus_documento" value="1" checked>
+                                </div>
+                                Activo
+                              </label>
+                            </div>
+                            <!-- LO QUE QUEDA ABAJO ES EL BOTON DE GUARDAR -->
+  
+                            <div>
+                              <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                                <div class="relative">
+                                  <input type="radio" required="" v-model="formulario.estatus_categoria" id="checkboxLabelFour" name="estatus_documento" value="0">
+                                </div>
+                                Inactivo
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
+                    </form>
+  
+                    <table class="w-full table-auto mb-10">
+                      <thead>
+                        <tr class="bg-gray-2 text-left dark:bg-meta-4">
+                          <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white" style="width: 280px !important;">
+                            Nombre
+                          </th>
+                          <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
+  
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="item in categorias">
+                          <td @click="sel_categoria(item.id_categoria)" class="border-b border-[#eee] py-5 px-4 dark:border-strokedark" >
+                            {{ item.des_categoria }}
+                          </td>
+                          <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                            <button @click="eliminar(item.id_categoria)" class="block rounded border bg-danger p-3 text-center font-medium text-white transition hover:bg-opacity-90 w-full flex justify-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                            </button>
+                          </td>
+                        </tr>
+  
+                      </tbody>
+                    </table>
+  
+                    <div class="-mx-3 flex flex-wrap justify-end gap-4">
+                      <!-- <div class="w-28">
+                        <button @click="modalOpen = false" class="block rounded border border-stroke bg-gray p-3 text-center font-medium text-black transition hover:border-meta-1 hover:bg-meta-1 hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-white dark:hover:border-meta-1 dark:hover:bg-meta-1">
+                          Cancelar
+                        </button>
+                      </div> -->
+                      <div class="w-28">
+                        <button type="button" @click="Guardar" class="block rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
+                          Guardar
+                        </button>
+                      </div>
                     </div>
-                  </form>
 
-                  <table class="w-full table-auto mb-10">
-                    <thead>
-                      <tr class="bg-gray-2 text-left dark:bg-meta-4">
-                        <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white" style="width: 280px !important;">
-                          Nombre
-                        </th>
-                        <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
-
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark" >
-                          hola
-                        </td>
-                        <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                          <button class="block rounded border bg-danger p-3 text-center font-medium text-white transition hover:bg-opacity-90 w-full flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                          </button>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-
-
-
-                  <div class="-mx-3 flex flex-wrap justify-end gap-4">
-                    <!-- <div class="w-28">
-                      <button @click="modalOpen = false" class="block rounded border border-stroke bg-gray p-3 text-center font-medium text-black transition hover:border-meta-1 hover:bg-meta-1 hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-white dark:hover:border-meta-1 dark:hover:bg-meta-1">
-                        Cancelar
-                      </button>
-                    </div> -->
-                    <div class="w-28">
-                      <button class="block rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
-                        Guardar
-                      </button>
-                    </div>
                   </div>
 
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div class="max-w-full overflow-x-auto">
@@ -228,6 +211,83 @@
   </div>
   <!-- ===== Page Wrapper End ===== -->
   <?php $this->GetComplement('scripts'); ?>
+  <script>
+    const { createApp } = Vue;
+
+    let app = createApp({
+      data(){
+        return {
+          mensaje: 'vue is running',
+          categorias:[],
+          formulario:{
+            id_categoria:'',
+            des_categoria:'',
+            estatus_categoria:'1',
+            ope: "Registrar"
+          }
+        }
+      },
+      methods:{
+        alerta(tipo, text){
+          Toast.fire({
+            icon: tipo,
+            title: text
+          });
+        },
+        async Guardar(){
+          var dataBody = new FormData();
+          for(var item in this.formulario){ dataBody.append(item, this.formulario[item]); }
+          await fetch(`<?php $this->SetURL('controllers/categorias_documentos_controller.php');?>`,{ method: "post", body: dataBody })
+          .then( response => response.json())
+          .then( result => {
+            if(result.data.code == 200) this.alerta("success", result.data.mensaje);
+            else this.alerta("error", result.data.mensaje)
+          }).catch( error => console.error(error))
+          await this.consultar();
+        },
+        async consultar(){
+          this.limpiar()
+          await fetch(`<?php $this->SetURL('controllers/categorias_documentos_controller.php?ope=consultar_todo');?>`)
+          .then( response => response.json())
+          .then( result => { this.categorias = result.data; })
+          .catch( error => console.error(error))
+        },
+        sel_categoria(id){
+          let res = this.categorias.find( i => i.id_categoria == id)
+          this.formulario = {
+            ...this.formulario,
+            id_categoria: res.id_categoria,
+            des_categoria: res.des_categoria,
+            estatus_categoria: res.estatus_categoria
+          };
+        },
+        async eliminar(id){
+          this.sel_categoria(id)
+          this.formulario.ope = "eliminar";
+          var dataBody = new FormData();
+          for(var item in this.formulario){ dataBody.append(item, this.formulario[item]); }
+          await fetch(`<?php $this->SetURL('controllers/categorias_documentos_controller.php');?>`,{ method: "post", body: dataBody })
+          .then( response => response.json())
+          .then( result => {
+            if(result.data.code == 200) this.alerta("success", result.data.mensaje);
+            else this.alerta("error", result.data.mensaje)
+          }).catch( error => console.error(error))
+          await this.consultar();
+        },
+        limpiar(){
+          this.formulario = {
+            id_categoria:'',
+            des_categoria:'',
+            estatus_categoria:'1',
+            ope: "Registrar"
+          }
+        }
+      },
+      async mounted(){
+        await this.consultar();
+      }
+    }).mount("#app_vue");
+  </script>
 </body>
 
 </html>

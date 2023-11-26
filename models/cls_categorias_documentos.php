@@ -18,9 +18,8 @@ class cls_categorias_documentos extends cls_db{
 
     public function setDatos($d){
         $this->id_categoria=isset($d['id_categoria']) ? $this->Clean(intval($d['id_categoria'])) : null;
-        $this->des_categoria=isset($d['des_categoria']) ? $this->Clean(intval($d['des_categoria'])) : null;
+        $this->des_categoria=isset($d['des_categoria']) ? $d['des_categoria'] : null;
         $this->estatus_categoria=isset($d['estatus_categoria']) ? $this->Clean(intval($d['estatus_categoria'])) : null;
-        $this->creacion_categoria=isset($d['creacion_categoria']) ? $this->Clean(intval($d['creacion_categoria'])) : null;
     }
 
     public function consultarTodoActivo(){
@@ -38,23 +37,20 @@ class cls_categorias_documentos extends cls_db{
     public function consultarPorId(){
         $sql="SELECT * FROM categorias_documentos WHERE id_categoria=$this->id_categoria;";
         $results = $this->Query($sql);
-        return $this->Get_todos_array($results);
+        return $this->Get_array($results);
     }
 
     public function create(){
         $SQL="INSERT INTO categorias_documentos(
             des_categoria,
-            estatus_categoria,
-            creacion_categoria,
+            estatus_categoria
         )
         VALUES(
             '$this->des_categoria',
-            '$this->estatus_categoria',
-            '$this->creacion_categoria'
-        );
-        ";
+            '$this->estatus_categoria'
+        );";
         $this->Query($SQL);
-        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+        if($this->Result_last_query()) return ['code' => 200, 'mensaje' => 'Categoria registrada']; else return ['code' => 400, 'mensaje' => 'Categoria no registrada'];
     }
     
     public function update(){
@@ -62,18 +58,16 @@ class cls_categorias_documentos extends cls_db{
             des_categoria='$this->des_categoria',
             estatus_categoria='$this->estatus_categoria'
         WHERE
-            id_categoria=$this->id_categoria;
-        ";
+            id_categoria=$this->id_categoria; ";
         $this->Query($SQL);
-        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+        if($this->Result_last_query()) return ['code' => 200, 'mensaje' => 'Categoria actualizada']; else return ['code' => 400, 'mensaje' => 'Categoria no actualizada'];
     }
 
     public function eliminar(){
         $SQL="DELETE FROM categorias_documentos WHERE id_categoria=$this->id_categoria;";
         $this->Query($SQL);
-        if($this->Result_last_query()) return "msg/01DONE"; else return "err/01ERR";
+        if($this->Result_last_query()) return ['code' => 200, 'mensaje' => 'Categoria eliminada']; else return ['code' => 400, 'mensaje' => 'la categoria no pudo ser eliminada'];
     }
-
 
 }
 
