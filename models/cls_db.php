@@ -64,6 +64,7 @@
 					if($hoy>=$inicio && $hoy<=$cierre){
 						$SQL2="UPDATE ano_escolar SET estado_incripciones='1'  WHERE id_ano_escolar='".$lapso["id_ano_escolar"]."';";
 						$result2=$this->Query($SQL2);
+						break;
 					}
 				}
 			}
