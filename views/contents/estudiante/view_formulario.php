@@ -10,7 +10,7 @@ $if_tutor = false;
 $if_estudiante = true;
 $matricula = null;
 $categoria = null;
-
+$nacionalidad = null;
 $pregunta1 = "";
 $respuesta1 = "";
 $pregunta2 = "";
@@ -29,6 +29,7 @@ if (isset($this->id_consulta)) {
     $cedula = $datos['cedula_usuario'];
     $nombre = $datos['nombre_usuario'];
     $correo = $datos['correo_usuario'];
+    $nacionalidad = $datos['nacionalidad_usuario'];
     $edad = $datos['edad_usuario'];
     $sexo = $datos['genero_usuario'];
     $telefono = $datos['telefono_usuario'];
@@ -83,6 +84,29 @@ if (isset($this->id_consulta)) {
                   <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante; ?>">
                   <input type="hidden" name="tipo_usuario" value="ESTUDIANTE">
                   <!-- <input type="hidden" name="return" value=""> -->
+
+                  <div class="mb-6">
+                    <label class="mb-2.5 block font-medium text-black dark:text-white">Nacionalidad<span class="text-meta-1">*</span>:</label>
+                    <div class="flex items-center space-x-4">
+                      <div class="mr-3">
+                        <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                          <div class="relative">
+                            <input type="radio" id="checkboxLabelFour1" required class="" name="nacionalidad_usuario" value="V" <?php if (isset($nacionalidad) && $nacionalidad == "V") echo "checked"; ?> />
+                          </div>
+                          Venezolano
+                        </label>
+                      </div>
+
+                      <div class="ml-3">
+                        <label for="checkboxLabelFour" class="flex cursor-pointer select-none items-center">
+                          <div class="relative">
+                            <input type="radio" id="checkboxLabelFour2" required class="" name="nacionalidad_usuario" value="E" <?php if (isset($nacionalidad) && $nacionalidad == "E") echo "checked"; ?> />
+                          </div>
+                          Extranjero
+                        </label>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="mb-4">
                     <label class="mb-2.5 block font-medium text-black dark:text-white">Cédula<span class="text-meta-1">*</span></label>
@@ -145,12 +169,12 @@ if (isset($this->id_consulta)) {
                     </div>
                   </div>
 
-                  <div class="mb-6">
+                  <!-- <div class="mb-6">
                     <label class="mb-2.5 block font-medium text-black dark:text-white">Matricula<span class="text-meta-1">*</span></label>
                     <div class="relative">
-                      <input type="text" minmength="2" maxlength="12" placeholder="Ingrese la matricula" name="matricula_estudiante" value="<?php echo $matricula; ?>" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                      <input type="text" minmength="2" maxlength="12" placeholder="Ingrese la matricula" name="matricula_estudiante" value="<?php //echo $matricula; ?>" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                     </div>
-                  </div>
+                  </div> -->
                   <div class="col-span-3"></div>
 
                   <?php if ($op === "Actualizar" && $if_estudiante === true) { ?>

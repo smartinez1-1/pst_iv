@@ -56,9 +56,16 @@
 
   if(isset($this->id_consulta_estudiante)){
     $datos = $model_e->consulta($this->id_consulta_estudiante);
-    $info_estudiante = $datos['cedula_usuario']." ".$datos['nombre_usuario'];
-    // var_dump($datos);
-    // die("d");
+    $info_estudiante = $datos['nacionalidad_usuario'].'-'.$datos['cedula_usuario']." ".$datos['nombre_usuario'];
+
+    $date_before = $model_i->consultar_inscripcion($datos['cedula_usuario'],'BEFORE');
+
+    if(isset($date_before[0])){
+      $id_seccion = $date_before[0]['id_seccion'];
+      $id_carrera = $date_before[0]['id_carrera'];
+      $turno_estudiante = $date_before[0]['turno_estudiante'];
+    }
+
   }
 
   if(isset($this->id_consulta)){
@@ -180,7 +187,11 @@
                             <?php 
                               foreach($secciones as $item){
                                 ?>
-                                <option value="<?php echo $item['id_seccion'];?>"><?php echo $item['numero_seccion'];?></option>
+                                <option 
+                                <?php echo ($id_seccion == $item['id_seccion']) ? "selected" : "";?> 
+                                  value="<?php echo $item['id_seccion'];?>">
+                                  <?php echo $item['numero_seccion'];?>
+                                </option>
                                 <?php
                               }
                             ?>
@@ -293,11 +304,10 @@
     let app = createApp({
       data(){
         return {
-          message: "hola vue",
-          id_seccion: "",
+          id_seccion: "<?php echo $id_seccion;?>",
           id_estudiante: "",
           id_semestre: "",
-          id_carrera: "",
+          id_carrera: "<?php echo $id_carrera;?>",
           data_estudiante: "",
           tipo_registro: "",
           secciones: [],
@@ -376,7 +386,7 @@
         ?>
         app.id_carrera = '<?php echo $d["id_carrera"];?>';
         app.if_estudiante = true;
-        app.consultar_seccione_por_carrera();
+        // app.consultar_seccione_por_carrera();
 
         setTimeout(() => {
           app.id_seccion = '<?php echo $d["id_seccion"];?>';
@@ -403,10 +413,10 @@
         ?>
         app.id_carrera = '<?php echo $datos['id_carrera'];?>';
         app.id_seccion = '<?php echo $datos['id_seccion'];?>';
-        app.id_semestre = '<?php echo $datos['id_semestre'];?>';
+        // app.id_semestre = '<?php //echo $datos['id_semestre'];?>';
         app.id_estudiante = '<?php echo $datos['id_estudiante'];?>';
         app.get_estudiante();        
-        app.consultar_seccione_por_carrera();
+        // app.consultar_seccione_por_carrera();
         // app.consultar_estudiantes_por_carrera();
         <?php
       }else{

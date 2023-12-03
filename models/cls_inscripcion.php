@@ -23,40 +23,73 @@
 
       try{
 
-				// var_dump($_POST);
-				// die("fasdfsd");
+				$this->verificarMatricula();
+				// la matricula es
+				// lapso academico-numero de la carrera+turno-nacionalidad-numero de cédula
         $sqlConsulta = "SELECT * FROM inscripcion WHERE id_estudiante = '$this->id_estudiante' AND id_ano_escolar = '$this->id_ano_escolar';";
         $result = $this->Query($sqlConsulta);
-        
         if($result->num_rows > 0) return "err/02ERR";
 
         $this->Start_transacction();
+
         $sql = "INSERT INTO inscripcion(id_carrera,id_seccion,id_estudiante,id_ano_escolar,des_semestre) 
         VALUES('$this->id_carrera','$this->id_seccion','$this->id_estudiante','$this->id_ano_escolar','$this->des_semestre');";
-        $this->Query($sql);
+        if(!$this->Query($sql)){
+					$this->Rollback();
+					return "err/01ERR"; 
+				}
 
 				// $sqlCon = "SELECT * FROM estudiante WHERE id_estudiante = '$this->id_estudiante' AND turno_estudiante <> '$this->turno';";
 				// $result2 = $this->Query($sqlCon);
 
         $sql2 = "UPDATE estudiante SET turno_estudiante = '$this->turno' WHERE id_estudiante = '$this->id_estudiante' AND turno_estudiante <> '$this->turno';";
-        $this->Query($sql2);
-				        
-				$this->End_transacction();
-				return "msg/01DONE"; 
-
-				// var_dump($this->Result_last_query());
+        if($this->Query($sql2)){
+					$this->End_transacction();
+					return "msg/01DONE"; 
+				}
 				
-
-        // if($this->Result_last_query()){
-          
-        // }else{
-        //   $this->Rollback();
-				// 	die("FDFD");
-        //   return "err/01ERR";
-        // }
       }catch (Exception $e) {
         die("AH OCURRIDO UN ERROR: " . $e->getMessage());
       }
+		}
+
+		public function verificarMatricula(){
+			try{
+				$res = $this->Query("SELECT * FROM estudiante WHERE id_estudiante = $this->id_estudiante");
+				if($res->num_rows > 0){
+					$result = $this->Get_array($res);
+					
+					if(!isset($result['matricula_estudiante'])){
+						$matricula = $this->makeCodeMatricula($result['cedula_usuario']);
+						$sql2 = $this->Query("UPDATE estudiante SET matricula_estudiante = '$matricula' WHERE id_estudiante = '$this->id_estudiante'");
+						if($sql2->num_rows > 0) return true; else return false;
+					}
+
+					return true;
+				}
+
+				return true;
+			}catch (Exception $e){
+				die("ERROR: ". $e->getMessage());
+			}
+		}
+
+		private function makeCodeMatricula($cedula){
+			try{
+				$lapso = $this->getData("SELECT * FROM ano_escolar WHERE id_ano_escolar = '$this->id_ano_escolar';")['ano_escolar_nombre'];
+				$carrera = $this->getData("SELECT * FROM carrera WHERE id_carrera = '$this->id_carrera';")['codigo_carrera'];
+				$nacionalidad = $this->getData("SELECT * FROM usuario WHERE cedula_usuario = '$cedula';")['nacionalidad_usuario'];
+
+				$matricula = $lapso."-".$carrera.$this->turno."-".$nacionalidad."-".$cedula;
+				return $matricula;
+			}catch (Exception $e){
+				die("ERROR: ". $e->getMessage());
+			}
+		}
+
+		private function getData($sql){
+			$results = $this->Query($sql);
+			return $this->Get_array($results);
 		}
 
 		public function update(){
@@ -82,6 +115,21 @@
         INNER JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion 
 				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario
 				WHERE ano_escolar.estado_ano_escolar = 1;";
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
+		}
+
+		public function Get_estudiantes(){
+			$sql = "SELECT estudiante.id_estudiante, estudiante.matricula_estudiante, estudiante.cedula_usuario, usuario.nombre_usuario,
+				usuario.nacionalidad_usuario, inscripcion.*, carrera.*, seccion.*, ano_escolar.* FROM estudiante
+				LEFT JOIN(SELECT id_estudiante, MAX(id_inscripcion) AS max_id_inscripcion FROM inscripcion GROUP BY id_estudiante) AS max_inscripcion ON 
+					estudiante.id_estudiante = max_inscripcion.id_estudiante
+				LEFT JOIN inscripcion ON max_inscripcion.max_id_inscripcion = inscripcion.id_inscripcion
+				LEFT JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar
+				LEFT JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
+				LEFT JOIN seccion ON seccion.id_seccion = inscripcion.id_seccion
+				INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario
+				GROUP BY estudiante.id_estudiante;";
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
