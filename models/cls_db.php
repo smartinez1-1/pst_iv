@@ -25,6 +25,48 @@
 				$this->pass = $_ENV["PASS_USER_DB"];
 				$this->port = $_ENV["PORT_DB"];
 				$this->Connect();
+				// aqui poner la verificación de cierre y apertura de lapsop academico
+				$this->validarCierreDeLapsoAcademico();
+				$this->validarAperturaDeLapsoAcademico();
+			}
+
+			private  function validarCierreDeLapsoAcademico(){
+				$hoy=new DateTime();
+				$hoy->setTime(0,0,0);
+				$SQL="SELECT * FROM ano_escolar WHERE estado_incripciones='1';";
+				$result=$this->Query($SQL);
+				$data=$this->Get_todos_array($result);
+				if(count($data)==1){
+					$lapso=$data[0];
+					$cierre=new DateTime($lapso["fecha_cierre"]);
+					$cierre->setTime(0,0,0);
+					if($hoy>$cierre){
+						$SQL2="UPDATE ano_escolar SET estado_incripciones='0'  WHERE id_ano_escolar='".$lapso["id_ano_escolar"]."';";
+						$result2=$this->Query($SQL2);
+					}
+					// var_dump($data);
+				}
+			}
+
+			private  function validarAperturaDeLapsoAcademico(){
+				$hoy=new DateTime();
+				$hoy->setTime(0,0,0);
+				$SQL="SELECT * FROM ano_escolar WHERE estado_incripciones='0';";
+				$result=$this->Query($SQL);
+				$data=$this->Get_todos_array($result);
+				for ($index=0; $index < count($data); $index++) { 
+					# code...
+					$lapso=$data[$index];
+					$inicio=new DateTime($lapso["fecha_inicio"]);
+					$inicio->setTime(0,0,0);
+					$cierre=new DateTime($lapso["fecha_cierre"]);
+					$cierre->setTime(0,0,0);
+					if($hoy>=$inicio && $hoy<=$cierre){
+						$SQL2="UPDATE ano_escolar SET estado_incripciones='1'  WHERE id_ano_escolar='".$lapso["id_ano_escolar"]."';";
+						$result2=$this->Query($SQL2);
+						break;
+					}
+				}
 			}
 			// ESTO CREA LA CONEXION A LA DB (POR SI HAY ALGUN PROBLEMA DE CONEXION DESPUES)
 			private function Connect(){
