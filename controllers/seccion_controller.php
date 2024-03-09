@@ -19,6 +19,10 @@
 			case "Get_seccion_por_carrera":
 				fn_secciones_por_carrera();
 			break;
+
+			case "Get_secciones":
+				fn_secciones();
+			break;
 		}
 	}
 
@@ -43,6 +47,13 @@
 	function fn_secciones_por_carrera(){
 		$models_s = new cls_seccion();
 		$result = $models_s->consultaPorCarrera($_GET['id_carrera']);
+
+		print json_encode(["data" => $result]);
+	}
+
+	function fn_secciones(){
+		$models_s = new cls_seccion();
+		$result = $models_s->Get_secciones();
 
 		print json_encode(["data" => $result]);
 	}

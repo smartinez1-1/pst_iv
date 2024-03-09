@@ -87,7 +87,7 @@
                           Seleccione una carrera <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required id="sel_id_carrera" name="id_carrera" v-model="id_carrera" v-on:change="consultar_seccione_por_carrera"
+                          <select required id="sel_id_carrera" name="id_carrera" v-model="id_carrera" 
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
                             <?php foreach($carreras as $carr){?>
@@ -272,6 +272,23 @@
           }).catch( error => console.error(error))
           return res;
         },
+        async consultar_secciones(){
+          await fetch(`<?php $this->SetURL('controllers/seccion_controller.php?ope=Get_secciones');?>`)
+          .then( response => response.json())
+          .then( result => {
+            
+            if(result) this.secciones = result['data']; else this.secciones = [];
+          }).catch( error => console.error(error))
+        },
+        async consultar_estudiantes(){
+          await fetch(`<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos');?>`)
+          .then( response => response.json())
+          .then( result => {
+            
+            if(result) this.estudiantes = result['data']; else this.estudiantes = [];
+          }).catch( error => console.error(error))
+        },
+        
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
 
@@ -371,12 +388,14 @@
 
       if(isset($datos_inscripcion) && $op == "Registrar"){
         ?>
-        app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
+        //app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
         app.id_seccion = '<?php echo $datos_inscripcion[0]['id_seccion'];?>'  
         setTimeout(() => {
-          app.consultar_seccione_por_carrera();
+          app.consultar_secciones();
+          app.consultar_estudiantes();
+          //app.consultar_seccione_por_carrera();
           // app.Get_estudiantes_por_seccion();
-          app.consultar_estudiantes_por_carrera();
+          //app.consultar_estudiantes_por_carrera();
           app.bloqueoCampos();
         }, 100);
         
