@@ -1,3 +1,7 @@
+cedula del usuario: 27111222
+clave del usuario: 27111222.User
+
+
 =======================INFORAMCION DEL PROYECTO ============================
 
 ESTE PROYECTO HA SIDO CONSTRUIDO BAJO EL PATRON DE DISEÑO MVC (MODELO - VISTA - CONTROLADOR), 
