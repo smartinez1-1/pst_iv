@@ -17,9 +17,9 @@
       //   fn_Register();
       // break;
 
-      // case "logout":
-      //   fn_Cerrar();
-      // break;
+      case "logout":
+        fn_Cerrar();
+      break;
     }
   }
 
