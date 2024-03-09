@@ -89,7 +89,7 @@
 
 						<!-- User Area -->
 						<div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
-							<a class="flex items-center gap-4" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
+							<a class="flex items-center gap-4" href="<?php $this->SetURL('profile/');?>" >
 								<span class="hidden text-right lg:block">
 									<span class="block text-sm font-medium text-black dark:text-white"><?php echo $_SESSION['username'];?></span>
 									<span class="block text-xs font-medium"><?php echo $_SESSION['nom_rol'];?></span>

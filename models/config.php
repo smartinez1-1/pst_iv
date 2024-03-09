@@ -17,7 +17,7 @@
     "carrera/index","carrera/formulario","inicio/index","seccion/index","seccion/formulario",
     "comunidad/index","comunidad/formulario","tutor/index","tutor/formulario","estudiante/index","estudiante/formulario",
     "tutor-comunidad/index","tutor-comunidad/formulario","grupo/index","grupo/formulario","semestre/index","semestre/formulario",
-    "inscripcion/index","inscripcion/formulario",
+    "inscripcion/index","inscripcion/formulario","profile/index"
   ];
   
   define("URL", "$protocolo://$host_string:$port_string$string_url");
