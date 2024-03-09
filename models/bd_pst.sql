@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2023 at 03:19 PM
+-- Generation Time: Mar 09, 2024 at 07:09 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -38,14 +38,6 @@ CREATE TABLE `ano_escolar` (
   `fecha_cierre` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Dumping data for table `ano_escolar`
---
-
-INSERT INTO `ano_escolar` (`id_ano_escolar`, `ano_escolar_nombre`, `estado_ano_escolar`, `estado_incripciones`, `fecha_inicio`, `fecha_cierre`) VALUES
-(1, '2-2023', 0, 1, '2023-11-23', '2024-11-23'),
-(2, '1-2024', 1, 1, '2024-11-23', '2025-11-23');
-
 -- --------------------------------------------------------
 
 --
@@ -61,15 +53,6 @@ CREATE TABLE `carrera` (
   `estado_carrera` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Dumping data for table `carrera`
---
-
-INSERT INTO `carrera` (`id_carrera`, `nombre_carrera`, `codigo_carrera`, `turno_carrera`, `admite_grupos_mixtos`, `estado_carrera`) VALUES
-(2, 'INGENIERIA', '4654', 'D', 1, '1'),
-(3, 'MEDICINA', '4898', 'D', 0, '1'),
-(4, 'OTRA ACARRERA', '8798', 'D', 1, '1');
-
 -- --------------------------------------------------------
 
 --
@@ -82,14 +65,6 @@ CREATE TABLE `categorias_documentos` (
   `estatus_categoria` tinyint(1) NOT NULL,
   `creacion_categoria` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `categorias_documentos`
---
-
-INSERT INTO `categorias_documentos` (`id_categoria`, `des_categoria`, `estatus_categoria`, `creacion_categoria`) VALUES
-(1, 'cambioooooo', 1, '2023-11-26 20:30:45'),
-(6, 'nueva categoria', 1, '2023-11-26 21:00:35');
 
 -- --------------------------------------------------------
 
@@ -176,15 +151,6 @@ CREATE TABLE `estudiante` (
   `matricula_estudiante` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Dumping data for table `estudiante`
---
-
-INSERT INTO `estudiante` (`id_estudiante`, `cedula_usuario`, `turno_estudiante`, `matricula_estudiante`) VALUES
-(3, 46546546, 'D', '2-2023-4654D-V-46546546'),
-(5, 27156546, 'D', '2-2023-4654D-V-27156546'),
-(6, 14552556, 'D', '1-2024-4898D-V-14552556');
-
 -- --------------------------------------------------------
 
 --
@@ -224,16 +190,6 @@ CREATE TABLE `inscripcion` (
   `id_ano_escolar` int NOT NULL,
   `des_semestre` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `inscripcion`
---
-
-INSERT INTO `inscripcion` (`id_inscripcion`, `id_carrera`, `id_seccion`, `id_estudiante`, `id_semestre`, `id_ano_escolar`, `des_semestre`) VALUES
-(1, 2, 1, 3, NULL, 1, 1),
-(2, 2, 1, 5, NULL, 1, 1),
-(3, 2, 1, 3, NULL, 2, 2),
-(4, 3, 1, 6, NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -1776,13 +1732,13 @@ CREATE TABLE `proyecto` (
   `id_grupo` int NOT NULL,
   `id_ano_escolar` int NOT NULL,
   `id_tutor` int NOT NULL,
-  `titulo_proyecto` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `titulo_proyecto` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `planteamiento_proyecto` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `objetivos_generales_proyecto` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `objetivos_especificos_proyecto` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `tipo_proyecto` varchar(45) NOT NULL,
+  `tipo_proyecto` varchar(255) NOT NULL,
   `estado_proyecto` char(1) NOT NULL,
-  `ruta_file` varchar(120) DEFAULT NULL
+  `ruta_file` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -1804,7 +1760,8 @@ CREATE TABLE `seccion` (
 
 INSERT INTO `seccion` (`id_seccion`, `numero_seccion`, `carrera_id`, `estado_seccion`) VALUES
 (1, 'D-123456789', NULL, 1),
-(2, 'D-987654321', NULL, 1);
+(2, 'D-987654321', NULL, 1),
+(3, 'FSDFDFDFFSDFS', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1834,13 +1791,6 @@ CREATE TABLE `tutor` (
   `avenida_tutor` varchar(60) DEFAULT NULL,
   `sector_tutor` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `tutor`
---
-
-INSERT INTO `tutor` (`id_tutor`, `cedula_usuario`, `tipo_tutor`, `categoria_tutor`, `parroquia_id_tutor`, `calle_tutor`, `avenida_tutor`, `sector_tutor`) VALUES
-(1, 3555888, 'DOCENTE', 'DXCL', 1139, 'FALSDJF', 'LFKAJSDKLFJ', 'LKFJALSKDF');
 
 -- --------------------------------------------------------
 
@@ -1887,15 +1837,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula_usuario`, `clave_usuario`, `nacionalidad_usuario`, `nombre_usuario`, `estatus_usuario`, `edad_usuario`, `genero_usuario`, `permiso_usuario`, `tipo_usuario`, `telefono_usuario`, `correo_usuario`, `id_pregunta_1`, `id_pregunta_2`, `pregunta_3`, `respuesta_1`, `respuesta_2`, `respuesta_3`) VALUES
-(3555888, '$2y$12$HnIP62C49h9mfETbW9ukAeDugjGpYD7MTkCP16QUCk08VNKAXA9da', NULL, 'ALSONFO', 1, '20', 'M', '2', 'TUTOR', '04245198989', 'FASDFASDFASD@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(14552556, '$2y$12$id/o378TdsG3nlTRvBfjYOx7bWhWCNh2C4qEdYewShNAzoJZIpZXC', 'V', 'JOSE JOSE', 1, '20', 'M', '3', 'ESTUDIANTE', '0424-565-4654', 'FSDFASDFASD@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(21123124, '$2y$12$XJKArJY9dDdakIJ.FZ/VKeO87P6R973pg0l8sJb33xbZuEsW9ZTvm', NULL, 'FASDFS', 1, '20', 'F', '3', 'ESTUDIANTE', '0424-519-8398', 'FASDFASD@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(21123432, '$2y$12$DJ.w9GTxSlHmR3QTUy.KbecppUg9ArWPIXTneLm6T3OuGIjvs6WOm', NULL, 'JOSEEEEEE', 1, '20', 'M', '3', 'ESTUDIANTE', '0456-456-4564', 'LKFASDF@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(27111222, '$2y$12$IAWEqJh.DjnRIrmpyUhAKOGZj1R1GzPnWbBVibP/SdreiuZIrazHO', NULL, 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N'),
-(27132642, '$2y$12$ePPgava12mWj42TtqwtBzuFj4n7ipIsNUod0CSD0TvtDyNvjU/yvq', NULL, 'JESUS MORALES', 1, '23', 'M', '3', 'ESTUDIANTE', '0424-519-8398', 'JESUS@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(27132666, '$2y$12$yN4STWiQwXjP2vv2tDuYle8yCvyw57foihx4s6/6DG8RZipyfoyDK', NULL, 'JESSUS DOS', 1, '15', 'M', '3', 'ESTUDIANTE', '0424-519-8989', 'JESEUSEF@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(27156546, '$2y$12$b7AvjDnKCclKYYeBop7N0./JEvKuBbZu2MGURnt19Ze8wiTV2Zqgy', 'V', 'FSDFSDFASDFASDF', 1, '22', 'M', '3', 'ESTUDIANTE', '0654-560-4560', 'FASDFASD@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL),
-(46546546, '$2y$12$xa777se5psRZHdm/o9V1GOl4A56dgZyYVFxv.XcgB7PiJaneRycme', 'V', 'JESUS UNO', 1, '20', 'F', '3', 'ESTUDIANTE', '0654-056-0456', 'FASDFASD@GMAIL.COM', NULL, NULL, NULL, NULL, NULL, NULL);
+(27111222, '$2y$12$IAWEqJh.DjnRIrmpyUhAKOGZj1R1GzPnWbBVibP/SdreiuZIrazHO', 'V', 'administrador', 1, NULL, '', '1', 'administrador', NULL, NULL, NULL, NULL, NULL, 'N', 'N', 'N');
 
 --
 -- Indexes for dumped tables
@@ -2045,19 +1987,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
-  MODIFY `id_ano_escolar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ano_escolar` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `id_carrera` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_carrera` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categorias_documentos`
 --
 ALTER TABLE `categorias_documentos`
-  MODIFY `id_categoria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_categoria` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `comunidad`
@@ -2081,7 +2023,7 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT for table `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_estudiante` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grupo`
@@ -2093,7 +2035,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT for table `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id_inscripcion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_inscripcion` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `parroquias`
@@ -2117,7 +2059,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT for table `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id_seccion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_seccion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `semestre`
@@ -2129,7 +2071,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT for table `tutor`
 --
 ALTER TABLE `tutor`
-  MODIFY `id_tutor` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tutor` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tutor_comunidad`
