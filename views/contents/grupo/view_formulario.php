@@ -82,19 +82,19 @@
                   ?>
                   <div class="p-6.5">
                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-4/6">
+                      <!-- <div class="w-full xl:w-4/6">
                         <label class="mb-3 block font-medium text-black dark:text-white">
                           Seleccione una carrera <span class="text-meta-1">*</span>
                         </label>
                         <div class="relative z-20 bg-white dark:bg-form-input">
-                          <select required id="sel_id_carrera" name="id_carrera" v-model="id_carrera" v-on:change="consultar_seccione_por_carrera"
+                          <select required id="sel_id_carrera" name="id_carrera" v-model="id_carrera" 
                             class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                             <option value="">Seleccione una opcion</option>
-                            <?php foreach($carreras as $carr){?>
+                            <?php //foreach($carreras as $carr){?>
                               <option 
-                                value="<?php echo $carr['id_carrera'];?>">
-                                  <?php echo $carr['nombre_carrera'];?></option>
-                            <?php }?>
+                                value="<?php //echo $carr['id_carrera'];?>">
+                                  <?php //echo $carr['nombre_carrera'];?></option>
+                            <?php //}?>
                           </select>
                           <span class="absolute top-1/2 right-4 z-10 -translate-y-1/2">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,8 +106,11 @@
                             </svg>
                           </span>
                         </div>
-                      </div>
-                      <div class="w-full xl:w-4/6">
+                      </div> -->
+                      
+                    </div>
+                    <div class="mb-4.5 w-full flex gap-6 flex-row">
+                      <div class="w-4/12">
                         <label class="mb-3 block font-medium text-black dark:text-white">
                           Seleccione una Sección <span class="text-meta-1">*</span>
                         </label>
@@ -128,16 +131,16 @@
                           </span>
                         </div>
                       </div>
-                    </div>
-                    <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                      <div class="w-full xl:w-4/6">
+
+                      <div class="w-5/12">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Nombre del grupo <span class="text-meta-1">*</span>
                         </label>
                         <input type="text" maxlength="45" minlength="4" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo de admiten letras" required placeholder="Ingrese su texto" name="nombre_grupo" value="<?php echo $nombre_grupo;?>"
                           class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
-                      <div class="w-full xl:w-2/6">
+
+                      <div class="w-3/12">
                         <label class="mb-2.5 block text-black dark:text-white">
                           Estado del grupo <span class="text-meta-1">*</span>
                         </label>
@@ -161,6 +164,7 @@
                           </div>
                         </div>
                       </div>
+
                     </div>
                     <table class="w-full table-auto">
                       <thead>
@@ -272,6 +276,23 @@
           }).catch( error => console.error(error))
           return res;
         },
+        async consultar_secciones(){
+          await fetch(`<?php $this->SetURL('controllers/seccion_controller.php?ope=Get_secciones');?>`)
+          .then( response => response.json())
+          .then( result => {
+            
+            if(result) this.secciones = result['data']; else this.secciones = [];
+          }).catch( error => console.error(error))
+        },
+        async consultar_estudiantes(){
+          await fetch(`<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos');?>`)
+          .then( response => response.json())
+          .then( result => {
+            
+            if(result) this.estudiantes = result['data']; else this.estudiantes = [];
+          }).catch( error => console.error(error))
+        },
+        
         async consultar_seccione_por_carrera(){
           if(this.id_carrera == '') return false;
 
@@ -360,6 +381,10 @@
           }, 100);
         }
       },
+      mounted(){
+        this.consultar_secciones();
+        this.consultar_estudiantes();
+      }
     }).mount("#app_vue");
 
     <?php 
@@ -371,12 +396,14 @@
 
       if(isset($datos_inscripcion) && $op == "Registrar"){
         ?>
-        app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
+        //app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
         app.id_seccion = '<?php echo $datos_inscripcion[0]['id_seccion'];?>'  
         setTimeout(() => {
-          app.consultar_seccione_por_carrera();
+          app.consultar_secciones();
+          app.consultar_estudiantes();
+          //app.consultar_seccione_por_carrera();
           // app.Get_estudiantes_por_seccion();
-          app.consultar_estudiantes_por_carrera();
+          //app.consultar_estudiantes_por_carrera();
           app.bloqueoCampos();
         }, 100);
         
