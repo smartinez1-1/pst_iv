@@ -74,11 +74,6 @@ if (isset($this->id_consulta)) {
             <form action="<?php $this->SetURL("controllers/estudiante_controller.php"); ?>" method="POST" autocomplete="off" class="flex flex-wrap items-center">
               <div class="w-full border-stroke dark:border-strokedark xl:border-l-2">
                 <div class="w-full grid grid-cols-4 gap-4 p-4 sm:p-12.5 xl:p-17.5">
-                  <!-- <span class="mb-1.5 block font-medium">Por favor verifica todos tus datos antes de guardar</span>
-                  <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                    Bienvenido al registro de Estudiante
-                  </h2> -->
-
                   <input type="hidden" name="ope" value="<?php echo $op; ?>">
                   <input type="hidden" name="permisos_usuario" value="3">
                   <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante; ?>">
@@ -211,7 +206,7 @@ if (isset($this->id_consulta)) {
                         Seleccione su segunda pregunta de seguridad <span class="text-meta-1">*</span>
                       </label>
                       <div class="relative z-20 bg-white dark:bg-form-input">
-                        <select required name="id_pregunta_1" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                        <select required name="id_pregunta_2" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                           <option value="">Seleccione una opcion</option>
                           <?php foreach ($lista_preguntas as $item) { ?>
                             <option value="<?php echo $item['id_pregunta']; ?>" <?php echo (isset($pregunta2) && $pregunta2 === $item['id_pregunta']) ? "selected" : ""; ?>><?php echo $item['des_pregunta']; ?></option>
@@ -232,6 +227,21 @@ if (isset($this->id_consulta)) {
                         <input type="text" maxlength="60" autocomplete="off" placeholder="Ingrese su respuesta de seguridad" name="respuesta_2" value="<?php echo $respuesta2; ?>" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                       </div>
                     </div>
+
+                    <div class="mb-6 col-span-2">
+                      <label class="mb-2.5 block font-medium text-black dark:text-white">Tercera pregunta de seguridad</label>
+                      <div class="relative">
+                        <input type="text" maxlength="60" autocomplete="off" placeholder="Ingrese su pregunta de seguridad" name="pregunta_3" value="<?php echo $respuesta2; ?>" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                      </div>
+                    </div>
+
+                    <div class="mb-6 col-span-2">
+                      <label class="mb-2.5 block font-medium text-black dark:text-white">Tercera respuesta de seguridad</label>
+                      <div class="relative">
+                        <input type="text" maxlength="60" autocomplete="off" placeholder="Ingrese su respuesta de seguridad" name="respuesta_3" value="<?php echo $respuesta2; ?>" class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                      </div>
+                    </div>
+                    
                     <div class="mb-6 col-span-2">
                       <label class="mb-2.5 block font-medium text-black dark:text-white">Contraseña <span class="text-meta-1">*</span></label>
                       <div class="relative">

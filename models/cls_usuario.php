@@ -24,12 +24,12 @@
       $this->tipo_usuario = isset($d['tipo_usuario']) ? $this->Clean($d['tipo_usuario']) : null;
       $this->telefono_usuario = isset($d['telefono_usuario']) ? $this->Clean($d['telefono_usuario']) : null;
       $this->correo_usuario = isset($d['correo_usuario']) ? $this->Clean($d['correo_usuario']) : null;
-      $this->pregunta1 = isset($d['pregunta1']) ? $this->Clean($d['pregunta1']) : null;
-      $this->pregunta2 = isset($d['pregunta2']) ? $this->Clean($d['pregunta2']) : null;
-      $this->pregunta3 = isset($d['pregunta3']) ? $this->Clean($d['pregunta3']) : null;
-      $this->respuesta1 = isset($d['respuesta1']) ? $this->Clean($d['respuesta1']) : null;
-      $this->respuesta2 = isset($d['respuesta2']) ? $this->Clean($d['respuesta2']) : null;
-      $this->respuesta3 = isset($d['respuesta3']) ? $this->Clean($d['respuesta3']) : null;
+      $this->pregunta1 = isset($d['id_pregunta_1']) ? $this->Clean($d['id_pregunta_1']) : null;
+      $this->pregunta2 = isset($d['id_pregunta_2']) ? $this->Clean($d['id_pregunta_2']) : null;
+      $this->pregunta3 = isset($d['pregunta_3']) ? $this->Clean($d['pregunta_3']) : null;
+      $this->respuesta1 = isset($d['respuesta_1']) ? $this->Clean($d['respuesta_1']) : null;
+      $this->respuesta2 = isset($d['respuesta_2']) ? $this->Clean($d['respuesta_2']) : null;
+      $this->respuesta3 = isset($d['respuesta_3']) ? $this->Clean($d['respuesta_3']) : null;
       $this->estatus_usuario = isset($d['estatus_usuario']) ? $this->Clean($d['estatus_usuario']) : null;
 		}
 
@@ -55,16 +55,34 @@
 		}
 
 		public function update(){
-			$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT,['cost' => 12]);
+			//$this->clave_usuario = password_hash($this->clave_usuario, PASSWORD_BCRYPT,['cost' => 12]);
+			if($this->clave_usuario != null) $this->updatePassword($this->clave_usuario);
 			$sql = "UPDATE usuario SET
 				nombre_usuario = '$this->nombre_usuario',
 				edad_usuario = '$this->edad_usuario',
 				genero_usuario = '$this->genero_usuario',
 				correo_usuario = '$this->correo_usuario',
 				telefono_usuario = '$this->telefono_usuario',
-				clave_usuario = '$this->clave_usuario',
-				estatus_usuario = '1' WHERE cedula_usuario = '$this->cedula_usuario';";
+				estatus_usuario = '1', 
+
+				id_pregunta_1 = '$this->pregunta1',
+				id_pregunta_2 = '$this->pregunta2',
+				pregunta_3 = '$this->pregunta3',
+
+				respuesta_1 = '$this->respuesta1',
+				respuesta_2 = '$this->respuesta2',
+				respuesta_3 = '$this->respuesta3'
+				
+				WHERE cedula_usuario = '$this->cedula_usuario';";
       $this->Query($sql);
 			return "msg/01DONE";
+		}
+
+		private function updatePassword($password){
+			$pass = password_hash($password, PASSWORD_BCRYPT,['cost' => 12]);
+			$sql = "UPDATE usuario SET
+			clave_usuario = '$pass',
+			estatus_usuario = '1' WHERE cedula_usuario = '$this->cedula_usuario';";
+			$this->Query($sql);
 		}
 	}

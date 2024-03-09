@@ -1,6 +1,7 @@
 <?php
   require_once("../models/config.php");
   require_once("../models/cls_auth.php");
+  require_once("../models/cls_usuario.php");
     
   if(isset($_POST['ope'])){
     switch($_POST['ope']){
@@ -8,13 +9,17 @@
         fn_Login();
       break;
 
-      case "Register":
-        fn_Register();
+      case "Actualizar":
+        fn_Actualizar();
       break;
 
-      case "logout":
-        fn_Cerrar();
-      break;
+      // case "Register":
+      //   fn_Register();
+      // break;
+
+      // case "logout":
+      //   fn_Cerrar();
+      // break;
     }
   }
 
@@ -40,19 +45,30 @@
     else header("Location: ".constant("URL").$mensaje[2].$mensaje[1]);
   }
 
-  function fn_Register(){
-    $model = new m_auth();
-    $model->setDatos($_POST);
-    $mensaje = $model->Register_user();
+  function fn_Actualizar(){
+    ///var_dump($_POST);
+    
+    $model_u = new cls_usuario();
 
-    header("Location: ".constant("URL")."auth/sign_in/$mensaje");
+    $model_u->setDatos($_POST);
+		$mensaje = $model_u->Update();
+
+    header("Location: ".constant("URL")."profile/index/".$mensaje);	
   }
 
-  function fn_Get_respuesta(){
-    $model = new m_auth();
-    $result = $model->Get_Respuestas_to_preguntas($_GET['id']);
-    print json_encode(["data" => $result]);
-  }
+  // function fn_Register(){
+  //   $model = new cls_auth();
+  //   $model->setDatos($_POST);
+  //   $mensaje = $model->Register_user();
+
+  //   header("Location: ".constant("URL")."auth/sign_in/$mensaje");
+  // }
+
+  // function fn_Get_respuesta(){
+  //   $model = new cls_auth();
+  //   $result = $model->Get_Respuestas_to_preguntas($_GET['id']);
+  //   print json_encode(["data" => $result]);
+  // }
 
   function fn_Cerrar(){
     session_start();
