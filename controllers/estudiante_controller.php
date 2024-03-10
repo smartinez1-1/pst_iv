@@ -25,6 +25,15 @@
 			case 'Get_todos':
 				fn_consulta_todos();
 			break;
+
+			case 'Get_todos_inscritos':
+				fn_consulta_todos_Inscritos();
+			break;
+			
+			case 'Get_todos_byTipoCarrera':
+				fn_consulta_todos_PorTipoCarrera();
+			break;
+			
 		}
 	}
 
@@ -66,6 +75,20 @@
 	function fn_consulta_todos(){
 		$model = new cls_estudiante();
 		$result = $model->Get_estudiantes("NO-INS");
+
+		print json_encode(["data" => $result]);
+	}
+
+	function fn_consulta_todos_Inscritos(){
+		$model = new cls_estudiante();
+		$result = $model->Get_estudiantes("INS");
+
+		print json_encode(["data" => $result]);
+	}
+
+	function fn_consulta_todos_PorTipoCarrera(){
+		$model = new cls_estudiante();
+		$result = $model->Get_estudiantesPorTipoCarrera($_GET['tipo']);
 
 		print json_encode(["data" => $result]);
 	}

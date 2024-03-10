@@ -24,7 +24,7 @@
 
 			try{
 				$this->Start_transacction();
-				$sql = "INSERT INTO grupo(nombre_grupo,id_seccion,estado_grupo) VALUES('$this->nombre_grupo','$this->id_seccion','$this->estado_grupo');";
+				$sql = "INSERT INTO grupo(nombre_grupo,estado_grupo) VALUES('$this->nombre_grupo','$this->estado_grupo');";
 				$this->Query($sql);
 
 				$id = $this->Returning_id();

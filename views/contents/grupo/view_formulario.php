@@ -110,7 +110,7 @@
                       
                     </div>
                     <div class="mb-4.5 w-full flex gap-6 flex-row">
-                      <div class="w-4/12">
+                      <!-- <div class="w-4/12">
                         <label class="mb-3 block font-medium text-black dark:text-white">
                           Seleccione una Sección <span class="text-meta-1">*</span>
                         </label>
@@ -130,7 +130,7 @@
                             </svg>
                           </span>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="w-5/12">
                         <label class="mb-2.5 block text-black dark:text-white">
@@ -160,6 +160,31 @@
                                 <input type="radio" required id="checkboxLabelFour" class="" name="estado_grupo" value="0" <?php echo ($estado_grupo == '0') ? "checked" : "";?>/>
                               </div>
                               Inactivo
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="w-3/12">
+                        <label class="mb-2.5 block text-black dark:text-white">
+                          Tipo de grupo <span class="text-meta-1">*</span>
+                        </label>
+                        <div class="flex items-center space-x-2">
+                          <div class="mr-3">
+                            <label for="tipoCarrera1" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" @click="setTipoCarrera(1)" :checked="tipo_carrera == 1" required id="tipoCarrera1" class="" name="tipo_grupo" value="1" <?php //echo ($tipo_grupo == '1') ? "checked" : "";?>/>
+                              </div>
+                              Carreras mixtas
+                            </label>
+                          </div>
+
+                          <div >
+                            <label for="tipoCarrera2" class="flex cursor-pointer select-none items-center">
+                              <div class="relative">
+                                <input type="radio" @click="setTipoCarrera(0)" :checked="tipo_carrera == 0" required id="tipoCarrera2" class="" name="tipo_grupo" value="0" <?php //echo ($tipo_grupo == '0') ? "checked" : "";?>/>
+                              </div>
+                              Carreras no mixtas
                             </label>
                           </div>
                         </div>
@@ -229,6 +254,7 @@
           id_carrera: "",
           id_seccion:"",
           id_grupo:"",
+          tipo_carrera: 1,
         }
       },
       methods:{
@@ -285,7 +311,7 @@
           }).catch( error => console.error(error))
         },
         async consultar_estudiantes(){
-          await fetch(`<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos');?>`)
+          await fetch(`<?php $this->SetURL('controllers/estudiante_controller.php?ope=Get_todos_byTipoCarrera&tipo=');?>${this.tipo_carrera}`)
           .then( response => response.json())
           .then( result => {
             
@@ -379,10 +405,18 @@
               if (child_s.tagName == 'OPTION' && child_s.value != this.id_seccion) child_s.disabled = "disabled";
             }  
           }, 100);
+        },
+        setTipoCarrera(nuevo){
+          this.tipo_carrera = nuevo;
+          var LenLista = this.grupo_est.length;
+          for(let x = 0; x < LenLista; x++){
+            this.grupo_est.pop();
+          }
+          this.consultar_estudiantes();
         }
       },
       mounted(){
-        this.consultar_secciones();
+        //this.consultar_secciones();
         this.consultar_estudiantes();
       }
     }).mount("#app_vue");
@@ -396,10 +430,10 @@
 
       if(isset($datos_inscripcion) && $op == "Registrar"){
         ?>
-        //app.id_carrera = '<?php echo $datos_inscripcion[0]['id_carrera'];?>'
-        app.id_seccion = '<?php echo $datos_inscripcion[0]['id_seccion'];?>'  
+        //app.id_carrera = '<?php //echo $datos_inscripcion[0]['id_carrera'];?>'
+        //app.id_seccion = '<?php //echo $datos_inscripcion[0]['id_seccion'];?>'  
         setTimeout(() => {
-          app.consultar_secciones();
+          //app.consultar_secciones();
           app.consultar_estudiantes();
           //app.consultar_seccione_por_carrera();
           // app.Get_estudiantes_por_seccion();

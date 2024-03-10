@@ -121,7 +121,7 @@
 
 		public function Get_estudiantes(){
 			$sql = "SELECT estudiante.id_estudiante, estudiante.matricula_estudiante, estudiante.cedula_usuario, usuario.nombre_usuario,
-				usuario.nacionalidad_usuario, inscripcion.*, carrera.*, seccion.*, ano_escolar.* FROM estudiante
+				usuario.nacionalidad_usuario, inscripcion.id_inscripcion, carrera.*, seccion.*, ano_escolar.* FROM estudiante
 				LEFT JOIN(SELECT id_estudiante, MAX(id_inscripcion) AS max_id_inscripcion FROM inscripcion GROUP BY id_estudiante) AS max_inscripcion ON 
 					estudiante.id_estudiante = max_inscripcion.id_estudiante
 				LEFT JOIN inscripcion ON max_inscripcion.max_id_inscripcion = inscripcion.id_inscripcion

@@ -43,7 +43,16 @@
 		public function Get_estudiantes($condicion = ''){
 			if($condicion == '') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario";
 			if($condicion == 'NO-INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE NOT EXISTS (SELECT * FROM inscripcion INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar WHERE estudiante.id_estudiante = inscripcion.id_estudiante AND ano_escolar.estado_ano_escolar = '1');";
-	
+			if($condicion == 'INS') $sql = "SELECT * FROM estudiante INNER JOIN usuario ON usuario.cedula_usuario = estudiante.cedula_usuario WHERE EXISTS (SELECT * FROM inscripcion INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar WHERE estudiante.id_estudiante = inscripcion.id_estudiante AND ano_escolar.estado_ano_escolar = '1');";
+			$results = $this->Query($sql);
+			return $this->Get_todos_array($results);
+		}
+
+		public function Get_estudiantesPorTipoCarrera($tipo){
+			$sql = "SELECT * FROM estudiante WHERE EXISTS( SELECT * FROM inscripcion
+				INNER JOIN ano_escolar ON ano_escolar.id_ano_escolar = inscripcion.id_ano_escolar
+				INNER JOIN carrera ON carrera.id_carrera = inscripcion.id_carrera
+				WHERE estudiante.id_estudiante = inscripcion.id_estudiante AND ano_escolar.estado_ano_escolar = '1' AND carrera.admite_grupos_mixtos = $tipo);";
 			$results = $this->Query($sql);
 			return $this->Get_todos_array($results);
 		}
