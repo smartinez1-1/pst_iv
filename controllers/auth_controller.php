@@ -2,6 +2,7 @@
   require_once("../models/config.php");
   require_once("../models/cls_auth.php");
   require_once("../models/cls_usuario.php");
+  require_once("../models/cls_historial_claves.php");
     
   if(isset($_POST['ope'])){
     switch($_POST['ope']){
@@ -46,12 +47,17 @@
   }
 
   function fn_Actualizar(){
-    ///var_dump($_POST);
     
     $model_u = new cls_usuario();
+    $model_historial_claves = new cls_historial_claves($_POST["cedula_usuario"]);
+    
+    $validar=$model_historial_claves->validarClaveHistorial($_POST["clave_usuario"],$_POST["cedula_usuario"]);
 
-    $model_u->setDatos($_POST);
-		$mensaje = $model_u->Update();
+    if($validar==false){
+      $model_u->setDatos($_POST);
+      $mensaje = $model_u->Update();
+      $estadoRegistroDelHistorial=$model_historial_claves->crearRegistro();
+    }
 
     header("Location: ".constant("URL")."profile/index/".$mensaje);	
   }
