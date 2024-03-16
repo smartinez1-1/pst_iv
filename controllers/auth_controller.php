@@ -50,7 +50,10 @@
     
     $model_u = new cls_usuario();
     $model_historial_claves = new cls_historial_claves($_POST["cedula_usuario"]);
-    
+
+    $fecha=new DateTime("now");
+    $fechaCaducidad=$fecha->modify("+".$_POST["periodo_caducidad"]." days");
+    $_POST["fecha_de_caducidad_clave"]=$fechaCaducidad->format("y-m-d");
     $validar=$model_historial_claves->validarClaveHistorial($_POST["clave_usuario"],$_POST["cedula_usuario"]);
 
     if($validar==false){

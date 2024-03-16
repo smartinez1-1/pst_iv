@@ -5,6 +5,7 @@
 		private $cedula_usuario, $clave_usuario, $nombre_usuario, $estatus_usuario, $nacionalidad, $edad_usuario;
     private $genero_usuario, $permisos_usuario, $tipo_usuario, $telefono_usuario, $correo_usuario;
     private $pregunta1, $pregunta2, $pregunta3, $respuesta1, $respuesta2, $respuesta3;
+    private $periodo_caducidad, $fecha_de_caducidad_clave;
 
     public function __construct(){
 			parent::__construct();
@@ -31,6 +32,8 @@
       $this->respuesta2 = isset($d['respuesta_2']) ? $this->Clean($d['respuesta_2']) : null;
       $this->respuesta3 = isset($d['respuesta_3']) ? $this->Clean($d['respuesta_3']) : null;
       $this->estatus_usuario = isset($d['estatus_usuario']) ? $this->Clean($d['estatus_usuario']) : null;
+      $this->periodo_caducidad = isset($d['periodo_caducidad']) ? $this->Clean($d['periodo_caducidad']) : null;
+      $this->fecha_de_caducidad_clave = isset($d['fecha_de_caducidad_clave']) ? $this->Clean($d['fecha_de_caducidad_clave']) : null;
 		}
 
 		public function create(){
@@ -71,7 +74,10 @@
 
 				respuesta_1 = '$this->respuesta1',
 				respuesta_2 = '$this->respuesta2',
-				respuesta_3 = '$this->respuesta3'
+				respuesta_3 = '$this->respuesta3',
+
+				dias_de_caducidad_clave = $this->periodo_caducidad,
+				fecha_de_caducidad_clave = '$this->fecha_de_caducidad_clave'
 				
 				WHERE cedula_usuario = '$this->cedula_usuario';";
       $this->Query($sql);
