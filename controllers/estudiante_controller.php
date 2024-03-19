@@ -2,6 +2,7 @@
 	require_once("../models/config.php");
 	require_once("../models/cls_usuario.php");
 	require_once("../models/cls_estudiante.php");
+	require_once("../models/cls_historial_claves.php");
     
 	if(isset($_POST['ope'])){
 		switch($_POST['ope']){
@@ -41,12 +42,16 @@
 		$model_u = new cls_usuario();
 		$model_e = new cls_estudiante();
 		
+		$model_historial_claves = new cls_historial_claves($_POST["cedula_usuario"]);
+		
 		$model_u->setDatos($_POST);
 		$result = $model_u->create();
 
 		if($result){
 			$model_e->setDatos($_POST);
 			$mensaje = $model_e->create();
+			$estadoRegistroDelHistorial=$model_historial_claves->crearRegistro();
+			
 		}else $mensaje = "estudiante/formulario/err/01ERR";
 
 		header("Location: ".constant("URL"). $mensaje);	

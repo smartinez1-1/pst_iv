@@ -47,7 +47,6 @@
   }
 
   function fn_Actualizar(){
-    
     $model_u = new cls_usuario();
     $model_historial_claves = new cls_historial_claves($_POST["cedula_usuario"]);
 
