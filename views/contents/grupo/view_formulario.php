@@ -65,7 +65,7 @@ if (isset($this->id_consulta)) {
                     Gestión de Grupo
                   </h3>
                 </div>
-                <form action="<?php $this->SetURL('controllers/grupo_controller.php'); ?>" autocomplete="off" method="POST">
+                <form action="<?php $this->SetURL('controllers/grupo_controller.php'); ?>" v-on:submit="arreglo_grupo_est" autocomplete="off" method="POST">
                   <input type="hidden" name="ope" value="<?php echo $op; ?>">
                   <input type="hidden" name="id_grupo" value="<?php echo $id_grupo; ?>">
                   <?php
@@ -226,7 +226,7 @@ if (isset($this->id_consulta)) {
                         </tbody>
                       </table>
 
-                      <button v-on:click="arreglo_grupo_est()" id="guardar" class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+                      <button id="guardar" class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
                         Guardar
                       </button>
                     </div>
@@ -249,11 +249,15 @@ if (isset($this->id_consulta)) {
 
     // ||||||||||
 
-    const guardar = document.getElementById("guardar");
+    //     const guardar = document.getElementById("guardar");
 
-    guardar.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
+    // guardar.addEventListener("click", (event) => {
+    //               event.preventDefault();
+
+
+    //             });
+
+
 
     // function arreglo_grupo_est(lista_grupo) {
     //   console.log(lista_grupo);
@@ -283,15 +287,17 @@ if (isset($this->id_consulta)) {
         }
       },
       methods: {
-        arreglo_grupo_est() {
-          console.log("data grupo => ", this.grupo_est);
-          // if (grupo_est.length >= 2) {
-          //   return true;
-          //   console.log("el arreglo cumple con el minimo de 2 personas");
-          // } else {
-          //   return false;
-          //   console.log("el arreglo no tiene el minimo");
-          // }
+        arreglo_grupo_est(e) {
+          // alert("hola")
+          // console.log("data grupo => ", this.grupo_est);
+          if (this.grupo_est.length <= 2) {
+            // console.log("el arreglo cumple con el minimo");
+            // // e.submit()
+            // return true
+            e.preventDefault()
+
+          }
+
         },
         add() {
           this.grupo_est.push({});
