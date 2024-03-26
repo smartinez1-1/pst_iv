@@ -247,32 +247,6 @@ if (isset($this->id_consulta)) {
       createApp
     } = Vue;
 
-    // ||||||||||
-
-    //     const guardar = document.getElementById("guardar");
-
-    // guardar.addEventListener("click", (event) => {
-    //               event.preventDefault();
-
-
-    //             });
-
-
-
-    // function arreglo_grupo_est(lista_grupo) {
-    //   console.log(lista_grupo);
-    //   if (lista_grupo.length >= 2) {
-    //     return true;
-    //     console.log("el arreglo cumple con el minimo de 2 personas");
-    //   } else {
-    //     return false;
-    //     console.log("el arreglo no tiene el minimo");
-    //   }
-
-    // }
-
-    // |||||||||||||||||
-
     let app = createApp({
       data() {
         return {
@@ -288,12 +262,9 @@ if (isset($this->id_consulta)) {
       },
       methods: {
         arreglo_grupo_est(e) {
-          // alert("hola")
-          // console.log("data grupo => ", this.grupo_est);
+
           if (this.grupo_est.length <= 2) {
-            // console.log("el arreglo cumple con el minimo");
-            // // e.submit()
-            // return true
+
             e.preventDefault()
 
           }
